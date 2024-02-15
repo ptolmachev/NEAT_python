@@ -10,7 +10,7 @@ env_name = 'SlimeVolley-v0'
 max_timesteps = 3000
 sleep = 0.01
 animols_param = {"neuron_type" : 'relu', "action_noise" : 0.00, "action_type" : "MultiBinary", "action_bounds" : None}
-filename = f"../../data/evolved_models/{env_name}/None_generation=454_score=1.0_N=4.json"
+filename = f"../../data/evolved_models/{env_name}/None_generation=102_score=0.14285714285714285_N=0.json"
 file = open(filename, "rb")
 data = json.load(file)
 with file as json_file:
