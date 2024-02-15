@@ -1,0 +1,785 @@
+{
+    "Num species": 8,
+    "Species 0 num animals": 3,
+    "Species 0 top fitness": -1703.8808770103585,
+    "Species 0 mean fitness": -1725.4256924423314,
+    "Species 0 std fitness": 27.727647373882647,
+    "Species 0 top animal N hidden neurons": 0,
+    "Species 0 top animal N synapses": 3,
+    "Species 0 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 0.006770846880005822
+            },
+            "1": {
+                "type": "i",
+                "bias": 0.5615243860283224
+            },
+            "2": {
+                "type": "i",
+                "bias": -0.018109258555845564
+            },
+            "3": {
+                "type": "o",
+                "bias": -1.0805001483460943
+            }
+        },
+        "synapses": {
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 0.1469207007978206,
+                "active": true
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -1.3735802726344128,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": 1.4094646520300822,
+                "active": true
+            }
+        }
+    },
+    "Species 3 num animals": 7,
+    "Species 3 top fitness": -1489.4359485809316,
+    "Species 3 mean fitness": -1505.5933845253676,
+    "Species 3 std fitness": 10.897966104112745,
+    "Species 3 top animal N hidden neurons": 1,
+    "Species 3 top animal N synapses": 7,
+    "Species 3 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 0.7805565835511874
+            },
+            "1": {
+                "type": "i",
+                "bias": 0.13898465931261753
+            },
+            "2": {
+                "type": "i",
+                "bias": 0.2874480932117239
+            },
+            "3": {
+                "type": "o",
+                "bias": -0.08073559722928109
+            },
+            "150": {
+                "type": "h",
+                "bias": 0.0
+            }
+        },
+        "synapses": {
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": -0.09727263825402283,
+                "active": true
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -1.3933489073454237,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": 2.7360539982532845,
+                "active": true
+            },
+            "151": {
+                "nrn_to": 150,
+                "nrn_from": 0,
+                "weight": 0.15600221337799267,
+                "active": true
+            },
+            "152": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 150,
+                "weight": -2.1013588089458213
+            },
+            "156": {
+                "nrn_to": 150,
+                "nrn_from": 1,
+                "weight": 0.8206523685894385,
+                "active": true
+            },
+            "157": {
+                "nrn_to": 150,
+                "nrn_from": 2,
+                "weight": -0.7699282043371735,
+                "active": true
+            }
+        }
+    },
+    "Species 8 num animals": 10,
+    "Species 8 top fitness": -1267.0575463991445,
+    "Species 8 mean fitness": -1355.8006223235602,
+    "Species 8 std fitness": 97.73768470781171,
+    "Species 8 top animal N hidden neurons": 2,
+    "Species 8 top animal N synapses": 12,
+    "Species 8 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 0.107857635476162
+            },
+            "1": {
+                "type": "i",
+                "bias": 0.8381275409582405
+            },
+            "2": {
+                "type": "i",
+                "bias": -0.11507824446514964
+            },
+            "3": {
+                "type": "o",
+                "bias": -0.5057313157795406
+            },
+            "235": {
+                "type": "h",
+                "bias": -0.03562976949930614
+            },
+            "150": {
+                "type": "h",
+                "bias": -0.418160151733731
+            }
+        },
+        "synapses": {
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 0.4909405592379328,
+                "active": true
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -0.6236894145519717,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": 1.3878501265793184,
+                "active": true
+            },
+            "236": {
+                "active": true,
+                "nrn_to": 235,
+                "nrn_from": 150,
+                "weight": 1.9991775403069598
+            },
+            "237": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 235,
+                "weight": -2.533507516328131
+            },
+            "238": {
+                "nrn_to": 235,
+                "nrn_from": 0,
+                "weight": 0.19183859215447185,
+                "active": false
+            },
+            "239": {
+                "nrn_to": 235,
+                "nrn_from": 2,
+                "weight": -0.15340840107723508,
+                "active": false
+            },
+            "240": {
+                "nrn_to": 235,
+                "nrn_from": 1,
+                "weight": 0.04691161618545021,
+                "active": false
+            },
+            "151": {
+                "active": true,
+                "nrn_to": 150,
+                "nrn_from": 0,
+                "weight": 2.74543426441408
+            },
+            "152": {
+                "nrn_to": 3,
+                "nrn_from": 150,
+                "weight": -0.5786245030547502,
+                "active": true
+            },
+            "156": {
+                "nrn_to": 150,
+                "nrn_from": 1,
+                "weight": 0.06553874928338099,
+                "active": false
+            },
+            "157": {
+                "nrn_to": 150,
+                "nrn_from": 2,
+                "weight": 0.49959568496575335,
+                "active": true
+            }
+        }
+    },
+    "Species 11 num animals": 9,
+    "Species 11 top fitness": -1323.3223974932282,
+    "Species 11 mean fitness": -1391.664029676894,
+    "Species 11 std fitness": 60.06918886763115,
+    "Species 11 top animal N hidden neurons": 2,
+    "Species 11 top animal N synapses": 11,
+    "Species 11 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 0.03818668298044789
+            },
+            "1": {
+                "type": "i",
+                "bias": 0.8857632179427885
+            },
+            "2": {
+                "type": "i",
+                "bias": -0.04103035974945385
+            },
+            "3": {
+                "type": "o",
+                "bias": -0.6182835066274683
+            },
+            "235": {
+                "type": "h",
+                "bias": -0.02109781336783378
+            },
+            "150": {
+                "type": "h",
+                "bias": -0.1900493999448065
+            }
+        },
+        "synapses": {
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 0.43488284237723546,
+                "active": true
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -1.1863893938113086,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": 0.5790786957040072,
+                "active": true
+            },
+            "236": {
+                "active": true,
+                "nrn_to": 235,
+                "nrn_from": 150,
+                "weight": 1.2626375579707851
+            },
+            "237": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 235,
+                "weight": -2.9963186598188254
+            },
+            "238": {
+                "nrn_to": 235,
+                "nrn_from": 0,
+                "weight": 0.15843565181452282,
+                "active": true
+            },
+            "240": {
+                "nrn_to": 235,
+                "nrn_from": 1,
+                "weight": -0.5112637083148824,
+                "active": true
+            },
+            "151": {
+                "active": true,
+                "nrn_to": 150,
+                "nrn_from": 0,
+                "weight": 2.403992223348486
+            },
+            "152": {
+                "nrn_to": 3,
+                "nrn_from": 150,
+                "weight": -0.076626435747099,
+                "active": false
+            },
+            "156": {
+                "nrn_to": 150,
+                "nrn_from": 1,
+                "weight": 0.15687629367459005,
+                "active": true
+            },
+            "157": {
+                "nrn_to": 150,
+                "nrn_from": 2,
+                "weight": 0.47954809099659185,
+                "active": true
+            }
+        }
+    },
+    "Species 13 num animals": 5,
+    "Species 13 top fitness": -1376.4737014659884,
+    "Species 13 mean fitness": -1431.4471576486808,
+    "Species 13 std fitness": 62.45495806458035,
+    "Species 13 top animal N hidden neurons": 2,
+    "Species 13 top animal N synapses": 11,
+    "Species 13 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 0.23481061577531404
+            },
+            "1": {
+                "type": "i",
+                "bias": 0.8790541149404889
+            },
+            "2": {
+                "type": "i",
+                "bias": 0.08168053559503927
+            },
+            "3": {
+                "type": "o",
+                "bias": -0.4790280158825434
+            },
+            "235": {
+                "type": "h",
+                "bias": -0.42606888449141644
+            },
+            "150": {
+                "type": "h",
+                "bias": 0.11404888131592839
+            }
+        },
+        "synapses": {
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 0.49912247860522635,
+                "active": true
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -0.7904862063635991,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": 2.45105386232474,
+                "active": true
+            },
+            "236": {
+                "active": true,
+                "nrn_to": 235,
+                "nrn_from": 150,
+                "weight": 1.238356890306454
+            },
+            "237": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 235,
+                "weight": -2.3125997532186973
+            },
+            "238": {
+                "nrn_to": 235,
+                "nrn_from": 0,
+                "weight": 0.20088515375177232,
+                "active": false
+            },
+            "240": {
+                "nrn_to": 235,
+                "nrn_from": 1,
+                "weight": -0.45183959830074766,
+                "active": true
+            },
+            "151": {
+                "active": true,
+                "nrn_to": 150,
+                "nrn_from": 0,
+                "weight": 2.137616978139732
+            },
+            "152": {
+                "nrn_to": 3,
+                "nrn_from": 150,
+                "weight": 0.1845268357607987,
+                "active": false
+            },
+            "156": {
+                "nrn_to": 150,
+                "nrn_from": 1,
+                "weight": -0.16682286627219084,
+                "active": false
+            },
+            "157": {
+                "nrn_to": 150,
+                "nrn_from": 2,
+                "weight": 0.536125828798698,
+                "active": true
+            }
+        }
+    },
+    "Species 14 num animals": 1,
+    "Species 14 top fitness": -1463.3761014447814,
+    "Species 14 mean fitness": -1463.3761014447814,
+    "Species 14 std fitness": 0.0,
+    "Species 14 top animal N hidden neurons": 4,
+    "Species 14 top animal N synapses": 18,
+    "Species 14 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 2.9703258178381753
+            },
+            "1": {
+                "type": "i",
+                "bias": 0.296350505315915
+            },
+            "2": {
+                "type": "i",
+                "bias": -0.014596717180307354
+            },
+            "3": {
+                "type": "o",
+                "bias": -0.015283979610292322
+            },
+            "352": {
+                "type": "h",
+                "bias": 0.11486219759796207
+            },
+            "150": {
+                "type": "h",
+                "bias": 0.2298593909319786
+            },
+            "189": {
+                "type": "h",
+                "bias": -0.014828392896567615
+            },
+            "287": {
+                "type": "h",
+                "bias": 0.06147536450531131
+            }
+        },
+        "synapses": {
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 0.28243863166627176,
+                "active": false
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -2.3881228143345936,
+                "active": true
+            },
+            "198": {
+                "nrn_to": 189,
+                "nrn_from": 1,
+                "weight": -0.7520063889191753,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": 3.0,
+                "active": true
+            },
+            "328": {
+                "nrn_to": 287,
+                "nrn_from": 1,
+                "weight": -0.7578153283321243,
+                "active": true
+            },
+            "202": {
+                "nrn_to": 3,
+                "nrn_from": 189,
+                "weight": -1.8391811396835573,
+                "active": true
+            },
+            "203": {
+                "nrn_to": 189,
+                "nrn_from": 2,
+                "weight": -0.1816370392658027,
+                "active": false
+            },
+            "151": {
+                "nrn_to": 150,
+                "nrn_from": 0,
+                "weight": 0.04165182194102847,
+                "active": false
+            },
+            "152": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 150,
+                "weight": -2.8510413780747186
+            },
+            "156": {
+                "nrn_to": 150,
+                "nrn_from": 1,
+                "weight": -0.048804746927053805,
+                "active": false
+            },
+            "157": {
+                "nrn_to": 150,
+                "nrn_from": 2,
+                "weight": -1.3375508767493745,
+                "active": true
+            },
+            "288": {
+                "active": true,
+                "nrn_to": 287,
+                "nrn_from": 2,
+                "weight": 0.9467983014002969
+            },
+            "289": {
+                "active": false,
+                "nrn_to": 189,
+                "nrn_from": 287,
+                "weight": 0.34862417220033276
+            },
+            "353": {
+                "active": true,
+                "nrn_to": 352,
+                "nrn_from": 287,
+                "weight": 0.9363086279318087
+            },
+            "354": {
+                "active": true,
+                "nrn_to": 189,
+                "nrn_from": 352,
+                "weight": 0.31004165311297105
+            },
+            "296": {
+                "nrn_to": 3,
+                "nrn_from": 287,
+                "weight": -0.0823456877316555,
+                "active": true
+            },
+            "190": {
+                "nrn_to": 189,
+                "nrn_from": 0,
+                "weight": 1.1757121275696274,
+                "active": true
+            },
+            "191": {
+                "active": true,
+                "nrn_to": 150,
+                "nrn_from": 189,
+                "weight": 0.9081703496041473
+            }
+        }
+    },
+    "Species 2 num animals": 13,
+    "Species 2 top fitness": -1326.0123647531777,
+    "Species 2 mean fitness": -1466.7477641486837,
+    "Species 2 std fitness": 207.43150041998175,
+    "Species 2 top animal N hidden neurons": 2,
+    "Species 2 top animal N synapses": 10,
+    "Species 2 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 0.22982387900577605
+            },
+            "1": {
+                "type": "i",
+                "bias": 1.0699629731382185
+            },
+            "2": {
+                "type": "i",
+                "bias": 0.1502755359115335
+            },
+            "3": {
+                "type": "o",
+                "bias": -0.6463784971991229
+            },
+            "235": {
+                "type": "h",
+                "bias": 0.038202825223690506
+            },
+            "150": {
+                "type": "h",
+                "bias": -0.22209779660633122
+            }
+        },
+        "synapses": {
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 0.5284971277587156,
+                "active": true
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -1.3215319862037085,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": 0.6837546783162199,
+                "active": true
+            },
+            "236": {
+                "active": true,
+                "nrn_to": 235,
+                "nrn_from": 150,
+                "weight": 1.237021770434354
+            },
+            "237": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 235,
+                "weight": -2.475439118095494
+            },
+            "238": {
+                "nrn_to": 235,
+                "nrn_from": 0,
+                "weight": 0.13502465817533837,
+                "active": false
+            },
+            "151": {
+                "active": true,
+                "nrn_to": 150,
+                "nrn_from": 0,
+                "weight": 2.219614797023552
+            },
+            "152": {
+                "active": false,
+                "nrn_to": 3,
+                "nrn_from": 150,
+                "weight": -3.0
+            },
+            "156": {
+                "nrn_to": 150,
+                "nrn_from": 1,
+                "weight": -0.032122516542032686,
+                "active": false
+            },
+            "157": {
+                "nrn_to": 150,
+                "nrn_from": 2,
+                "weight": 0.49291635971681513,
+                "active": true
+            }
+        }
+    },
+    "Species 12 num animals": 12,
+    "Species 12 top fitness": -1299.6478446807982,
+    "Species 12 mean fitness": -1434.7576085254234,
+    "Species 12 std fitness": 176.43036349964888,
+    "Species 12 top animal N hidden neurons": 2,
+    "Species 12 top animal N synapses": 11,
+    "Species 12 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 0.10353861286615726
+            },
+            "1": {
+                "type": "i",
+                "bias": 0.9212065467033532
+            },
+            "2": {
+                "type": "i",
+                "bias": 0.17304305378423696
+            },
+            "3": {
+                "type": "o",
+                "bias": -1.162946771669268
+            },
+            "235": {
+                "type": "h",
+                "bias": -0.06649568121013799
+            },
+            "150": {
+                "type": "h",
+                "bias": -0.23677670475299523
+            }
+        },
+        "synapses": {
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 0.30608116359745496,
+                "active": true
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -1.6417400596120482,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": 0.7369594702266988,
+                "active": true
+            },
+            "236": {
+                "active": true,
+                "nrn_to": 235,
+                "nrn_from": 150,
+                "weight": 2.2064167954292824
+            },
+            "237": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 235,
+                "weight": -2.292110035204454
+            },
+            "238": {
+                "nrn_to": 235,
+                "nrn_from": 0,
+                "weight": 0.37281739302495825,
+                "active": false
+            },
+            "240": {
+                "nrn_to": 235,
+                "nrn_from": 1,
+                "weight": 0.17679528948566428,
+                "active": true
+            },
+            "151": {
+                "active": true,
+                "nrn_to": 150,
+                "nrn_from": 0,
+                "weight": 2.408122269862637
+            },
+            "152": {
+                "nrn_to": 3,
+                "nrn_from": 150,
+                "weight": -0.25437609879862366,
+                "active": false
+            },
+            "156": {
+                "nrn_to": 150,
+                "nrn_from": 1,
+                "weight": -0.0411042670048523,
+                "active": true
+            },
+            "157": {
+                "nrn_to": 150,
+                "nrn_from": 2,
+                "weight": 0.4117258167015027,
+                "active": true
+            }
+        }
+    }
+}

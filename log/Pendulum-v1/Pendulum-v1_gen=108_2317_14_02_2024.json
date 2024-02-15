@@ -1,0 +1,99 @@
+{
+    "Num species": 1,
+    "Species 0 num animals": 60,
+    "Species 0 top fitness": -1277.3379324683942,
+    "Species 0 mean fitness": -1505.7937458761185,
+    "Species 0 std fitness": 238.69973610950808,
+    "Species 0 top animal N hidden neurons": 2,
+    "Species 0 top animal N synapses": 10,
+    "Species 0 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 0.6908318920152478
+            },
+            "1": {
+                "type": "i",
+                "bias": -0.603132290881898
+            },
+            "2": {
+                "type": "i",
+                "bias": 0.13042987152145444
+            },
+            "3": {
+                "type": "o",
+                "bias": 0.02594416562895141
+            },
+            "41": {
+                "type": "h",
+                "bias": -2.1026270013540294
+            },
+            "236": {
+                "type": "h",
+                "bias": -0.07096800156463401
+            }
+        },
+        "synapses": {
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": -0.12977443928809698,
+                "active": true
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -0.7599608022544957,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 0.21622636194037576,
+                "active": true
+            },
+            "42": {
+                "active": true,
+                "nrn_to": 41,
+                "nrn_from": 0,
+                "weight": 0.6941777630582221
+            },
+            "43": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 41,
+                "weight": -1.1278315538397308
+            },
+            "237": {
+                "active": true,
+                "nrn_to": 236,
+                "nrn_from": 1,
+                "weight": 0.9592308254741725
+            },
+            "238": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 236,
+                "weight": 0.7392428513343846
+            },
+            "51": {
+                "nrn_to": 41,
+                "nrn_from": 1,
+                "weight": 0.5088103170333432,
+                "active": true
+            },
+            "56": {
+                "nrn_to": 41,
+                "nrn_from": 2,
+                "weight": 0.652082964687316,
+                "active": true
+            },
+            "250": {
+                "nrn_to": 41,
+                "nrn_from": 236,
+                "weight": -0.05161378611884429,
+                "active": false
+            }
+        }
+    }
+}

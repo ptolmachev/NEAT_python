@@ -1,0 +1,71 @@
+{
+    "Num species": 1,
+    "Species 0 num animals": 60,
+    "Species 0 top fitness": -1536.2343461471296,
+    "Species 0 mean fitness": -1619.0578085816294,
+    "Species 0 std fitness": 114.43779301582866,
+    "Species 0 top animal N hidden neurons": 1,
+    "Species 0 top animal N synapses": 6,
+    "Species 0 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 0.5324136539616756
+            },
+            "1": {
+                "type": "i",
+                "bias": -0.2326088851384326
+            },
+            "2": {
+                "type": "i",
+                "bias": 0.10819805411046587
+            },
+            "3": {
+                "type": "o",
+                "bias": -0.008727506016928083
+            },
+            "41": {
+                "type": "h",
+                "bias": -0.088903173929745
+            }
+        },
+        "synapses": {
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": 0.2796984527424488,
+                "active": true
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -0.4045403823525035,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 0.18745979288628564,
+                "active": true
+            },
+            "56": {
+                "nrn_to": 41,
+                "nrn_from": 2,
+                "weight": 0.3731592414207446,
+                "active": true
+            },
+            "42": {
+                "active": true,
+                "nrn_to": 41,
+                "nrn_from": 0,
+                "weight": 1.0505852775902118
+            },
+            "43": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 41,
+                "weight": -0.6349587682495808
+            }
+        }
+    }
+}

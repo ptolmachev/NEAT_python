@@ -1,0 +1,77 @@
+{
+    "Num species": 1,
+    "Species 0 num animals": 60,
+    "Species 0 top fitness": -1240.2341276120965,
+    "Species 0 mean fitness": -1479.8895630560992,
+    "Species 0 std fitness": 297.0510617737052,
+    "Species 0 top animal N hidden neurons": 1,
+    "Species 0 top animal N synapses": 7,
+    "Species 0 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": -0.04290568254840503
+            },
+            "1": {
+                "type": "i",
+                "bias": 0.3654484420043723
+            },
+            "2": {
+                "type": "i",
+                "bias": 0.1230260646685122
+            },
+            "3": {
+                "type": "o",
+                "bias": -0.32544783737416616
+            },
+            "228": {
+                "type": "h",
+                "bias": -0.9411751409741275
+            }
+        },
+        "synapses": {
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -1.2812832940993746,
+                "active": true
+            },
+            "229": {
+                "active": true,
+                "nrn_to": 228,
+                "nrn_from": 0,
+                "weight": 3.0
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 0.6131858376890555,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": 0.21233626129773636,
+                "active": false
+            },
+            "230": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 228,
+                "weight": -2.697713135940909
+            },
+            "234": {
+                "nrn_to": 228,
+                "nrn_from": 2,
+                "weight": 0.7689082917505058,
+                "active": true
+            },
+            "239": {
+                "nrn_to": 228,
+                "nrn_from": 1,
+                "weight": 0.5791098959434822,
+                "active": true
+            }
+        }
+    }
+}

@@ -1,0 +1,45 @@
+env_name: SlimeVolley-v0
+nature_params:
+  max_animals: 100
+  max_species: 12
+  max_timesteps: 2000
+  rel_advantage_ind: 5.0
+  rel_advantage_spec: 1.0
+  odds_mutations: (10, 10, 80, 80, 80, 80, 200, 200)
+  mutation_rate: 3
+  c_d: 1.0
+  c_w: 0.4
+  delta: 3.0
+  gamma: 1.2
+  established_species_thr: 5
+  cull_ratio: 0.2
+  parthenogenesis_rate: 0.25
+  metabolic_penalty: 0.01
+  eval_repeats: 1
+  parallel: true
+  num_workers: 10
+  self_play: true
+  num_reference_animals: 5
+innovation_handler_params:
+  maxlen: 300
+animal_params:
+  neuron_type: relu
+  action_type: MultiBinary
+  action_bounds: None
+  action_noise: 0.03
+logger_params:
+  data_folder: ../../../data/evolved_models/SlimeVolley-v0
+  log_folder: ../../../log/SlimeVolley-v0
+  img_folder: ../../../img/SlimeVolley-v0
+  render: false
+  render_every: -1
+  plot_every: 10
+blueprint_params:
+  weight_init_std: 0.2
+  weight_change_std: 0.01
+  orph_node_thr: 0.1
+  max_neurons: 16
+  max_weight_val: 3.0
+  change_weight_probs: (0.95, 0.025, 0.025)
+evolution_params:
+  n_generations: 1000

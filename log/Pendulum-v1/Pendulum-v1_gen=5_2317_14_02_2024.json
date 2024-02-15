@@ -1,0 +1,53 @@
+{
+    "Num species": 1,
+    "Species 0 num animals": 60,
+    "Species 0 top fitness": -1820.0135399004891,
+    "Species 0 mean fitness": -1909.506735858803,
+    "Species 0 std fitness": 113.55325683981985,
+    "Species 0 top animal N hidden neurons": 1,
+    "Species 0 top animal N synapses": 3,
+    "Species 0 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 0.09817655283637682
+            },
+            "1": {
+                "type": "i",
+                "bias": -0.08187363536313569
+            },
+            "2": {
+                "type": "i",
+                "bias": 0.16011998721024429
+            },
+            "3": {
+                "type": "o",
+                "bias": 0.0
+            },
+            "7": {
+                "type": "h",
+                "bias": 0.0
+            }
+        },
+        "synapses": {
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 0.08524694435360425,
+                "active": false
+            },
+            "8": {
+                "active": true,
+                "nrn_to": 7,
+                "nrn_from": 2,
+                "weight": 1.0
+            },
+            "9": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 7,
+                "weight": 0.08524694435360425
+            }
+        }
+    }
+}

@@ -1,0 +1,105 @@
+{
+    "N hidden nrns": 2,
+    "genome dict": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": -0.09062327055826461
+            },
+            "1": {
+                "type": "i",
+                "bias": 0.31651064168897164
+            },
+            "2": {
+                "type": "i",
+                "bias": 0.03179119285376364
+            },
+            "3": {
+                "type": "o",
+                "bias": -1.1148089983026175
+            },
+            "263": {
+                "type": "h",
+                "bias": 0.06489808402623712
+            },
+            "223": {
+                "type": "h",
+                "bias": 0.09203906198658658
+            }
+        },
+        "synapses": {
+            "224": {
+                "active": true,
+                "nrn_to": 223,
+                "nrn_from": 0,
+                "weight": 0.30554452398568316
+            },
+            "225": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 223,
+                "weight": -2.9374195838440986
+            },
+            "226": {
+                "nrn_to": 223,
+                "nrn_from": 2,
+                "weight": -0.3087350774970487,
+                "active": true
+            },
+            "227": {
+                "nrn_to": 223,
+                "nrn_from": 1,
+                "weight": 0.44077348117410686,
+                "active": true
+            },
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -0.4686581588321752,
+                "active": true
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": 0.0006124939001266125,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": -0.09684948118698976,
+                "active": true
+            },
+            "264": {
+                "active": true,
+                "nrn_to": 263,
+                "nrn_from": 1,
+                "weight": 0.7740224057965133
+            },
+            "265": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 263,
+                "weight": 3.0
+            },
+            "269": {
+                "nrn_to": 263,
+                "nrn_from": 0,
+                "weight": -0.45085946600677895,
+                "active": true
+            },
+            "273": {
+                "nrn_to": 263,
+                "nrn_from": 223,
+                "weight": -0.07635570754285484,
+                "active": true
+            },
+            "274": {
+                "nrn_to": 263,
+                "nrn_from": 2,
+                "weight": -0.07045669076314838,
+                "active": false
+            }
+        }
+    }
+}

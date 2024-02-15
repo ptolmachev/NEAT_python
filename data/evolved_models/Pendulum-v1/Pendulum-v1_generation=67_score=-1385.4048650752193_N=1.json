@@ -1,0 +1,71 @@
+{
+    "N hidden nrns": 1,
+    "genome dict": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": -0.027800244538071686
+            },
+            "1": {
+                "type": "i",
+                "bias": 0.12114648207783141
+            },
+            "2": {
+                "type": "i",
+                "bias": 0.09551650611899942
+            },
+            "3": {
+                "type": "o",
+                "bias": -0.7018608523777491
+            },
+            "228": {
+                "type": "h",
+                "bias": -0.05335025056846593
+            }
+        },
+        "synapses": {
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -1.1640229150008483,
+                "active": true
+            },
+            "229": {
+                "active": true,
+                "nrn_to": 228,
+                "nrn_from": 0,
+                "weight": 2.1090971110391945
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 0.2249648435502674,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": 0.5035441114286725,
+                "active": true
+            },
+            "230": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 228,
+                "weight": -0.9874228509163477
+            },
+            "234": {
+                "nrn_to": 228,
+                "nrn_from": 2,
+                "weight": 0.5024911937013918,
+                "active": true
+            },
+            "239": {
+                "nrn_to": 228,
+                "nrn_from": 1,
+                "weight": -0.12016229265571124,
+                "active": false
+            }
+        }
+    }
+}

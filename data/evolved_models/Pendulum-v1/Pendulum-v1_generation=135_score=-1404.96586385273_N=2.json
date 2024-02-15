@@ -1,0 +1,93 @@
+{
+    "N hidden nrns": 2,
+    "genome dict": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 0.3653281561564897
+            },
+            "1": {
+                "type": "i",
+                "bias": 0.9298532886428545
+            },
+            "2": {
+                "type": "i",
+                "bias": 0.12012356004556027
+            },
+            "3": {
+                "type": "o",
+                "bias": -1.2160304212396311
+            },
+            "235": {
+                "type": "h",
+                "bias": 0.0422375791309654
+            },
+            "150": {
+                "type": "h",
+                "bias": -0.1480338344089325
+            }
+        },
+        "synapses": {
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 0.4076365962302986,
+                "active": true
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -1.2770180220063945,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": 2.7063853293698763,
+                "active": true
+            },
+            "236": {
+                "active": true,
+                "nrn_to": 235,
+                "nrn_from": 150,
+                "weight": 0.8999324822220052
+            },
+            "237": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 235,
+                "weight": -2.4339209073701484
+            },
+            "238": {
+                "nrn_to": 235,
+                "nrn_from": 0,
+                "weight": 0.08399206676460497,
+                "active": true
+            },
+            "151": {
+                "active": true,
+                "nrn_to": 150,
+                "nrn_from": 0,
+                "weight": 2.2294975605455942
+            },
+            "152": {
+                "active": false,
+                "nrn_to": 3,
+                "nrn_from": 150,
+                "weight": -2.36539983430983
+            },
+            "156": {
+                "nrn_to": 150,
+                "nrn_from": 1,
+                "weight": 1.3367242246516635,
+                "active": true
+            },
+            "157": {
+                "nrn_to": 150,
+                "nrn_from": 2,
+                "weight": 0.48851232590107113,
+                "active": true
+            }
+        }
+    }
+}

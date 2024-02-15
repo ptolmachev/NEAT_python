@@ -1,0 +1,2677 @@
+{
+    "Num species": 5,
+    "Species 0 num animals": 13,
+    "Species 0 top fitness": -210.40941626775202,
+    "Species 0 mean fitness": -581.7924004520966,
+    "Species 0 std fitness": 492.23020671863924,
+    "Species 0 top animal N hidden neurons": 8,
+    "Species 0 top animal N synapses": 53,
+    "Species 0 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 3.0
+            },
+            "1": {
+                "type": "i",
+                "bias": 0.3835021088470253
+            },
+            "2": {
+                "type": "i",
+                "bias": 0.10626814909960808
+            },
+            "3": {
+                "type": "o",
+                "bias": 1.2372152095667823
+            },
+            "1671": {
+                "type": "h",
+                "bias": -0.7229663001107539
+            },
+            "4039": {
+                "type": "h",
+                "bias": -0.0658240861397469
+            },
+            "4944": {
+                "type": "h",
+                "bias": -0.06203721337986388
+            },
+            "3796": {
+                "type": "h",
+                "bias": 0.3542040787597816
+            },
+            "3927": {
+                "type": "h",
+                "bias": -0.11944236607971426
+            },
+            "41": {
+                "type": "h",
+                "bias": -2.425611511671272
+            },
+            "236": {
+                "type": "h",
+                "bias": -0.10528787968852116
+            },
+            "1975": {
+                "type": "h",
+                "bias": 0.18739052322785207
+            }
+        },
+        "synapses": {
+            "257": {
+                "nrn_to": 236,
+                "nrn_from": 2,
+                "weight": -2.504862307689883,
+                "active": true
+            },
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": -0.031262836205096976,
+                "active": false
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -0.427115508243661,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 2.184860108517484,
+                "active": true
+            },
+            "1672": {
+                "nrn_to": 1671,
+                "nrn_from": 41,
+                "weight": 0.18945380208378876,
+                "active": true
+            },
+            "1673": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 1671,
+                "weight": -3.0
+            },
+            "1933": {
+                "nrn_to": 236,
+                "nrn_from": 1671,
+                "weight": -1.480685572996334,
+                "active": true
+            },
+            "4244": {
+                "nrn_to": 4039,
+                "nrn_from": 2,
+                "weight": -0.468784018081405,
+                "active": true
+            },
+            "5142": {
+                "nrn_to": 4039,
+                "nrn_from": 1,
+                "weight": 0.25609621063792654,
+                "active": true
+            },
+            "4252": {
+                "nrn_to": 236,
+                "nrn_from": 3796,
+                "weight": -0.14635712755486674,
+                "active": true
+            },
+            "3997": {
+                "nrn_to": 41,
+                "nrn_from": 3927,
+                "weight": 0.3366526888862718,
+                "active": true
+            },
+            "1694": {
+                "nrn_to": 1671,
+                "nrn_from": 236,
+                "weight": 0.3347451353604783,
+                "active": false
+            },
+            "4254": {
+                "nrn_to": 4039,
+                "nrn_from": 1671,
+                "weight": -2.129590056704166,
+                "active": true
+            },
+            "4128": {
+                "nrn_to": 4039,
+                "nrn_from": 3796,
+                "weight": 1.3687646295845208,
+                "active": true
+            },
+            "2978": {
+                "nrn_to": 1975,
+                "nrn_from": 41,
+                "weight": 0.44265046984630585,
+                "active": false
+            },
+            "4519": {
+                "nrn_to": 3927,
+                "nrn_from": 1,
+                "weight": 0.9472689798762829,
+                "active": true
+            },
+            "42": {
+                "active": true,
+                "nrn_to": 41,
+                "nrn_from": 0,
+                "weight": 2.454226949587301
+            },
+            "43": {
+                "nrn_to": 3,
+                "nrn_from": 41,
+                "weight": -0.09074316622515045,
+                "active": false
+            },
+            "2474": {
+                "nrn_to": 1975,
+                "nrn_from": 1,
+                "weight": -3.0,
+                "active": true
+            },
+            "1707": {
+                "nrn_to": 1671,
+                "nrn_from": 0,
+                "weight": 0.4093676835979815,
+                "active": false
+            },
+            "51": {
+                "nrn_to": 41,
+                "nrn_from": 1,
+                "weight": 1.5935244396966903,
+                "active": true
+            },
+            "56": {
+                "nrn_to": 41,
+                "nrn_from": 2,
+                "weight": 0.87398574253051,
+                "active": true
+            },
+            "1976": {
+                "nrn_to": 1975,
+                "nrn_from": 0,
+                "weight": 1.3563447828652975,
+                "active": true
+            },
+            "1977": {
+                "nrn_to": 236,
+                "nrn_from": 1975,
+                "weight": 0.08728379776677472,
+                "active": true
+            },
+            "4026": {
+                "nrn_to": 3796,
+                "nrn_from": 3927,
+                "weight": -0.029633928132598866,
+                "active": true
+            },
+            "1726": {
+                "nrn_to": 1671,
+                "nrn_from": 1,
+                "weight": -0.48530261002293573,
+                "active": true
+            },
+            "2111": {
+                "nrn_to": 41,
+                "nrn_from": 1975,
+                "weight": 0.9676542075749298,
+                "active": false
+            },
+            "2117": {
+                "nrn_to": 1671,
+                "nrn_from": 1975,
+                "weight": -0.36171708903617483,
+                "active": true
+            },
+            "4040": {
+                "active": true,
+                "nrn_to": 4039,
+                "nrn_from": 1975,
+                "weight": 2.5198526909305503
+            },
+            "4041": {
+                "active": false,
+                "nrn_to": 236,
+                "nrn_from": 4039,
+                "weight": -0.1848737173995207
+            },
+            "5072": {
+                "nrn_to": 4944,
+                "nrn_from": 2,
+                "weight": -0.3054593550757252,
+                "active": false
+            },
+            "4945": {
+                "active": true,
+                "nrn_to": 4944,
+                "nrn_from": 1,
+                "weight": 0.33532642007520946
+            },
+            "4946": {
+                "active": true,
+                "nrn_to": 236,
+                "nrn_from": 4944,
+                "weight": 2.9000342000679438
+            },
+            "2517": {
+                "nrn_to": 3,
+                "nrn_from": 1975,
+                "weight": 0.08082511058227318,
+                "active": false
+            },
+            "1750": {
+                "nrn_to": 236,
+                "nrn_from": 41,
+                "weight": -0.10580486523933952,
+                "active": false
+            },
+            "3797": {
+                "active": true,
+                "nrn_to": 3796,
+                "nrn_from": 41,
+                "weight": 2.1124661512943885
+            },
+            "3928": {
+                "active": true,
+                "nrn_to": 3927,
+                "nrn_from": 0,
+                "weight": 0.2771917087562561
+            },
+            "3929": {
+                "active": false,
+                "nrn_to": 1975,
+                "nrn_from": 3927,
+                "weight": -0.3778290717806402
+            },
+            "3798": {
+                "active": true,
+                "nrn_to": 1671,
+                "nrn_from": 3796,
+                "weight": 2.8868067308705974
+            },
+            "2398": {
+                "nrn_to": 1975,
+                "nrn_from": 2,
+                "weight": -0.5507578405345315,
+                "active": false
+            },
+            "5219": {
+                "nrn_to": 3,
+                "nrn_from": 4944,
+                "weight": 1.8710387629233782,
+                "active": true
+            },
+            "4712": {
+                "nrn_to": 4039,
+                "nrn_from": 0,
+                "weight": -0.6990436886772885,
+                "active": true
+            },
+            "2536": {
+                "nrn_to": 236,
+                "nrn_from": 41,
+                "weight": -1.151769484228686,
+                "active": false
+            },
+            "4330": {
+                "nrn_to": 4039,
+                "nrn_from": 3927,
+                "weight": -0.6654895816371316,
+                "active": true
+            },
+            "3819": {
+                "nrn_to": 3,
+                "nrn_from": 3796,
+                "weight": -0.8132574384121016,
+                "active": true
+            },
+            "237": {
+                "nrn_to": 236,
+                "nrn_from": 1,
+                "weight": -0.20555663706872523,
+                "active": true
+            },
+            "238": {
+                "nrn_to": 3,
+                "nrn_from": 236,
+                "weight": -0.09073397368372554,
+                "active": true
+            },
+            "4975": {
+                "nrn_to": 41,
+                "nrn_from": 4944,
+                "weight": -0.41556298429552824,
+                "active": true
+            },
+            "4602": {
+                "nrn_to": 3927,
+                "nrn_from": 2,
+                "weight": -0.5078918478796712,
+                "active": true
+            },
+            "243": {
+                "nrn_to": 236,
+                "nrn_from": 0,
+                "weight": 0.5496451688371629,
+                "active": true
+            },
+            "4217": {
+                "nrn_to": 4039,
+                "nrn_from": 41,
+                "weight": 1.63076884934298,
+                "active": true
+            },
+            "250": {
+                "nrn_to": 41,
+                "nrn_from": 236,
+                "weight": 0.19834536118852955,
+                "active": false
+            },
+            "5443": {
+                "nrn_to": 3796,
+                "nrn_from": 1,
+                "weight": -0.096928915592569,
+                "active": true
+            }
+        }
+    },
+    "Species 12 num animals": 6,
+    "Species 12 top fitness": -218.11514582844927,
+    "Species 12 mean fitness": -800.0074966252845,
+    "Species 12 std fitness": 357.59991197460545,
+    "Species 12 top animal N hidden neurons": 14,
+    "Species 12 top animal N synapses": 97,
+    "Species 12 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 0.15029619022868942
+            },
+            "1": {
+                "type": "i",
+                "bias": 0.4216892633828146
+            },
+            "2": {
+                "type": "i",
+                "bias": 0.381410443119936
+            },
+            "3": {
+                "type": "o",
+                "bias": 2.9072685136618213
+            },
+            "1284": {
+                "type": "h",
+                "bias": 0.9335218734438884
+            },
+            "1476": {
+                "type": "h",
+                "bias": 1.1460153506975588
+            },
+            "2442": {
+                "type": "h",
+                "bias": -0.23480764204070656
+            },
+            "907": {
+                "type": "h",
+                "bias": 0.8187360781644213
+            },
+            "3217": {
+                "type": "h",
+                "bias": 0.6569229230099488
+            },
+            "1181": {
+                "type": "h",
+                "bias": -0.4879533990039985
+            },
+            "4770": {
+                "type": "h",
+                "bias": -0.06893862390581204
+            },
+            "1251": {
+                "type": "h",
+                "bias": -0.006990585720088854
+            },
+            "741": {
+                "type": "h",
+                "bias": 0.5288658909456431
+            },
+            "41": {
+                "type": "h",
+                "bias": 0.05445537508437445
+            },
+            "3501": {
+                "type": "h",
+                "bias": -3.0
+            },
+            "4653": {
+                "type": "h",
+                "bias": -0.07343419666596582
+            },
+            "2928": {
+                "type": "h",
+                "bias": -0.03580072460022215
+            },
+            "1913": {
+                "type": "h",
+                "bias": 0.12446557502197493
+            }
+        },
+        "synapses": {
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": -1.2595242439009755,
+                "active": true
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -0.030430880936544273,
+                "active": false
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 1.6039314175188835,
+                "active": true
+            },
+            "3079": {
+                "nrn_to": 907,
+                "nrn_from": 1181,
+                "weight": 0.5927866343383443,
+                "active": true
+            },
+            "1285": {
+                "nrn_to": 1284,
+                "nrn_from": 1181,
+                "weight": -0.41342090696169487,
+                "active": true
+            },
+            "1286": {
+                "active": false,
+                "nrn_to": 41,
+                "nrn_from": 1284,
+                "weight": 0.17220067968011255
+            },
+            "1546": {
+                "nrn_to": 41,
+                "nrn_from": 1476,
+                "weight": 0.047729405774438405,
+                "active": false
+            },
+            "766": {
+                "nrn_to": 41,
+                "nrn_from": 741,
+                "weight": -2.827067018663335,
+                "active": true
+            },
+            "3604": {
+                "nrn_to": 1913,
+                "nrn_from": 1476,
+                "weight": 0.19116162608537263,
+                "active": false
+            },
+            "1306": {
+                "nrn_to": 1284,
+                "nrn_from": 2,
+                "weight": -2.6796236073840647,
+                "active": true
+            },
+            "1311": {
+                "nrn_to": 1284,
+                "nrn_from": 1,
+                "weight": -0.721708827333844,
+                "active": true
+            },
+            "4131": {
+                "nrn_to": 2928,
+                "nrn_from": 2442,
+                "weight": 0.2441981626651046,
+                "active": true
+            },
+            "1318": {
+                "nrn_to": 1284,
+                "nrn_from": 1251,
+                "weight": 0.057245575017028205,
+                "active": false
+            },
+            "4647": {
+                "nrn_to": 3,
+                "nrn_from": 1913,
+                "weight": -1.05754953737578,
+                "active": false
+            },
+            "42": {
+                "nrn_to": 41,
+                "nrn_from": 0,
+                "weight": 0.2510902659558306,
+                "active": false
+            },
+            "43": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 41,
+                "weight": -1.3219583336821117
+            },
+            "4654": {
+                "active": true,
+                "nrn_to": 4653,
+                "nrn_from": 2928,
+                "weight": 2.2013926283982928
+            },
+            "4655": {
+                "active": true,
+                "nrn_to": 3501,
+                "nrn_from": 4653,
+                "weight": 0.5547850352456656
+            },
+            "51": {
+                "nrn_to": 41,
+                "nrn_from": 1,
+                "weight": -0.09773824786952652,
+                "active": false
+            },
+            "1587": {
+                "nrn_to": 741,
+                "nrn_from": 907,
+                "weight": 0.24508809683561308,
+                "active": true
+            },
+            "56": {
+                "nrn_to": 41,
+                "nrn_from": 2,
+                "weight": -0.05046587441811469,
+                "active": true
+            },
+            "1852": {
+                "nrn_to": 741,
+                "nrn_from": 1476,
+                "weight": -2.7673935050976035,
+                "active": false
+            },
+            "3901": {
+                "nrn_to": 2928,
+                "nrn_from": 1476,
+                "weight": 0.6646664201532774,
+                "active": true
+            },
+            "5438": {
+                "nrn_to": 907,
+                "nrn_from": 1476,
+                "weight": -0.3537665588320107,
+                "active": true
+            },
+            "4415": {
+                "nrn_to": 907,
+                "nrn_from": 2442,
+                "weight": 0.22302411851229184,
+                "active": false
+            },
+            "5185": {
+                "nrn_to": 1476,
+                "nrn_from": 4770,
+                "weight": -0.3672914560875922,
+                "active": true
+            },
+            "3909": {
+                "nrn_to": 1913,
+                "nrn_from": 2,
+                "weight": -0.7867095918832776,
+                "active": true
+            },
+            "3154": {
+                "nrn_to": 741,
+                "nrn_from": 2442,
+                "weight": -0.10045390103278752,
+                "active": false
+            },
+            "3421": {
+                "nrn_to": 1181,
+                "nrn_from": 2442,
+                "weight": -0.0387052183221743,
+                "active": false
+            },
+            "5474": {
+                "nrn_to": 4770,
+                "nrn_from": 1,
+                "weight": 0.23750963862830213,
+                "active": true
+            },
+            "2662": {
+                "nrn_to": 1251,
+                "nrn_from": 0,
+                "weight": -0.703759261096464,
+                "active": true
+            },
+            "2151": {
+                "nrn_to": 741,
+                "nrn_from": 1181,
+                "weight": 0.05121423370658692,
+                "active": false
+            },
+            "2929": {
+                "active": true,
+                "nrn_to": 2928,
+                "nrn_from": 2,
+                "weight": 1.1656443039439515
+            },
+            "2930": {
+                "active": true,
+                "nrn_to": 907,
+                "nrn_from": 2928,
+                "weight": 0.48201341219422505
+            },
+            "2936": {
+                "nrn_to": 2928,
+                "nrn_from": 1,
+                "weight": 1.7500350790474493,
+                "active": true
+            },
+            "5497": {
+                "nrn_to": 4770,
+                "nrn_from": 0,
+                "weight": -0.213849350307876,
+                "active": true
+            },
+            "1914": {
+                "active": true,
+                "nrn_to": 1913,
+                "nrn_from": 1251,
+                "weight": 1.7383425594763995
+            },
+            "1915": {
+                "active": false,
+                "nrn_to": 1284,
+                "nrn_from": 1913,
+                "weight": -0.3124930789610705
+            },
+            "3452": {
+                "nrn_to": 1284,
+                "nrn_from": 907,
+                "weight": 0.38393852812558565,
+                "active": false
+            },
+            "2443": {
+                "active": true,
+                "nrn_to": 2442,
+                "nrn_from": 0,
+                "weight": 2.95172977526617
+            },
+            "908": {
+                "nrn_to": 907,
+                "nrn_from": 0,
+                "weight": -3.0,
+                "active": true
+            },
+            "2444": {
+                "active": true,
+                "nrn_to": 41,
+                "nrn_from": 2442,
+                "weight": 1.4840276226266593
+            },
+            "1935": {
+                "nrn_to": 1913,
+                "nrn_from": 741,
+                "weight": -0.2678719059885851,
+                "active": false
+            },
+            "2704": {
+                "nrn_to": 1913,
+                "nrn_from": 0,
+                "weight": -0.4681066213240481,
+                "active": true
+            },
+            "2705": {
+                "nrn_to": 1476,
+                "nrn_from": 2,
+                "weight": -0.5940048297722061,
+                "active": true
+            },
+            "3218": {
+                "active": true,
+                "nrn_to": 3217,
+                "nrn_from": 1181,
+                "weight": 3.0
+            },
+            "3219": {
+                "active": false,
+                "nrn_to": 741,
+                "nrn_from": 3217,
+                "weight": -2.027470461546033
+            },
+            "913": {
+                "nrn_to": 907,
+                "nrn_from": 1,
+                "weight": -0.899420569854764,
+                "active": true
+            },
+            "914": {
+                "nrn_to": 41,
+                "nrn_from": 907,
+                "weight": -0.9431427126628712,
+                "active": false
+            },
+            "3987": {
+                "nrn_to": 3217,
+                "nrn_from": 1476,
+                "weight": 0.09108519978551177,
+                "active": false
+            },
+            "4253": {
+                "nrn_to": 1181,
+                "nrn_from": 2928,
+                "weight": -0.250618196970194,
+                "active": true
+            },
+            "1182": {
+                "active": false,
+                "nrn_to": 1181,
+                "nrn_from": 1,
+                "weight": 1.1773330259066457
+            },
+            "1183": {
+                "nrn_to": 41,
+                "nrn_from": 1181,
+                "weight": -2.851073259553194,
+                "active": false
+            },
+            "3998": {
+                "nrn_to": 3501,
+                "nrn_from": 2,
+                "weight": 2.8287036163468473,
+                "active": true
+            },
+            "927": {
+                "nrn_to": 907,
+                "nrn_from": 741,
+                "weight": 0.1280992206536959,
+                "active": false
+            },
+            "1187": {
+                "nrn_to": 1181,
+                "nrn_from": 0,
+                "weight": 0.4721062086694828,
+                "active": true
+            },
+            "4771": {
+                "active": true,
+                "nrn_to": 4770,
+                "nrn_from": 2,
+                "weight": 1.0023250497446488
+            },
+            "4772": {
+                "active": true,
+                "nrn_to": 41,
+                "nrn_from": 4770,
+                "weight": 2.275342409685285
+            },
+            "2979": {
+                "nrn_to": 41,
+                "nrn_from": 1251,
+                "weight": 0.18050944173389213,
+                "active": true
+            },
+            "2984": {
+                "nrn_to": 1284,
+                "nrn_from": 2928,
+                "weight": -1.1133757604537413,
+                "active": false
+            },
+            "937": {
+                "nrn_to": 3,
+                "nrn_from": 907,
+                "weight": -0.5803974623566629,
+                "active": true
+            },
+            "1706": {
+                "nrn_to": 1181,
+                "nrn_from": 1476,
+                "weight": -3.0,
+                "active": true
+            },
+            "2731": {
+                "nrn_to": 3,
+                "nrn_from": 1284,
+                "weight": -0.27305430639006106,
+                "active": false
+            },
+            "3754": {
+                "nrn_to": 741,
+                "nrn_from": 1284,
+                "weight": 0.43068777759396704,
+                "active": true
+            },
+            "2221": {
+                "nrn_to": 1284,
+                "nrn_from": 1476,
+                "weight": -0.30677424637590456,
+                "active": true
+            },
+            "3245": {
+                "nrn_to": 3217,
+                "nrn_from": 1,
+                "weight": 0.13652226052917976,
+                "active": false
+            },
+            "5037": {
+                "nrn_to": 1284,
+                "nrn_from": 3217,
+                "weight": 0.7912625802084143,
+                "active": true
+            },
+            "3502": {
+                "nrn_to": 3501,
+                "nrn_from": 2928,
+                "weight": -0.7594582569222214,
+                "active": true
+            },
+            "3503": {
+                "active": true,
+                "nrn_to": 1284,
+                "nrn_from": 3501,
+                "weight": 0.2575208330117362
+            },
+            "941": {
+                "nrn_to": 907,
+                "nrn_from": 2,
+                "weight": 0.898330857656926,
+                "active": false
+            },
+            "4017": {
+                "nrn_to": 3501,
+                "nrn_from": 1476,
+                "weight": -0.3556450469892902,
+                "active": true
+            },
+            "2740": {
+                "nrn_to": 1913,
+                "nrn_from": 907,
+                "weight": 0.3224458604196305,
+                "active": true
+            },
+            "2230": {
+                "nrn_to": 3,
+                "nrn_from": 1251,
+                "weight": 0.2829518498648301,
+                "active": false
+            },
+            "5048": {
+                "nrn_to": 1251,
+                "nrn_from": 1181,
+                "weight": -0.6261958984871935,
+                "active": true
+            },
+            "3517": {
+                "nrn_to": 1251,
+                "nrn_from": 2928,
+                "weight": 0.883208654802429,
+                "active": false
+            },
+            "1219": {
+                "nrn_to": 3,
+                "nrn_from": 1181,
+                "weight": -0.38120364192705153,
+                "active": false
+            },
+            "1477": {
+                "active": true,
+                "nrn_to": 1476,
+                "nrn_from": 1,
+                "weight": 2.871267234791938
+            },
+            "1478": {
+                "active": false,
+                "nrn_to": 3,
+                "nrn_from": 1476,
+                "weight": 0.7199563274182789
+            },
+            "4549": {
+                "nrn_to": 3501,
+                "nrn_from": 1181,
+                "weight": 0.0044114089737224416,
+                "active": true
+            },
+            "2504": {
+                "nrn_to": 2442,
+                "nrn_from": 1,
+                "weight": 2.735336123667229,
+                "active": true
+            },
+            "3023": {
+                "nrn_to": 1913,
+                "nrn_from": 1,
+                "weight": 0.8320557992967995,
+                "active": false
+            },
+            "3537": {
+                "nrn_to": 1913,
+                "nrn_from": 3501,
+                "weight": 0.196206789319374,
+                "active": false
+            },
+            "2518": {
+                "nrn_to": 3,
+                "nrn_from": 2442,
+                "weight": 0.5377837040164158,
+                "active": false
+            },
+            "2777": {
+                "nrn_to": 1284,
+                "nrn_from": 0,
+                "weight": 1.504463445515879,
+                "active": true
+            },
+            "5337": {
+                "nrn_to": 3501,
+                "nrn_from": 4770,
+                "weight": 0.32279104384990526,
+                "active": true
+            },
+            "1252": {
+                "active": false,
+                "nrn_to": 1251,
+                "nrn_from": 1,
+                "weight": 0.18455211098235774
+            },
+            "1253": {
+                "active": true,
+                "nrn_to": 741,
+                "nrn_from": 1251,
+                "weight": -1.8887204656232643
+            },
+            "742": {
+                "nrn_to": 741,
+                "nrn_from": 1,
+                "weight": -0.2806973541637968,
+                "active": true
+            },
+            "744": {
+                "nrn_to": 741,
+                "nrn_from": 0,
+                "weight": -0.8861684225011076,
+                "active": true
+            },
+            "4842": {
+                "nrn_to": 741,
+                "nrn_from": 4770,
+                "weight": -0.09380443650926257,
+                "active": true
+            },
+            "2027": {
+                "nrn_to": 1913,
+                "nrn_from": 1181,
+                "weight": 1.3179648873984,
+                "active": false
+            },
+            "1519": {
+                "nrn_to": 1251,
+                "nrn_from": 1476,
+                "weight": -0.05225005947473919,
+                "active": false
+            },
+            "753": {
+                "nrn_to": 3,
+                "nrn_from": 741,
+                "weight": 0.21576071674980535,
+                "active": false
+            },
+            "4598": {
+                "nrn_to": 3217,
+                "nrn_from": 2442,
+                "weight": -0.3108028591140303,
+                "active": true
+            },
+            "1273": {
+                "nrn_to": 41,
+                "nrn_from": 1251,
+                "weight": 0.27638457603943045,
+                "active": false
+            },
+            "1532": {
+                "nrn_to": 1251,
+                "nrn_from": 907,
+                "weight": -0.14982739968981598,
+                "active": true
+            },
+            "1278": {
+                "nrn_to": 1251,
+                "nrn_from": 2,
+                "weight": -2.9809105502635163,
+                "active": true
+            }
+        }
+    },
+    "Species 8 num animals": 16,
+    "Species 8 top fitness": -187.35364062455585,
+    "Species 8 mean fitness": -622.6683691358008,
+    "Species 8 std fitness": 581.621278454429,
+    "Species 8 top animal N hidden neurons": 9,
+    "Species 8 top animal N synapses": 69,
+    "Species 8 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 0.0347364844751804
+            },
+            "1": {
+                "type": "i",
+                "bias": -0.1385703606282698
+            },
+            "2": {
+                "type": "i",
+                "bias": 3.0
+            },
+            "3": {
+                "type": "o",
+                "bias": 0.661264275157907
+            },
+            "1284": {
+                "type": "h",
+                "bias": -0.6010307693155792
+            },
+            "3524": {
+                "type": "h",
+                "bias": 0.015721646811529724
+            },
+            "907": {
+                "type": "h",
+                "bias": -0.01036423136792701
+            },
+            "1181": {
+                "type": "h",
+                "bias": -0.4279157016748345
+            },
+            "1251": {
+                "type": "h",
+                "bias": -0.876682017193093
+            },
+            "741": {
+                "type": "h",
+                "bias": -0.23325272822384996
+            },
+            "41": {
+                "type": "h",
+                "bias": -2.1025664331802667
+            },
+            "236": {
+                "type": "h",
+                "bias": 0.21888337517092718
+            },
+            "1524": {
+                "type": "h",
+                "bias": 0.7045855734241668
+            }
+        },
+        "synapses": {
+            "257": {
+                "nrn_to": 236,
+                "nrn_from": 2,
+                "weight": 0.2704242612484189,
+                "active": false
+            },
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": 0.013274784243691646,
+                "active": false
+            },
+            "1285": {
+                "active": false,
+                "nrn_to": 1284,
+                "nrn_from": 1181,
+                "weight": 0.8917740609101378
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -0.1413671074088321,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 0.7075063276893568,
+                "active": true
+            },
+            "1286": {
+                "active": true,
+                "nrn_to": 41,
+                "nrn_from": 1284,
+                "weight": -0.025419835059176513
+            },
+            "3852": {
+                "nrn_to": 1251,
+                "nrn_from": 0,
+                "weight": 0.1709012842429695,
+                "active": true
+            },
+            "2328": {
+                "nrn_to": 1251,
+                "nrn_from": 741,
+                "weight": -1.3617193285417077,
+                "active": true
+            },
+            "1311": {
+                "nrn_to": 1284,
+                "nrn_from": 1,
+                "weight": -0.592096244001737,
+                "active": false
+            },
+            "1831": {
+                "nrn_to": 1181,
+                "nrn_from": 907,
+                "weight": -0.9196396102483383,
+                "active": false
+            },
+            "2089": {
+                "nrn_to": 1251,
+                "nrn_from": 2,
+                "weight": 0.173482933795,
+                "active": true
+            },
+            "42": {
+                "active": true,
+                "nrn_to": 41,
+                "nrn_from": 0,
+                "weight": 1.2607810009691982
+            },
+            "43": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 41,
+                "weight": -3.0
+            },
+            "2095": {
+                "nrn_to": 41,
+                "nrn_from": 1524,
+                "weight": -0.011190824784244435,
+                "active": false
+            },
+            "51": {
+                "nrn_to": 41,
+                "nrn_from": 1,
+                "weight": -0.09706371505697879,
+                "active": false
+            },
+            "1335": {
+                "nrn_to": 1251,
+                "nrn_from": 1181,
+                "weight": 1.131972700616203,
+                "active": true
+            },
+            "56": {
+                "nrn_to": 41,
+                "nrn_from": 2,
+                "weight": 0.6379124683728302,
+                "active": true
+            },
+            "2364": {
+                "nrn_to": 1524,
+                "nrn_from": 1,
+                "weight": 0.003954794518952963,
+                "active": true
+            },
+            "3391": {
+                "nrn_to": 1524,
+                "nrn_from": 741,
+                "weight": -0.14544159517728633,
+                "active": true
+            },
+            "4424": {
+                "nrn_to": 741,
+                "nrn_from": 2,
+                "weight": -0.07982281985280265,
+                "active": false
+            },
+            "1359": {
+                "nrn_to": 3,
+                "nrn_from": 1284,
+                "weight": 2.730175466106559,
+                "active": true
+            },
+            "1618": {
+                "nrn_to": 1284,
+                "nrn_from": 1524,
+                "weight": 1.440565585913467,
+                "active": false
+            },
+            "3422": {
+                "nrn_to": 1284,
+                "nrn_from": 2,
+                "weight": -0.1362475884868364,
+                "active": false
+            },
+            "4962": {
+                "nrn_to": 1251,
+                "nrn_from": 1284,
+                "weight": -0.015785433508541558,
+                "active": true
+            },
+            "1637": {
+                "nrn_to": 1181,
+                "nrn_from": 1524,
+                "weight": 0.3798922795122162,
+                "active": false
+            },
+            "1399": {
+                "nrn_to": 1284,
+                "nrn_from": 0,
+                "weight": 1.0502730133509548,
+                "active": true
+            },
+            "1403": {
+                "nrn_to": 1251,
+                "nrn_from": 1284,
+                "weight": -0.022603417797905853,
+                "active": false
+            },
+            "3204": {
+                "nrn_to": 1181,
+                "nrn_from": 2,
+                "weight": -1.470408573246995,
+                "active": true
+            },
+            "908": {
+                "active": true,
+                "nrn_to": 907,
+                "nrn_from": 0,
+                "weight": 1.2083154209814881
+            },
+            "909": {
+                "nrn_to": 236,
+                "nrn_from": 907,
+                "weight": 0.1318866315533129,
+                "active": true
+            },
+            "913": {
+                "nrn_to": 907,
+                "nrn_from": 1,
+                "weight": 1.7122794594520476,
+                "active": true
+            },
+            "914": {
+                "nrn_to": 41,
+                "nrn_from": 907,
+                "weight": 1.4035085263704914,
+                "active": true
+            },
+            "3735": {
+                "nrn_to": 236,
+                "nrn_from": 1284,
+                "weight": -0.7734655514666864,
+                "active": true
+            },
+            "1182": {
+                "active": true,
+                "nrn_to": 1181,
+                "nrn_from": 1,
+                "weight": 1.0591990244035074
+            },
+            "1183": {
+                "nrn_to": 41,
+                "nrn_from": 1181,
+                "weight": 0.24200438554867262,
+                "active": true
+            },
+            "4256": {
+                "nrn_to": 1251,
+                "nrn_from": 907,
+                "weight": -0.21614705028556724,
+                "active": true
+            },
+            "927": {
+                "nrn_to": 907,
+                "nrn_from": 741,
+                "weight": 0.5457555211169871,
+                "active": false
+            },
+            "1187": {
+                "nrn_to": 1181,
+                "nrn_from": 0,
+                "weight": 0.25454972271384263,
+                "active": true
+            },
+            "5375": {
+                "nrn_to": 1524,
+                "nrn_from": 2,
+                "weight": 0.0018748506732543802,
+                "active": true
+            },
+            "937": {
+                "nrn_to": 3,
+                "nrn_from": 907,
+                "weight": -0.24520937530592668,
+                "active": true
+            },
+            "2985": {
+                "nrn_to": 1284,
+                "nrn_from": 741,
+                "weight": 0.02503357531981958,
+                "active": true
+            },
+            "941": {
+                "nrn_to": 907,
+                "nrn_from": 2,
+                "weight": 0.41321665231702687,
+                "active": true
+            },
+            "5295": {
+                "nrn_to": 3524,
+                "nrn_from": 741,
+                "weight": -0.16050649580654935,
+                "active": true
+            },
+            "1214": {
+                "nrn_to": 907,
+                "nrn_from": 1181,
+                "weight": -0.09248819022526417,
+                "active": false
+            },
+            "1219": {
+                "nrn_to": 3,
+                "nrn_from": 1181,
+                "weight": -0.04107767994887156,
+                "active": false
+            },
+            "5060": {
+                "nrn_to": 1181,
+                "nrn_from": 1284,
+                "weight": 0.11722362513928139,
+                "active": true
+            },
+            "3525": {
+                "active": true,
+                "nrn_to": 3524,
+                "nrn_from": 2,
+                "weight": 1.3291663044163469
+            },
+            "3526": {
+                "nrn_to": 1181,
+                "nrn_from": 3524,
+                "weight": 0.08837561330125379,
+                "active": false
+            },
+            "3529": {
+                "nrn_to": 3524,
+                "nrn_from": 0,
+                "weight": -0.6945058712928283,
+                "active": true
+            },
+            "2251": {
+                "nrn_to": 1181,
+                "nrn_from": 741,
+                "weight": -0.612393818333229,
+                "active": true
+            },
+            "3790": {
+                "nrn_to": 41,
+                "nrn_from": 1251,
+                "weight": 0.9048000738384967,
+                "active": true
+            },
+            "3022": {
+                "nrn_to": 1251,
+                "nrn_from": 236,
+                "weight": -0.3441626608114435,
+                "active": true
+            },
+            "1999": {
+                "nrn_to": 1181,
+                "nrn_from": 236,
+                "weight": -0.05295276413132928,
+                "active": false
+            },
+            "1252": {
+                "active": true,
+                "nrn_to": 1251,
+                "nrn_from": 1,
+                "weight": -0.16674701747718174
+            },
+            "1253": {
+                "active": false,
+                "nrn_to": 741,
+                "nrn_from": 1251,
+                "weight": 0.15627024483439553
+            },
+            "742": {
+                "nrn_to": 741,
+                "nrn_from": 1,
+                "weight": 0.8870159479324273,
+                "active": true
+            },
+            "743": {
+                "active": true,
+                "nrn_to": 236,
+                "nrn_from": 741,
+                "weight": 2.513693212868212
+            },
+            "744": {
+                "nrn_to": 741,
+                "nrn_from": 0,
+                "weight": -0.35310494641936546,
+                "active": true
+            },
+            "237": {
+                "nrn_to": 236,
+                "nrn_from": 1,
+                "weight": 0.1469617055093119,
+                "active": false
+            },
+            "238": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 236,
+                "weight": 2.91650832046187
+            },
+            "753": {
+                "nrn_to": 3,
+                "nrn_from": 741,
+                "weight": -2.94709260959568,
+                "active": true
+            },
+            "5362": {
+                "nrn_to": 3524,
+                "nrn_from": 907,
+                "weight": -0.24303769597479635,
+                "active": true
+            },
+            "243": {
+                "nrn_to": 236,
+                "nrn_from": 0,
+                "weight": 0.37940139651473637,
+                "active": true
+            },
+            "1525": {
+                "nrn_to": 1524,
+                "nrn_from": 0,
+                "weight": -0.008967849612924805,
+                "active": true
+            },
+            "1526": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 1524,
+                "weight": -0.2568098953812811
+            },
+            "1271": {
+                "nrn_to": 3,
+                "nrn_from": 1251,
+                "weight": -2.989478777794894,
+                "active": true
+            },
+            "250": {
+                "nrn_to": 41,
+                "nrn_from": 236,
+                "weight": -0.09096308655298592,
+                "active": false
+            },
+            "766": {
+                "nrn_to": 41,
+                "nrn_from": 741,
+                "weight": -2.73630861261317,
+                "active": true
+            },
+            "2047": {
+                "nrn_to": 1251,
+                "nrn_from": 1524,
+                "weight": -0.028415503919489868,
+                "active": true
+            }
+        }
+    },
+    "Species 4 num animals": 6,
+    "Species 4 top fitness": -921.0266193833872,
+    "Species 4 mean fitness": -1056.363802418892,
+    "Species 4 std fitness": 136.5686173884845,
+    "Species 4 top animal N hidden neurons": 18,
+    "Species 4 top animal N synapses": 103,
+    "Species 4 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 2.342415874209014
+            },
+            "1": {
+                "type": "i",
+                "bias": 0.6379758848316687
+            },
+            "2": {
+                "type": "i",
+                "bias": 3.0
+            },
+            "3": {
+                "type": "o",
+                "bias": -0.8980728405925974
+            },
+            "4992": {
+                "type": "h",
+                "bias": 0.08986835949752243
+            },
+            "2186": {
+                "type": "h",
+                "bias": -0.019524397210916325
+            },
+            "2066": {
+                "type": "h",
+                "bias": -0.2978841614891044
+            },
+            "41": {
+                "type": "h",
+                "bias": -0.8095348451746258
+            },
+            "1322": {
+                "type": "h",
+                "bias": 0.14178428922594302
+            },
+            "3254": {
+                "type": "h",
+                "bias": -3.0
+            },
+            "2231": {
+                "type": "h",
+                "bias": -1.1529731303046609
+            },
+            "1080": {
+                "type": "h",
+                "bias": 0.5741090177058753
+            },
+            "2617": {
+                "type": "h",
+                "bias": -0.5423899161669746
+            },
+            "828": {
+                "type": "h",
+                "bias": -0.190941512423491
+            },
+            "4939": {
+                "type": "h",
+                "bias": 0.06132572221388252
+            },
+            "3150": {
+                "type": "h",
+                "bias": -0.4494197151442923
+            },
+            "2792": {
+                "type": "h",
+                "bias": 0.9370701056558823
+            },
+            "236": {
+                "type": "h",
+                "bias": -1.6600390441966943
+            },
+            "2289": {
+                "type": "h",
+                "bias": 0.22246064255322198
+            },
+            "1400": {
+                "type": "h",
+                "bias": 0.06222865843889324
+            },
+            "4094": {
+                "type": "h",
+                "bias": -0.012153243311445905
+            },
+            "5485": {
+                "type": "h",
+                "bias": 0.0
+            }
+        },
+        "synapses": {
+            "4096": {
+                "active": true,
+                "nrn_to": 2289,
+                "nrn_from": 4094,
+                "weight": 0.8839953052836846
+            },
+            "257": {
+                "nrn_to": 236,
+                "nrn_from": 2,
+                "weight": 0.4251325991905486,
+                "active": true
+            },
+            "2817": {
+                "nrn_to": 2792,
+                "nrn_from": 1,
+                "weight": -3.0,
+                "active": true
+            },
+            "1283": {
+                "nrn_to": 236,
+                "nrn_from": 828,
+                "weight": -0.07442948460054435,
+                "active": true
+            },
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": -3.0,
+                "active": true
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": -1.0877557664524042,
+                "active": false
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 1.6934490324563867,
+                "active": true
+            },
+            "5137": {
+                "nrn_to": 2231,
+                "nrn_from": 3254,
+                "weight": 1.9257251062319134,
+                "active": false
+            },
+            "2067": {
+                "active": true,
+                "nrn_to": 2066,
+                "nrn_from": 1,
+                "weight": 0.8045717724021907
+            },
+            "2068": {
+                "active": false,
+                "nrn_to": 236,
+                "nrn_from": 2066,
+                "weight": 2.983065361341686
+            },
+            "2069": {
+                "nrn_to": 1400,
+                "nrn_from": 2066,
+                "weight": 2.9481139000408874,
+                "active": true
+            },
+            "2327": {
+                "nrn_to": 1400,
+                "nrn_from": 2,
+                "weight": -1.5170088925008063,
+                "active": false
+            },
+            "3610": {
+                "nrn_to": 2186,
+                "nrn_from": 2617,
+                "weight": 0.16541043036207437,
+                "active": false
+            },
+            "2590": {
+                "nrn_to": 2186,
+                "nrn_from": 2,
+                "weight": 1.405802830755558,
+                "active": false
+            },
+            "3870": {
+                "nrn_to": 828,
+                "nrn_from": 1,
+                "weight": 0.15035305896223242,
+                "active": false
+            },
+            "3109": {
+                "nrn_to": 1400,
+                "nrn_from": 236,
+                "weight": -1.0279516438195024,
+                "active": true
+            },
+            "42": {
+                "active": true,
+                "nrn_to": 41,
+                "nrn_from": 0,
+                "weight": 2.984342687856708
+            },
+            "43": {
+                "active": false,
+                "nrn_to": 3,
+                "nrn_from": 41,
+                "weight": -1.109087031843034
+            },
+            "2090": {
+                "nrn_to": 3,
+                "nrn_from": 2066,
+                "weight": 2.9301386939416307,
+                "active": true
+            },
+            "1323": {
+                "active": true,
+                "nrn_to": 1322,
+                "nrn_from": 1,
+                "weight": 1.4218582546011855
+            },
+            "1324": {
+                "nrn_to": 41,
+                "nrn_from": 1322,
+                "weight": 0.17190250370518967,
+                "active": false
+            },
+            "4397": {
+                "nrn_to": 3150,
+                "nrn_from": 3254,
+                "weight": 0.2725450163128547,
+                "active": false
+            },
+            "2351": {
+                "nrn_to": 41,
+                "nrn_from": 2289,
+                "weight": -0.4756530027725439,
+                "active": false
+            },
+            "51": {
+                "nrn_to": 41,
+                "nrn_from": 1,
+                "weight": -2.912868075441865,
+                "active": false
+            },
+            "5172": {
+                "nrn_to": 2289,
+                "nrn_from": 3254,
+                "weight": -0.44188324968839204,
+                "active": true
+            },
+            "2809": {
+                "nrn_to": 1080,
+                "nrn_from": 0,
+                "weight": 0.9300563210151293,
+                "active": true
+            },
+            "2868": {
+                "nrn_to": 2066,
+                "nrn_from": 2,
+                "weight": 0.9592363983347857,
+                "active": false
+            },
+            "2869": {
+                "nrn_to": 2792,
+                "nrn_from": 2,
+                "weight": 1.338640775028217,
+                "active": true
+            },
+            "56": {
+                "nrn_to": 41,
+                "nrn_from": 2,
+                "weight": 0.2466807529446527,
+                "active": false
+            },
+            "1082": {
+                "nrn_to": 236,
+                "nrn_from": 1080,
+                "weight": 1.376430732077475,
+                "active": false
+            },
+            "2618": {
+                "active": false,
+                "nrn_to": 2617,
+                "nrn_from": 1,
+                "weight": 1.3232427396703839
+            },
+            "4922": {
+                "nrn_to": 3,
+                "nrn_from": 3254,
+                "weight": -0.055947997472144996,
+                "active": false
+            },
+            "1339": {
+                "nrn_to": 3,
+                "nrn_from": 1322,
+                "weight": -1.0171003419079452,
+                "active": false
+            },
+            "829": {
+                "active": true,
+                "nrn_to": 828,
+                "nrn_from": 2,
+                "weight": 1.9867131817830446
+            },
+            "830": {
+                "active": false,
+                "nrn_to": 41,
+                "nrn_from": 828,
+                "weight": 0.8635772256678083
+            },
+            "3390": {
+                "nrn_to": 2231,
+                "nrn_from": 2066,
+                "weight": 0.017588523184659956,
+                "active": false
+            },
+            "1346": {
+                "nrn_to": 1322,
+                "nrn_from": 2,
+                "weight": 2.6544386653927656,
+                "active": false
+            },
+            "1098": {
+                "nrn_to": 41,
+                "nrn_from": 1080,
+                "weight": -0.9726367731069793,
+                "active": true
+            },
+            "4940": {
+                "active": true,
+                "nrn_to": 4939,
+                "nrn_from": 1322,
+                "weight": 0.7555529115950163
+            },
+            "4941": {
+                "active": true,
+                "nrn_to": 2792,
+                "nrn_from": 4939,
+                "weight": -0.35881400644074873
+            },
+            "3151": {
+                "active": false,
+                "nrn_to": 3150,
+                "nrn_from": 828,
+                "weight": 0.8983494160827894
+            },
+            "3152": {
+                "active": true,
+                "nrn_to": 41,
+                "nrn_from": 3150,
+                "weight": 1.3065884134070556
+            },
+            "3153": {
+                "nrn_to": 2289,
+                "nrn_from": 2792,
+                "weight": 0.7821332822509467,
+                "active": false
+            },
+            "1621": {
+                "nrn_to": 1080,
+                "nrn_from": 1,
+                "weight": -1.1944509375922387,
+                "active": true
+            },
+            "3933": {
+                "nrn_to": 3150,
+                "nrn_from": 1322,
+                "weight": 0.95699501133548,
+                "active": true
+            },
+            "2400": {
+                "nrn_to": 2289,
+                "nrn_from": 1322,
+                "weight": -2.991332414117738,
+                "active": true
+            },
+            "4960": {
+                "nrn_to": 2186,
+                "nrn_from": 4939,
+                "weight": -0.06796681817009798,
+                "active": false
+            },
+            "4452": {
+                "nrn_to": 828,
+                "nrn_from": 3254,
+                "weight": -0.0065048238349909165,
+                "active": false
+            },
+            "1130": {
+                "nrn_to": 1080,
+                "nrn_from": 2,
+                "weight": 2.70874238632185,
+                "active": false
+            },
+            "874": {
+                "nrn_to": 828,
+                "nrn_from": 0,
+                "weight": -0.26503156566936076,
+                "active": true
+            },
+            "1392": {
+                "nrn_to": 828,
+                "nrn_from": 1322,
+                "weight": -2.7270099646310597,
+                "active": true
+            },
+            "1401": {
+                "active": false,
+                "nrn_to": 1400,
+                "nrn_from": 828,
+                "weight": 0.29090733715328637
+            },
+            "1402": {
+                "active": false,
+                "nrn_to": 236,
+                "nrn_from": 1400,
+                "weight": 1.150807681079456
+            },
+            "2176": {
+                "nrn_to": 1322,
+                "nrn_from": 2066,
+                "weight": -0.12175296926965395,
+                "active": false
+            },
+            "4993": {
+                "active": true,
+                "nrn_to": 4992,
+                "nrn_from": 828,
+                "weight": 1.0001168251330672
+            },
+            "4994": {
+                "active": true,
+                "nrn_to": 3150,
+                "nrn_from": 4992,
+                "weight": 0.8582981991924775
+            },
+            "2438": {
+                "nrn_to": 1080,
+                "nrn_from": 2186,
+                "weight": 0.11154705546525487,
+                "active": false
+            },
+            "2188": {
+                "nrn_to": 1400,
+                "nrn_from": 2186,
+                "weight": 0.7604191458026783,
+                "active": false
+            },
+            "5017": {
+                "nrn_to": 2792,
+                "nrn_from": 4992,
+                "weight": -0.18388697789680292,
+                "active": true
+            },
+            "3489": {
+                "nrn_to": 41,
+                "nrn_from": 3254,
+                "weight": -0.5679223962531017,
+                "active": false
+            },
+            "5282": {
+                "nrn_to": 3150,
+                "nrn_from": 236,
+                "weight": -0.6358718212489605,
+                "active": true
+            },
+            "1447": {
+                "nrn_to": 1400,
+                "nrn_from": 1080,
+                "weight": -2.451403851007444,
+                "active": false
+            },
+            "4008": {
+                "nrn_to": 2289,
+                "nrn_from": 0,
+                "weight": -0.0004906827904104134,
+                "active": false
+            },
+            "4268": {
+                "nrn_to": 2231,
+                "nrn_from": 2289,
+                "weight": -0.2417914136360339,
+                "active": false
+            },
+            "2223": {
+                "nrn_to": 1080,
+                "nrn_from": 1322,
+                "weight": 0.033200759251567756,
+                "active": true
+            },
+            "5044": {
+                "nrn_to": 4094,
+                "nrn_from": 2,
+                "weight": -0.3286359818232915,
+                "active": true
+            },
+            "3510": {
+                "nrn_to": 2231,
+                "nrn_from": 0,
+                "weight": 0.5854531596345081,
+                "active": true
+            },
+            "3255": {
+                "active": true,
+                "nrn_to": 3254,
+                "nrn_from": 1,
+                "weight": 0.2883139385111175
+            },
+            "2232": {
+                "active": true,
+                "nrn_to": 2231,
+                "nrn_from": 41,
+                "weight": 0.9576723544565751
+            },
+            "2233": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 2231,
+                "weight": -1.503394108999795
+            },
+            "3256": {
+                "active": true,
+                "nrn_to": 2617,
+                "nrn_from": 3254,
+                "weight": 1.0743896547971055
+            },
+            "4548": {
+                "nrn_to": 1400,
+                "nrn_from": 1322,
+                "weight": 0.2519408265245359,
+                "active": false
+            },
+            "5318": {
+                "nrn_to": 1400,
+                "nrn_from": 3150,
+                "weight": -0.0008022047834589097,
+                "active": true
+            },
+            "5065": {
+                "nrn_to": 2617,
+                "nrn_from": 1322,
+                "weight": 0.48229571366834195,
+                "active": true
+            },
+            "3018": {
+                "nrn_to": 2289,
+                "nrn_from": 828,
+                "weight": -0.2557080332008765,
+                "active": true
+            },
+            "4812": {
+                "nrn_to": 2066,
+                "nrn_from": 2792,
+                "weight": -0.013012925917474659,
+                "active": false
+            },
+            "4301": {
+                "nrn_to": 4094,
+                "nrn_from": 1322,
+                "weight": -1.6346496217391426,
+                "active": true
+            },
+            "5326": {
+                "nrn_to": 2289,
+                "nrn_from": 1080,
+                "weight": -0.21830096543803496,
+                "active": false
+            },
+            "3532": {
+                "nrn_to": 2289,
+                "nrn_from": 2066,
+                "weight": 0.3277451597986712,
+                "active": true
+            },
+            "1744": {
+                "nrn_to": 236,
+                "nrn_from": 1322,
+                "weight": -0.5353235159666033,
+                "active": true
+            },
+            "3795": {
+                "nrn_to": 1400,
+                "nrn_from": 1,
+                "weight": 0.25538959739294936,
+                "active": false
+            },
+            "5077": {
+                "nrn_to": 2066,
+                "nrn_from": 2186,
+                "weight": -0.6766306549536737,
+                "active": true
+            },
+            "3287": {
+                "nrn_to": 2066,
+                "nrn_from": 3254,
+                "weight": -0.6266839486656157,
+                "active": true
+            },
+            "2520": {
+                "nrn_to": 2186,
+                "nrn_from": 1322,
+                "weight": 0.09602034919302012,
+                "active": false
+            },
+            "4575": {
+                "nrn_to": 4094,
+                "nrn_from": 236,
+                "weight": 0.26604950104546493,
+                "active": true
+            },
+            "3045": {
+                "nrn_to": 2792,
+                "nrn_from": 0,
+                "weight": 0.7986112898278206,
+                "active": false
+            },
+            "3046": {
+                "nrn_to": 828,
+                "nrn_from": 2617,
+                "weight": -2.7536525377287364,
+                "active": false
+            },
+            "2793": {
+                "active": false,
+                "nrn_to": 2792,
+                "nrn_from": 1322,
+                "weight": -0.5699008727111974
+            },
+            "2794": {
+                "active": true,
+                "nrn_to": 2186,
+                "nrn_from": 2792,
+                "weight": 0.6989733669915934
+            },
+            "4331": {
+                "nrn_to": 4094,
+                "nrn_from": 1,
+                "weight": 0.2682682920650374,
+                "active": false
+            },
+            "5353": {
+                "nrn_to": 4094,
+                "nrn_from": 1080,
+                "weight": 0.6812929570125594,
+                "active": true
+            },
+            "237": {
+                "nrn_to": 236,
+                "nrn_from": 1,
+                "weight": -2.423029234854385,
+                "active": false
+            },
+            "238": {
+                "active": false,
+                "nrn_to": 3,
+                "nrn_from": 236,
+                "weight": 0.03939195378423268
+            },
+            "2544": {
+                "nrn_to": 2289,
+                "nrn_from": 2186,
+                "weight": -0.09307554453682002,
+                "active": true
+            },
+            "5104": {
+                "nrn_to": 4939,
+                "nrn_from": 1080,
+                "weight": -0.24287068711127247,
+                "active": false
+            },
+            "243": {
+                "nrn_to": 236,
+                "nrn_from": 0,
+                "weight": 0.8515470088361284,
+                "active": true
+            },
+            "2291": {
+                "active": false,
+                "nrn_to": 1080,
+                "nrn_from": 2289,
+                "weight": 0.4075423518931617
+            },
+            "761": {
+                "nrn_to": 236,
+                "nrn_from": 41,
+                "weight": -2.4268507005673663,
+                "active": false
+            },
+            "250": {
+                "nrn_to": 41,
+                "nrn_from": 236,
+                "weight": -2.8327156575601804,
+                "active": true
+            },
+            "3070": {
+                "nrn_to": 2289,
+                "nrn_from": 236,
+                "weight": 1.5516117404930498,
+                "active": true
+            },
+            "4095": {
+                "active": true,
+                "nrn_to": 4094,
+                "nrn_from": 2792,
+                "weight": 2.8350043290743727
+            },
+            "5486": {
+                "active": true,
+                "nrn_to": 5485,
+                "nrn_from": 3254,
+                "weight": 1.0
+            },
+            "5487": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 5485,
+                "weight": -0.055947997472144996
+            }
+        }
+    },
+    "Species 2 num animals": 19,
+    "Species 2 top fitness": -186.51820354084103,
+    "Species 2 mean fitness": -863.4645616836043,
+    "Species 2 std fitness": 566.3801280489523,
+    "Species 2 top animal N hidden neurons": 10,
+    "Species 2 top animal N synapses": 61,
+    "Species 2 top animal": {
+        "neurons": {
+            "0": {
+                "type": "i",
+                "bias": 1.0254142268046111
+            },
+            "1": {
+                "type": "i",
+                "bias": -0.642987353710758
+            },
+            "2": {
+                "type": "i",
+                "bias": 0.5190997091073439
+            },
+            "3": {
+                "type": "o",
+                "bias": 1.5259957476371888
+            },
+            "3274": {
+                "type": "h",
+                "bias": -0.043963469771683056
+            },
+            "907": {
+                "type": "h",
+                "bias": 0.08303391160971012
+            },
+            "1550": {
+                "type": "h",
+                "bias": -0.1212145098555052
+            },
+            "4562": {
+                "type": "h",
+                "bias": -0.18645029220197826
+            },
+            "4819": {
+                "type": "h",
+                "bias": -0.09226577680619698
+            },
+            "1181": {
+                "type": "h",
+                "bias": -0.02881461856156041
+            },
+            "741": {
+                "type": "h",
+                "bias": 0.9872422783583594
+            },
+            "41": {
+                "type": "h",
+                "bias": -2.888920391537521
+            },
+            "236": {
+                "type": "h",
+                "bias": 0.1863252387677397
+            },
+            "5166": {
+                "type": "h",
+                "bias": -0.09262019290068628
+            }
+        },
+        "synapses": {
+            "257": {
+                "nrn_to": 236,
+                "nrn_from": 2,
+                "weight": -1.2281584339291065,
+                "active": true
+            },
+            "4": {
+                "nrn_to": 3,
+                "nrn_from": 1,
+                "weight": -0.01142551307207319,
+                "active": true
+            },
+            "2052": {
+                "nrn_to": 3,
+                "nrn_from": 1550,
+                "weight": -3.0,
+                "active": true
+            },
+            "5": {
+                "nrn_to": 3,
+                "nrn_from": 0,
+                "weight": 0.28674868734822634,
+                "active": true
+            },
+            "6": {
+                "nrn_to": 3,
+                "nrn_from": 2,
+                "weight": 2.3144391691166892,
+                "active": true
+            },
+            "908": {
+                "active": true,
+                "nrn_to": 907,
+                "nrn_from": 0,
+                "weight": 2.9119166148776032
+            },
+            "909": {
+                "active": true,
+                "nrn_to": 236,
+                "nrn_from": 907,
+                "weight": 0.433729765968351
+            },
+            "1551": {
+                "active": false,
+                "nrn_to": 1550,
+                "nrn_from": 907,
+                "weight": 0.5888615404745041
+            },
+            "1552": {
+                "active": true,
+                "nrn_to": 1181,
+                "nrn_from": 1550,
+                "weight": 0.30807251222751014
+            },
+            "4624": {
+                "nrn_to": 4562,
+                "nrn_from": 1,
+                "weight": 0.5646003060139506,
+                "active": true
+            },
+            "4623": {
+                "nrn_to": 4562,
+                "nrn_from": 1550,
+                "weight": -0.8942577034692496,
+                "active": true
+            },
+            "913": {
+                "nrn_to": 907,
+                "nrn_from": 1,
+                "weight": -2.4114210780212844,
+                "active": true
+            },
+            "914": {
+                "nrn_to": 41,
+                "nrn_from": 907,
+                "weight": -0.689209449443556,
+                "active": true
+            },
+            "4243": {
+                "nrn_to": 3274,
+                "nrn_from": 1550,
+                "weight": -0.011472688653915618,
+                "active": false
+            },
+            "5012": {
+                "nrn_to": 4562,
+                "nrn_from": 3274,
+                "weight": -0.849891257185677,
+                "active": true
+            },
+            "4888": {
+                "nrn_to": 4819,
+                "nrn_from": 907,
+                "weight": -0.05742716712523011,
+                "active": true
+            },
+            "1561": {
+                "nrn_to": 236,
+                "nrn_from": 1550,
+                "weight": -0.03807135463500119,
+                "active": false
+            },
+            "4637": {
+                "nrn_to": 4562,
+                "nrn_from": 41,
+                "weight": -0.48112597124417184,
+                "active": true
+            },
+            "1182": {
+                "active": true,
+                "nrn_to": 1181,
+                "nrn_from": 1,
+                "weight": 0.8193063197314308
+            },
+            "927": {
+                "nrn_to": 907,
+                "nrn_from": 741,
+                "weight": -1.6452316177947661,
+                "active": true
+            },
+            "2719": {
+                "nrn_to": 1550,
+                "nrn_from": 2,
+                "weight": 0.24193357996900736,
+                "active": true
+            },
+            "1183": {
+                "active": true,
+                "nrn_to": 41,
+                "nrn_from": 1181,
+                "weight": 0.7169447434452644
+            },
+            "4005": {
+                "nrn_to": 41,
+                "nrn_from": 1550,
+                "weight": -0.2564272038356681,
+                "active": true
+            },
+            "1448": {
+                "nrn_to": 1181,
+                "nrn_from": 236,
+                "weight": -0.056282917012660624,
+                "active": false
+            },
+            "937": {
+                "nrn_to": 3,
+                "nrn_from": 907,
+                "weight": -0.36745339721770454,
+                "active": true
+            },
+            "42": {
+                "nrn_to": 41,
+                "nrn_from": 0,
+                "weight": 0.8022223111380596,
+                "active": true
+            },
+            "43": {
+                "nrn_to": 3,
+                "nrn_from": 41,
+                "weight": -0.4377169365259013,
+                "active": true
+            },
+            "1836": {
+                "nrn_to": 1550,
+                "nrn_from": 741,
+                "weight": -2.948105447109756,
+                "active": true
+            },
+            "941": {
+                "nrn_to": 907,
+                "nrn_from": 2,
+                "weight": 0.151517537029665,
+                "active": true
+            },
+            "1582": {
+                "nrn_to": 1550,
+                "nrn_from": 0,
+                "weight": 0.06439200377360677,
+                "active": false
+            },
+            "5167": {
+                "active": true,
+                "nrn_to": 5166,
+                "nrn_from": 0,
+                "weight": 2.202741915364366
+            },
+            "5168": {
+                "active": true,
+                "nrn_to": 1550,
+                "nrn_from": 5166,
+                "weight": -0.055449763754470464
+            },
+            "51": {
+                "nrn_to": 41,
+                "nrn_from": 1,
+                "weight": 0.1576793366487927,
+                "active": true
+            },
+            "56": {
+                "nrn_to": 41,
+                "nrn_from": 2,
+                "weight": 0.9057343681165453,
+                "active": true
+            },
+            "4921": {
+                "nrn_to": 4819,
+                "nrn_from": 2,
+                "weight": -0.024850587397198337,
+                "active": false
+            },
+            "1597": {
+                "nrn_to": 1550,
+                "nrn_from": 1,
+                "weight": 0.705876703662938,
+                "active": true
+            },
+            "1215": {
+                "nrn_to": 1181,
+                "nrn_from": 741,
+                "weight": 2.682023366556203,
+                "active": true
+            },
+            "1219": {
+                "nrn_to": 3,
+                "nrn_from": 1181,
+                "weight": -0.05033466072084594,
+                "active": false
+            },
+            "3784": {
+                "nrn_to": 3274,
+                "nrn_from": 0,
+                "weight": -0.2569857577656285,
+                "active": true
+            },
+            "3275": {
+                "active": true,
+                "nrn_to": 3274,
+                "nrn_from": 41,
+                "weight": 2.3603420673449422
+            },
+            "3276": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 3274,
+                "weight": -2.641659728767944
+            },
+            "1614": {
+                "nrn_to": 1181,
+                "nrn_from": 0,
+                "weight": 1.2372335081514454,
+                "active": true
+            },
+            "1619": {
+                "nrn_to": 236,
+                "nrn_from": 1181,
+                "weight": -0.8570708640507188,
+                "active": false
+            },
+            "4563": {
+                "active": true,
+                "nrn_to": 4562,
+                "nrn_from": 236,
+                "weight": 1.9179440849585059
+            },
+            "3284": {
+                "nrn_to": 3274,
+                "nrn_from": 1,
+                "weight": -1.1427922580293657,
+                "active": true
+            },
+            "4564": {
+                "active": true,
+                "nrn_to": 3,
+                "nrn_from": 4562,
+                "weight": 0.3374684910973413
+            },
+            "4820": {
+                "active": true,
+                "nrn_to": 4819,
+                "nrn_from": 1550,
+                "weight": 0.35814903899129963
+            },
+            "4821": {
+                "active": false,
+                "nrn_to": 3274,
+                "nrn_from": 4819,
+                "weight": -0.023391389684940558
+            },
+            "1370": {
+                "nrn_to": 1181,
+                "nrn_from": 907,
+                "weight": -0.01472344134884649,
+                "active": false
+            },
+            "742": {
+                "nrn_to": 741,
+                "nrn_from": 1,
+                "weight": 0.3578135602973292,
+                "active": false
+            },
+            "743": {
+                "active": true,
+                "nrn_to": 236,
+                "nrn_from": 741,
+                "weight": 2.7748630122509694
+            },
+            "744": {
+                "nrn_to": 741,
+                "nrn_from": 0,
+                "weight": 0.509376288121254,
+                "active": true
+            },
+            "4844": {
+                "nrn_to": 41,
+                "nrn_from": 4819,
+                "weight": 0.40384926064129534,
+                "active": true
+            },
+            "237": {
+                "nrn_to": 236,
+                "nrn_from": 1,
+                "weight": -0.5768072690282712,
+                "active": true
+            },
+            "238": {
+                "nrn_to": 3,
+                "nrn_from": 236,
+                "weight": 0.05495774789204476,
+                "active": true
+            },
+            "4590": {
+                "nrn_to": 4562,
+                "nrn_from": 2,
+                "weight": -0.20431082692285193,
+                "active": true
+            },
+            "753": {
+                "nrn_to": 3,
+                "nrn_from": 741,
+                "weight": 0.2180072728812633,
+                "active": false
+            },
+            "243": {
+                "nrn_to": 236,
+                "nrn_from": 0,
+                "weight": -0.565289158401689,
+                "active": true
+            },
+            "4214": {
+                "nrn_to": 3274,
+                "nrn_from": 741,
+                "weight": -0.07542283958005183,
+                "active": false
+            },
+            "250": {
+                "nrn_to": 41,
+                "nrn_from": 236,
+                "weight": 0.25495025153320855,
+                "active": false
+            },
+            "766": {
+                "nrn_to": 41,
+                "nrn_from": 741,
+                "weight": -0.35252965573391015,
+                "active": true
+            }
+        }
+    }
+}

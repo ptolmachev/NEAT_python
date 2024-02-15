@@ -1,0 +1,46 @@
+env_name: &env_name "SlimeVolley-v0"
+nature_params:
+  max_animals: 128
+  max_species: 16
+  max_timesteps: 3000
+  rel_advantage_ind: 3.0
+  rel_advantage_spec: 1.0
+  mutation_probs: (0.02, 0.03, 0.2, 0.2, 0.8, 0.05)
+  syn_mutation_prob: 0.6
+  syn_mut_type_probs: (0.9, 0.05, 0.05)
+  weight_change_std: 0.05
+  c_d: 1.0
+  c_w: 0.4
+  delta: 3.0
+  gamma: 1.2
+  established_species_thr: 5
+  cull_ratio: 0.2
+  parthenogenesis_rate: 0.25
+  interspecies_mating_chance : 0.02
+  metabolic_penalty: 0.01
+  eval_repeats: 1
+  parallel: True
+  num_workers: 8
+  self_play: True
+  num_reference_animals: 7
+
+innovation_handler_params:
+  maxlen: 300
+
+animal_params:
+  neuron_type: "relu"
+  action_type: "MultiBinary"
+  action_bounds: None
+  action_noise: 0.03
+
+logger_params:
+  data_folder: "/home/pt1290/NEAT_python/data/evolved_models/SlimeVolley-v0"
+  log_folder: "/home/pt1290/NEAT_python/log/SlimeVolley-v0"
+  img_folder: "/home/pt1290/NEAT_python/img/SlimeVolley-v0"
+  render: False
+  render_every: -1
+  plot_every : 10
+
+evolution_params:
+  n_generations: 1000
+
