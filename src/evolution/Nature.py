@@ -1,18 +1,11 @@
-from functools import partial
-
-import gymnasium
 import numpy as np
+from functools import partial
 from tqdm.auto import tqdm
 import warnings
-import sys
-import os
-from pathlib import Path
 from itertools import chain
-from src.evolution.utils import standardize, get_probs
 from src.evolution.Animal import Animal
 from src.evolution.Blueprint import *
 from src.evolution.Species import *
-from src.utils import jsonify
 from copy import deepcopy
 warnings.filterwarnings("ignore")
 import ray
@@ -90,6 +83,7 @@ class Nature():
                  max_animals=32,
                  max_species=6,
                  max_timesteps=1000,
+                 blueprint_params=None,
                  animal_params=None,
                  rel_advantage_ind=3.0,
                  rel_advantage_spec=1.0,
@@ -109,6 +103,8 @@ class Nature():
                  metabolic_penalty = 0.05,
                  eval_repeats=11,
                  logger=None,
+                 save_logs = True,
+                 log_every=10,
                  num_workers=10,
                  parallel=True,
                  self_play=False,
@@ -133,6 +129,8 @@ class Nature():
         self.perturb_biases = perturb_biases
         self.innovation_handler = innovation_handler
         self.logger = logger
+        self.save_logs = save_logs
+        self.log_every = log_every
         self.validator = validator
         self.max_animals = max_animals
         self.max_species = max_species
@@ -140,9 +138,10 @@ class Nature():
         self.rel_advantage_spec = rel_advantage_spec
         self.parthenogenesis_rate = parthenogenesis_rate
         self.interspecies_mating_chance = interspecies_mating_chance
+        self.blueprint_params = blueprint_params
         if "action_bounds" in list(animal_params.keys()):
             animal_params["action_bounds"] = animal_params["action_bounds"]
-        self.animal_params = animal_params # output type, neuron type, action bounds
+        self.animal_params = deepcopy(animal_params) # output type, neuron type, action bounds
         self.eval_repeats = eval_repeats
         # params for evaluating distance between the genomes:
         self.c_w = c_w
@@ -201,7 +200,8 @@ class Nature():
         b = BluePrint(innovation_handler=self.innovation_handler,
                       genome_dict=deepcopy(genome_dict),
                       n_inputs=n_inputs,
-                      n_outputs=n_outputs)
+                      n_outputs=n_outputs,
+                      **self.blueprint_params)
         # mutate these blueprints
         base_blueprints = [deepcopy(b) for i in range(self.max_animals)]
         mutated_blueprints = [self.mutate(b) for b in base_blueprints]
@@ -267,7 +267,8 @@ class Nature():
         return np.nanmean(rewards)
 
     def eval_population(self):
-        seed = self.current_generation #might be important for the animals to learn
+        # seed = self.current_generation
+        seed = np.random.randint(100000)
         if self.self_play:
             reference_animals = np.random.choice(self.animals, self.num_reference_animals, replace=False)
         else:
@@ -399,7 +400,7 @@ class Nature():
                 survived_species.append(species)
         if len(survived_species) == 0:
             #jeeez...all of the species are bad. perhaps allow only the top one to survive
-            top_species_ind = np.argmax(np.array([species.top_fitness for species in self.species_list]))
+            top_species_ind = np.argmax(np.array([np.max(species.fitness_list) for species in self.species_list]))
             top_species = self.species_list[top_species_ind]
             top_species.top_fitness_list.clear()
             top_species.mean_fitness_list.clear()
@@ -487,22 +488,24 @@ class Nature():
             std_score_sequence.append(np.std(fitness_vals))
 
             if not (self.logger is None):
-                log_dict = {}
-                log_dict[f"Num species"] = len(self.species_list)
-                for species in self.species_list:
-                    log_dict[f"Species {species.species_id} num animals"] = len(species.subpopulation)
-                    log_dict[f"Species {species.species_id} top fitness"] = np.max(species.fitness_list)
-                    log_dict[f"Species {species.species_id} mean fitness"] = species.mean_fitness
-                    log_dict[f"Species {species.species_id} std fitness"] = species.std_fitness
-                    top_animal_genome = species.subpopulation[np.argmax(species.fitness_list)].blueprint.genome_dict
-                    log_dict[f"Species {species.species_id} top animal N hidden neurons"] = \
-                        len(get_neurons_by_type(top_animal_genome, type='h'))
-                    log_dict[f"Species {species.species_id} top animal N synapses"] = \
-                        len(list(top_animal_genome["synapses"].keys()))
-                    log_dict[f"Species {species.species_id} top animal"] = top_animal_genome
-
                 tag = self.logger.tag if not (self.logger is None) else ''
-                self.logger.save_log(log_dict, file_name=f"{self.env_name}_gen={self.current_generation}_{tag}.json")
+                if self.save_logs and ((self.current_generation + 1) % self.log_every) == 0:
+                    log_dict = {}
+                    log_dict[f"Num species"] = len(self.species_list)
+                    for species in self.species_list:
+                        log_dict[f"Species {species.species_id} num animals"] = len(species.subpopulation)
+                        log_dict[f"Species {species.species_id} top fitness"] = np.max(species.fitness_list)
+                        log_dict[f"Species {species.species_id} mean fitness"] = species.mean_fitness
+                        log_dict[f"Species {species.species_id} std fitness"] = species.std_fitness
+                        top_animal_genome = species.subpopulation[np.argmax(species.fitness_list)].blueprint.genome_dict
+                        log_dict[f"Species {species.species_id} top animal N hidden neurons"] = \
+                            len(get_neurons_by_type(top_animal_genome, type='h'))
+                        log_dict[f"Species {species.species_id} top animal N synapses"] = \
+                            len(list(top_animal_genome["synapses"].keys()))
+                        log_dict[f"Species {species.species_id} top animal"] = top_animal_genome
+
+                    self.logger.save_log(log_dict, file_name=f"{self.env_name}_gen={self.current_generation}_{tag}.json")
+
                 if (self.current_generation + 1) % self.logger.plot_every == 0:
                     self.logger.plot_scores(top_scores=top_score_sequence,
                                             mean_scores=mean_score_sequence,

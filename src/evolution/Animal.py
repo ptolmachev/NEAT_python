@@ -62,6 +62,8 @@ class Animal():
                 raise ValueError("Stuck in a loop!")
         output = nrn_vals[list(self.out_nrns_inds)]
         return self.finalize_action(output)
+        # output = nrn_vals[list(self.out_nrns_inds)]
+        # return output + self.action_noise * np.random.randn(*output.shape)
 
     def mate(self, other_animal):
         fitness_parents = np.array([self.fitness, other_animal.fitness])

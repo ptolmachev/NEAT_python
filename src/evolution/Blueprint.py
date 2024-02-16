@@ -20,6 +20,11 @@ class BluePrint():
         links = get_list_of_links(genome_dict)
         input_nrns = get_neurons_by_type(genome_dict, type='i')
         output_nrns = get_neurons_by_type(genome_dict, type='o')
+        self.n_inputs = n_inputs
+        self.inp_neurons = input_nrns
+        self.n_outputs = n_outputs
+        self.out_neurons = output_nrns
+
         for nrn_to, nrn_from in links:
             if nrn_to in input_nrns:
                 raise ValueError(
@@ -37,17 +42,12 @@ class BluePrint():
         # (4) remove cycles if present
         if success == False:
             genome_dict = remove_cycles(genome_dict)
-            self.top_sorter = TopologicalSorter(get_neural_graph(genome_dict))
             success = self.set_topological_order(genome_dict)
         if success == False:
-            raise ValueError("Something is wrong!")
+            print("Something is definitely wrong")
         self.genome_dict = genome_dict
 
         self.innovation_handler = innovation_handler
-        self.n_inputs = n_inputs
-        self.inp_neurons = input_nrns
-        self.n_outputs = n_outputs
-        self.out_neurons = output_nrns
         self.orph_node_thr = orph_node_thr
         self.max_neruons = max_neurons
         self.max_weight_val = max_weight_val
@@ -69,17 +69,18 @@ class BluePrint():
         return get_list_of_links(self.genome_dict, active_only=active_only)
 
     def set_topological_order(self, genome_dict):
-        inp_neurons = get_neurons_by_type(genome_dict, 'i')
-        out_neurons = get_neurons_by_type(genome_dict, 'o')
         top_sorter = TopologicalSorter(get_neural_graph(genome_dict))
-        try:
-            top_order_full = list(top_sorter.static_order()) #including input and output neurons
-            self.topological_order = []
-            for nrn in top_order_full:
-                if not ((nrn in inp_neurons) or (nrn in out_neurons)):
-                    self.topological_order.append(nrn)
-        except:
-            return False #means there is a cycle
+        res = top_sorter._find_cycle()
+        cycle = None if res is None else res[:-1]
+        if not (cycle is None):
+            return False
+        else:
+            top_order_full = list(top_sorter.static_order())
+            self.topological_order = [nrn for nrn in top_order_full if not ((nrn in self.inp_neurons) or (nrn in self.out_neurons))]
+            # self.topological_order = []
+            # for nrn in top_order_full:
+            #     if not ((nrn in self.inp_neurons) or (nrn in self.out_neurons)):
+            #         self.topological_order.append(nrn)
         return True
 
     def add_neuron(self):
@@ -213,7 +214,7 @@ class BluePrint():
         gene_types = ["synapses"]
         if perturb_biases == True:
             gene_types.append("neurons")
-        for gene_type in ["synapses", "neurons"]:
+        for gene_type in gene_types:
             if gene_type == "neurons": # allow biases only on hidden units to change
                 innovations = [innovation for innovation, info in self.genome_dict[gene_type].items() if (info["type"] == 'h')]
             else:
