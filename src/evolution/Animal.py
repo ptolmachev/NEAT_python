@@ -52,18 +52,23 @@ class Animal():
         l = len(inputs)
         W = self.W[l:]
         b = self.b[l:]
-        while_cnt = 0
-        while not np.array_equal(nrn_vals_prev, nrn_vals):  # iterate till there are no changes in the network values
+
+        # while_cnt = 0
+        # while not np.array_equal(nrn_vals_prev, nrn_vals):  # iterate till there are no changes in the network values
+        #     nrn_vals_prev = np.copy(nrn_vals)
+        #     nrn_vals[l:] = self.activation(W @ nrn_vals_prev + b)
+        #     while_cnt += 1
+        #     if while_cnt > 1000:
+        #         print(self.blueprint.genome_dict)
+        #         raise ValueError("Stuck in a loop!")
+
+        for i in range(10000):
             nrn_vals_prev = np.copy(nrn_vals)
             nrn_vals[l:] = self.activation(W @ nrn_vals_prev + b)
-            while_cnt += 1
-            if while_cnt > 1000:
-                print(self.blueprint.genome_dict)
-                raise ValueError("Stuck in a loop!")
-        output = nrn_vals[list(self.out_nrns_inds)]
-        return self.finalize_action(output)
-        # output = nrn_vals[list(self.out_nrns_inds)]
-        # return output + self.action_noise * np.random.randn(*output.shape)
+            if np.array_equal(nrn_vals_prev, nrn_vals):
+                output = nrn_vals[list(self.out_nrns_inds)]
+                return self.finalize_action(output)
+        raise ValueError("There likely is a loop in connectivity!")
 
     def mate(self, other_animal):
         fitness_parents = np.array([self.fitness, other_animal.fitness])

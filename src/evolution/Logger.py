@@ -71,22 +71,32 @@ class Logger():
         fig.savefig(os.path.join(self.img_folder, file_name))
         plt.close()
 
-    def plot_scores(self, top_scores, mean_scores, std_scores,  file_name):
+    def plot_scores(self, top_scores, mean_scores, std_scores,  file_name, val_scores = None):
         fig = plt.figure(figsize = (10, 4))
         top_scores = np.array(top_scores)
         mean = np.array(mean_scores)
         std = np.array(std_scores)
+        if not(val_scores is None):
+            plt.plot(val_scores, color = 'g', label="validation scores")
+
         plt.plot(top_scores, color = 'r', label="top scores")
         plt.plot(mean, color='blue', label="mean scores")
         plt.plot(mean - std, color='blue', linestyle='--', linewidth = 0.5)
         plt.plot(mean + std, color='blue', linestyle='--', linewidth = 0.5)
-        y_min = np.min(top_scores)
-        y_max = np.max(top_scores)
+
+        # getting a ylim
+        if not(val_scores is None):
+            ref_scores = val_scores
+        else:
+            ref_scores = top_scores
+        y_min = np.min(ref_scores)
+        y_max = np.max(ref_scores)
         range = y_max - y_min
         y_mean = (y_min + y_max) / 2
         z_min = y_mean - 1.1 * range / 2
         z_max = y_mean + 1.1 * range / 2
         plt.ylim([z_min, z_max])
+
         plt.fill_between(np.arange(len(mean)), mean - std, mean + std, alpha=0.1, label='±1 Std Dev')
         plt.grid(True)
         plt.xlabel("Generation")

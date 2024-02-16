@@ -9,6 +9,46 @@ import sys
 from src.slimevolleygym.slimevolley import SlimeVolleyEnv
 import ast
 
+
+class Validator():
+    def __init__(self, env_builder_function, eval_repeats, max_timesteps):
+        self.environment = env_builder_function()
+        self.eval_repeats = eval_repeats
+        self.max_timesteps = max_timesteps
+
+    def prepare_environment(self, seed):
+        try:
+            self.environment.seed(seed=seed)
+            obs = self.environment.reset()
+        except:
+            obs = self.environment.reset(seed=seed)
+        if type(obs) == tuple:
+            obs = obs[0]
+        return obs
+
+    def run_through_environment(self, animal, seed):
+        animal.action_noise = 0 #its a serious test. Focus!
+        obs = self.prepare_environment(seed)
+        total_reward = 0
+        done = False
+        while_cnt = 0
+        while (not done) and (while_cnt < self.max_timesteps):
+            action = animal.react(inputs=obs)
+            result = self.environment.step(action=action)
+            if len(result) == 4: obs, reward, done, info = result
+            elif len(result) == 5: obs, reward, done, _, info = result
+            total_reward += reward
+            while_cnt += 1
+        return total_reward
+
+    def get_validation_score(self, animal):
+        rewards = []
+        for i in range(self.eval_repeats):
+            reward = self.run_through_environment(animal, seed=np.random.randint(100000))
+            rewards.append(reward)
+        self.environment.close()
+        return np.nanmean(rewards)
+
 env_name = "Pendulum-v1"
 @hydra.main(config_path="conf", config_name=f"config_{env_name}", version_base="1.3")
 def run_evolution(cfg):
@@ -68,7 +108,8 @@ def run_evolution(cfg):
                         num_workers=cfg.nature_params.num_workers,
                         self_play=cfg.nature_params.self_play,
                         num_reference_animals=cfg.nature_params.num_reference_animals,
-                        logger=logger)
+                        logger=logger,
+                        validator=Validator(eval_repeats=13, max_timesteps=1000, env_builder_function=environment_builder_fn))
         nature.evolve_loop(n_generations=cfg.evolution_params.n_generations)
         del innovation_handler
     return None

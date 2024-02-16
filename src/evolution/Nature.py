@@ -22,8 +22,8 @@ class RemoteEnvironment():
         try:
             obs = self.environment.reset(seed=seed)
         except:
-            obs = self.environment.reset()
             self.environment.seed(seed=seed)
+            obs = self.environment.reset()
         if type(obs) == tuple:  # for compatibility with other gym environments
             obs = obs[0]
         return obs
@@ -212,8 +212,8 @@ class Nature():
         try:
             obs = self.environment.reset(seed=seed)
         except:
-            obs = self.environment.reset()
             self.environment.seed(seed=seed)
+            obs = self.environment.reset()
         if type(obs) == tuple:  # for compatibility with other gym environments
             obs = obs[0]
         return obs
@@ -468,6 +468,7 @@ class Nature():
     def evolve_loop(self, n_generations):
         best_score_overall = -np.inf
         top_score_sequence = []
+        val_scores_sequence = [] if not (self.validator is None) else None
         mean_score_sequence = []
         std_score_sequence = []
 
@@ -478,11 +479,13 @@ class Nature():
         for i in tqdm(range(n_generations)):
             self.evolve_step()
             fitness_vals = np.array(self.fitness_list)
+
             if not (self.validator is None):
-                #do the validation of a top animal
-                cur_top_score = self.validator.get_validation_score(animal=self.animals[np.argmax(fitness_vals)], seed = 0)
-            else:
-                cur_top_score = np.max(fitness_vals)
+                cur_val_score = self.validator.get_validation_score(animal=self.animals[np.argmax(fitness_vals)],
+                                                                    )
+                val_scores_sequence.append(cur_val_score)
+
+            cur_top_score = np.max(fitness_vals)
             top_score_sequence.append(cur_top_score)
             mean_score_sequence.append(np.mean(fitness_vals))
             std_score_sequence.append(np.std(fitness_vals))
@@ -508,15 +511,20 @@ class Nature():
 
                 if (self.current_generation + 1) % self.logger.plot_every == 0:
                     self.logger.plot_scores(top_scores=top_score_sequence,
+                                            val_scores=val_scores_sequence,
                                             mean_scores=mean_score_sequence,
                                             std_scores=std_score_sequence,
                                             file_name=f"{self.env_name}_scores_{tag}.png")
 
-                if cur_top_score >= best_score_overall:
-                    best_score_overall = cur_top_score
+                cur_score = cur_top_score if (self.validator is None) else cur_val_score
+                if cur_score >= best_score_overall:
+                    best_score_overall = cur_score
                     top_animal = self.animals[np.argmax(fitness_vals)]
                     data_dict = deepcopy(top_animal.blueprint.genome_dict)
-                    data_dict["score"] = best_score_overall
+                    if (self.validator is None):
+                        data_dict["score"] = best_score_overall
+                    else:
+                        data_dict["val score"] = best_score_overall
                     data_dict["N_neurons"] = int(len(top_animal.blueprint.get_neurons_by_type("h")))
                     data_dict["N_synapses"] = int(len(list(top_animal.blueprint.genome_dict["synapses"].keys())))
                     self.logger.fossilize(top_animal, self.current_generation, self.env_name, score=best_score_overall)

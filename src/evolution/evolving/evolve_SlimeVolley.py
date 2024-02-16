@@ -17,8 +17,11 @@ class ValidatorSlimeVolley():
         self.max_timesteps = max_timesteps
 
     def prepare_environment(self, seed):
-        obs = self.environment.reset()
-        self.environment.seed(seed=seed)
+        try:
+            self.environment.seed(seed=seed)
+            obs = self.environment.reset()
+        except:
+            obs = self.environment.reset(seed=seed)
         if type(obs) == tuple:
             obs = obs[0]
         return obs
@@ -40,16 +43,16 @@ class ValidatorSlimeVolley():
             while_cnt += 1
         return total_reward
 
-    def get_validation_score(self, animal, seed):
+    def get_validation_score(self, animal):
         rewards = []
         for i in range(self.eval_repeats):
-            reward = self.run_through_environment(animal, seed=seed+i)
+            reward = self.run_through_environment(animal, seed=np.random.randint(100000))
             rewards.append(reward)
         self.environment.close()
         return np.nanmean(rewards)
 
 env_name = "SlimeVolley-v0"
-@hydra.main(config_path="conf", config_name=f"config_{env_name}", version_base="1.3")
+@hydra.main(config_path="conf", config_name=f"config_{env_name}_DELLA", version_base="1.3")
 def run_evolution(cfg):
     for i in range(1):
         innovation_handler = InnovationHandler(cfg.innovation_handler_params["maxlen"])
@@ -77,15 +80,17 @@ def run_evolution(cfg):
                         plot_every=cfg.logger_params.plot_every,
                         tag=formatted_datetime)
 
+        animal_params = dict(cfg.animal_params)
+        if not(animal_params["action_bounds"] is None):
+            animal_params["action_bounds"] = ast.literal_eval(animal_params["action_bounds"])
         #define Nature
-        animal_params = cfg.animal_params
-        animal_params["action_bounds"] = ast.literal_eval(animal_params["action_bounds"])
         nature = Nature(innovation_handler=innovation_handler,
                         environment_builder_fn=environment_builder_fn,
                         max_animals=cfg.nature_params.max_animals,
                         max_species=cfg.nature_params.max_species,
                         max_timesteps=cfg.nature_params.max_timesteps,
                         animal_params=animal_params,
+                        blueprint_params = dict(cfg.blueprint_params),
                         rel_advantage_ind=cfg.nature_params.rel_advantage_ind,
                         rel_advantage_spec=cfg.nature_params.rel_advantage_spec,
                         mutation_probs=ast.literal_eval(cfg.nature_params.mutation_probs),

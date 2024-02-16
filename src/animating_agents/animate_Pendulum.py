@@ -8,14 +8,14 @@ import numpy as np
 
 env_name = 'Pendulum-v1'
 animols_param = {"neuron_type" : 'relu', "action_noise" : 0.00, "action_type" : "Continuous"}
-filename = f"../../data/evolved_models/{env_name}/Pendulum-v1_generation=973_score=-132.9603639404299_N=8.json"
+filename = f"../../data/evolved_models/{env_name}/Pendulum-v1_generation=655_score=-154.14406767246913_N=6.json"
 file = open(filename, "rb")
 data = json.load(file)
 with file as json_file:
     for line in json_file:
         data = json.loads(line)
 
-max_timesteps = 200
+max_timesteps = 500
 sleep = 0.001
 genome_dict = data["genome dict"]
 env = gymnasium.make(env_name, render_mode='human')
