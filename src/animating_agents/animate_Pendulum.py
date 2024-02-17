@@ -7,8 +7,8 @@ from src.evolution.Logger import Logger
 import numpy as np
 
 env_name = 'Pendulum-v1'
-animols_param = {"neuron_type" : 'relu', "action_noise" : 0.00, "action_type" : "Continuous"}
-filename = f"../../data/evolved_models/{env_name}/Pendulum-v1_generation=655_score=-154.14406767246913_N=6.json"
+animols_param = {"neuron_type" : 'relu', "action_noise" : 0.03, "action_type" : "Continuous"}
+filename = f"../../data/evolved_models/{env_name}/Pendulum-v1_generation=685_score=-177.18277256370976_N=8.json"
 file = open(filename, "rb")
 data = json.load(file)
 with file as json_file:

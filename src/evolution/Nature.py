@@ -245,7 +245,7 @@ class Nature():
     def get_fitness(self, animal, seed, reference_animals=None):
         if not (reference_animals is None):
             if not reference_animals:
-                raise ValueError("You need to assign a list of reference animals against whom you evaluate the primary animal")
+                raise ValueError("You need to assign a list of reference animals against which you evaluate the primary animal")
 
         rewards = []
         if not (reference_animals is None):
