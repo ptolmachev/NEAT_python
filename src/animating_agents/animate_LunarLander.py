@@ -7,7 +7,7 @@ import numpy as np
 
 env_name = 'LunarLander-v2'
 animols_param = {"neuron_type" : 'relu', "action_noise" : 0.00, "action_type" : "Discrete"}
-filename = f"../../data/evolved_models/{env_name}/LunarLander-v2_generation=231_score=284.3989478683089_N=0.json"
+filename = f"../../data/evolved_models/{env_name}/LunarLander-v2_generation=239_score=280.43465647393157_N=1.json"
 file = open(filename, "rb")
 data = json.load(file)
 with file as json_file:

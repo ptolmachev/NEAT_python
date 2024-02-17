@@ -17,6 +17,7 @@ if "top_animal" in filename:
     genome_dict = data
 else:
     genome_dict = data["genome_dict"]
+
 env = gymnasium.make(env_name)
 
 n_inputs = env.observation_space.shape[0]

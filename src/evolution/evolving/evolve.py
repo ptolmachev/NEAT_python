@@ -49,7 +49,7 @@ class Validator():
         self.environment.close()
         return np.nanmean(rewards)
 
-env_name = "Pendulum-v1"
+env_name = "LunarLander-v2"
 @hydra.main(config_path="conf", config_name=f"config_{env_name}", version_base="1.3")
 def run_evolution(cfg):
     for i in range(1):

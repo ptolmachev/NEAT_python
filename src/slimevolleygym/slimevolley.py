@@ -14,10 +14,14 @@ No dependencies apart from Numpy and Gym
 
 import logging
 import math
-import gymnasium as gym
-from gymnasium import spaces
-from gymnasium.utils import seeding
-from gymnasium.envs.registration import register
+# import gymnasium as gym
+# from gymnasium import spaces
+# from gymnasium.utils import seeding
+# from gymnasium.envs.registration import register
+import gym
+from gym import spaces
+from gym.utils import seeding
+from gym.envs.registration import register
 import numpy as np
 import cv2 # installed with gym anyways
 from collections import deque

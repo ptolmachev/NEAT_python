@@ -255,6 +255,19 @@ class BluePrint():
         self.genome_dict["neurons"][int(np.random.choice(hidden_neurons))]["bias"] = 0.0
         return True
 
+    def get_longest_path(self):
+        l = self.n_inputs
+        A = self.get_adjacency_matrix()[l:]
+        nrn_vals = np.zeros(A.shape[1])
+        nrn_vals[:l] = np.ones(l)
+        nrn_vals_prev = np.zeros_like(nrn_vals)
+        for i in range(10000):
+            nrn_vals_prev = np.copy(nrn_vals)
+            nrn_vals[l:] = A @ nrn_vals_prev
+            if np.array_equal(nrn_vals_prev, nrn_vals):
+                return i + 1
+        raise ValueError("There is a loop in the connectivity!")
+
 #########################EXTERNAL FUNCTIONS########################
 
 def recombine_genes(genes_by_parents, genes_names_by_parent, fitness):

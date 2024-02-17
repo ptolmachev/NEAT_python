@@ -1,3 +1,3 @@
-import slimevolleygym.slimevolley
-import slimevolleygym.mlp
-from slimevolleygym.slimevolley import *
+import src.slimevolleygym.slimevolley
+import src.slimevolleygym.mlp
+from src.slimevolleygym.slimevolley import *

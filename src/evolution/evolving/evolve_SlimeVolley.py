@@ -52,7 +52,7 @@ class ValidatorSlimeVolley():
         return np.nanmean(rewards)
 
 env_name = "SlimeVolley-v0"
-@hydra.main(config_path="conf", config_name=f"config_{env_name}_DELLA", version_base="1.3")
+@hydra.main(config_path="conf", config_name=f"config_{env_name}", version_base="1.3")
 def run_evolution(cfg):
     for i in range(1):
         innovation_handler = InnovationHandler(cfg.innovation_handler_params["maxlen"])

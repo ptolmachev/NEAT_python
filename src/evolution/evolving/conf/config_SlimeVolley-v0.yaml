@@ -1,6 +1,6 @@
 env_name: &env_name "SlimeVolley-v0"
 nature_params:
-  max_animals: 60
+  max_animals: 128
   max_species: 12
   max_timesteps: 3000
   rel_advantage_ind: 3.0
@@ -20,7 +20,7 @@ nature_params:
   metabolic_penalty: 0.01
   eval_repeats: 1
   parallel: True
-  num_workers: 10
+  num_workers: 16
   self_play: True
   num_reference_animals: 7
 
@@ -32,6 +32,12 @@ animal_params:
   action_type: "MultiBinary"
   action_bounds: None
   action_noise: 0.03
+
+blueprint_params:
+  weight_init_std : 0.4
+  orph_node_thr: 0.1
+  max_neurons: 32
+  max_weight_val: 3.0
 
 logger_params:
   data_folder: "../../../data/evolved_models/SlimeVolley-v0"

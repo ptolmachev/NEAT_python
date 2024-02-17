@@ -29,6 +29,8 @@ class Animal():
         self.inp_nrns_inds = [self.nrn_names.index(nrn) for nrn in self.inp_nrns]
         self.out_nrns_inds = [self.nrn_names.index(nrn) for nrn in self.out_nrns]
 
+        # compute the number of updates in a loop for running "animal.react" efficiently
+        self.n_updates = self.blueprint.get_longest_path() - 1
 
     def finalize_action(self, raw_output):
         if self.action_type == 'Discrete':
@@ -44,31 +46,33 @@ class Animal():
             return binarized_action
         else:
             raise ValueError(f"action type {self.action_type} is not recognized!")
+    #
+    # def react(self, inputs):
+    #     nrn_vals = np.zeros(self.W.shape[0])
+    #     nrn_vals[:len(inputs)] = inputs
+    #     nrn_vals_prev = np.zeros_like(nrn_vals)
+    #     l = len(inputs)
+    #     W = self.W[l:]
+    #     b = self.b[l:]
+    #
+    #     for i in range(10000):
+    #         nrn_vals_prev = np.copy(nrn_vals)
+    #         nrn_vals[l:] = self.activation(W @ nrn_vals_prev + b)
+    #         if np.array_equal(nrn_vals_prev, nrn_vals):
+    #             output = nrn_vals[list(self.out_nrns_inds)]
+    #             return self.finalize_action(output)
+    #     raise ValueError("There likely is a loop in connectivity!")
 
     def react(self, inputs):
         nrn_vals = np.zeros(self.W.shape[0])
-        nrn_vals[:len(inputs)] = inputs
-        nrn_vals_prev = np.zeros_like(nrn_vals)
         l = len(inputs)
+        nrn_vals[:l] = inputs
         W = self.W[l:]
         b = self.b[l:]
-
-        # while_cnt = 0
-        # while not np.array_equal(nrn_vals_prev, nrn_vals):  # iterate till there are no changes in the network values
-        #     nrn_vals_prev = np.copy(nrn_vals)
-        #     nrn_vals[l:] = self.activation(W @ nrn_vals_prev + b)
-        #     while_cnt += 1
-        #     if while_cnt > 1000:
-        #         print(self.blueprint.genome_dict)
-        #         raise ValueError("Stuck in a loop!")
-
-        for i in range(10000):
-            nrn_vals_prev = np.copy(nrn_vals)
-            nrn_vals[l:] = self.activation(W @ nrn_vals_prev + b)
-            if np.array_equal(nrn_vals_prev, nrn_vals):
-                output = nrn_vals[list(self.out_nrns_inds)]
-                return self.finalize_action(output)
-        raise ValueError("There likely is a loop in connectivity!")
+        for i in range(self.n_updates):
+            nrn_vals[l:] = self.activation(W @ nrn_vals + b)
+        output = nrn_vals[list(self.out_nrns_inds)]
+        return self.finalize_action(output)
 
     def mate(self, other_animal):
         fitness_parents = np.array([self.fitness, other_animal.fitness])
