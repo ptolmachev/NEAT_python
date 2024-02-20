@@ -51,7 +51,7 @@ def get_dist_btwn_genomes(genome_dict_1, genome_dict_2, c_w, c_d):
     N1 = len(list(genome_dict_1["neurons"].keys()))
     N2 = len(list(genome_dict_2["neurons"].keys()))
     N = np.maximum(N1, N2)
-    distance = 0
+    val_differences = []
     disjoint_genes_count = 0
 
     # do counting for neurons
@@ -63,9 +63,7 @@ def get_dist_btwn_genomes(genome_dict_1, genome_dict_2, c_w, c_d):
         if (innovation_id in innovs_1) and (innovation_id in innovs_2):
             b1 = genome_dict_1["neurons"][innovation_id]["bias"]
             b2 = genome_dict_2["neurons"][innovation_id]["bias"]
-            b1 = 0 if b1 is None else b1
-            b2 = 0 if b2 is None else b2
-            distance += c_w * (np.abs(b1 - b2))
+            val_differences.append(np.abs(b1 - b2))
         else:
             disjoint_genes_count += 1
 
@@ -73,15 +71,17 @@ def get_dist_btwn_genomes(genome_dict_1, genome_dict_2, c_w, c_d):
     innovs_1 = set(genome_dict_1["synapses"].keys())
     innovs_2 = set(genome_dict_2["synapses"].keys())
     innovs = list(innovs_1 | innovs_2)
+    synapses_1 = genome_dict_1["synapses"]
+    synapses_2 = genome_dict_1["synapses"]
     # go through innovations one by one and check if
     for innovation_id in innovs:
         if (innovation_id in innovs_1) and (innovation_id in innovs_2):
-            w1 = genome_dict_1["synapses"][innovation_id]["weight"]
-            w2 = genome_dict_2["synapses"][innovation_id]["weight"]
-            distance += c_w * (np.abs(w1 - w2))
+            w1 = synapses_1[innovation_id]["weight"] if synapses_1[innovation_id]["active"] else 0
+            w2 = synapses_2[innovation_id]["weight"] if synapses_2[innovation_id]["active"] else 0
+            val_differences.append(np.abs(w1 - w2))
         else:
             disjoint_genes_count += 1
-    distance += (c_d / N) * disjoint_genes_count
+    distance = (c_d / N) * disjoint_genes_count + c_w * np.mean(val_differences)
     return distance
 
 

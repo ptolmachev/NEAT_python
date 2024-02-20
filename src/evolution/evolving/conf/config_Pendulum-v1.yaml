@@ -2,7 +2,7 @@ env_name: &env_name "Pendulum-v1"
 nature_params:
   max_animals: 100
   max_species: 12
-  max_timesteps: 300
+  max_timesteps: 500
   rel_advantage_ind: 3.0
   rel_advantage_spec: 1.0
   mutation_probs: (0.02, 0.03, 0.2, 0.2, 0.8, 0.05)
@@ -20,9 +20,9 @@ nature_params:
   metabolic_penalty: 0.01
   eval_repeats: 7
   parallel: True
-  num_workers: 10
+  n_workers: 10
   self_play: False
-  num_reference_animals: 0
+  n_ref_animals: 0
 
 innovation_handler_params:
   maxlen: 300

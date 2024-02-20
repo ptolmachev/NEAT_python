@@ -3,12 +3,11 @@ import time
 import gymnasium
 from src.evolution.Blueprint import BluePrint
 from src.evolution.Animal import Animal
-from src.evolution.Logger import Logger
 import numpy as np
 
 env_name = 'Pendulum-v1'
-animols_param = {"neuron_type" : 'relu', "action_noise" : 0.03, "action_type" : "Continuous"}
-filename = f"../../data/evolved_models/{env_name}/Pendulum-v1_generation=685_score=-177.18277256370976_N=8.json"
+animols_param = {"neuron_type" : 'relu', "action_noise" : 0.00, "action_type" : "Continuous"}
+filename = f"../../data/evolved_models/{env_name}/Pendulum-v1_generation=746_score=-185.76052550779474_N=10.json"
 file = open(filename, "rb")
 data = json.load(file)
 with file as json_file:

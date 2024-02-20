@@ -2,12 +2,12 @@ import graphlib
 from functools import partial
 from graphlib import TopologicalSorter
 from src.evolution.Blueprint import get_neural_graph
-import igraph as ig
 import numpy as np
 import hydra
 from src.evolution.Blueprint import *
 from src.evolution.Animal import *
 import json
+import time
 
 # filename = f"../../data/evolved_models/SlimeVolley-v0/None_generation=812_score=-4.2_N=16.json"
 # file = open(filename, "rb")
@@ -65,19 +65,36 @@ def get_random_genome(ni, no, nh):
 ni = 8
 no = 4
 nh = 6
+tic = time.time()
 for _ in range(100):
     genome_dict = get_random_genome(ni, no, nh)
-    blueprint = BluePrint(genome_dict=genome_dict, innovation_handler=InnovationHandler(), n_inputs=ni, n_outputs=no)
+    IH = InnovationHandler()
+    IH.innovation_counter = 100000
+    blueprint = BluePrint(genome_dict=genome_dict, innovation_handler=IH, n_inputs=ni, n_outputs=no)
+
     #mutate:
     perturb_weights = partial(blueprint.perturb_weights,
                               mutation_prob=0.8,
                               type_prob=[0.9, 0.05, 0.05],
-                              weight_change_std=0.05)
+                              weight_change_std=0.05,
+                              perturb_biases=True)
+
+    mutation_functions = [blueprint.add_neuron, blueprint.remove_neuron,
+                          blueprint.add_synapse, blueprint.disable_synapse,
+                          perturb_weights, blueprint.reset_bias]
+    probs = np.array([1,1,1,1,1,1])
+    probs= probs/np.sum(probs)
     for i in range(100):
-        blueprint.add_synapse()
+        [mutation_functions[i]() for i in range(len(probs)) if np.random.rand() < probs[i]]
+
     animal = Animal(blueprint, action_type="Continuous", action_noise=0, action_bounds=(-1, 1))
-    inputs = np.random.randn(ni)
-    animal.react(inputs)
+    for i in range(500):
+        inputs = np.random.randn(ni)
+        animal.react(inputs)
+
+toc = time.time()
+
+print(toc - tic)
 
 
 # graph = get_neural_graph(blueprint.genome_dict, active_only=True)

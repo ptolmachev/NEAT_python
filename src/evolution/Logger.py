@@ -55,11 +55,11 @@ class Logger():
 
         if score is None:
             score = np.round(top_animol.fitness, 3)
-        file_name = f"{env_name}_generation={generation + 1}_score={score}_N={n_hidden_nrns}.json"
-        try:
-            self.save_data(data_dict, file_name)
-        except:
-            self.save_data(data_dict, file_name)
+        if generation is None:
+            file_name = f"{env_name}_score={score}_N={n_hidden_nrns}.json"
+        else:
+            file_name = f"{env_name}_generation={generation + 1}_score={score}_N={n_hidden_nrns}.json"
+        self.save_data(data_dict, file_name)
         return None
 
     def plot_MDS_embedding(self, D, file_name):

@@ -74,11 +74,11 @@ def run_evolution(cfg):
                         parallel=cfg.nature_params.parallel,
                         num_workers=cfg.nature_params.num_workers,
                         self_play=cfg.nature_params.self_play,
-                        num_reference_animals=cfg.nature_params.num_reference_animals,
+                        num_reference_animals=cfg.nature_params.n_ref_animals,
                         logger=logger,
                         save_logs=cfg.nature_params.save_logs,
                         log_every=cfg.nature_params.log_every)
-        nature.evolve_loop(n_generations=cfg.evolution_params.n_generations)
+        nature.run_evolution(n_generations=cfg.evolution_params.n_generations)
         del innovation_handler
     return None
 

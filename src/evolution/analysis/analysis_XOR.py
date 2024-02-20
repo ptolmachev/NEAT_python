@@ -3,10 +3,8 @@ from src.evolution.Blueprint import get_connectivity_matrix
 from matplotlib import pyplot as plt
 import numpy as np
 
-env_name = 'CDDM'
-max_timesteps = 3000
-sleep = 0.01
-filename = f"../../../data/evolved_models/{env_name}/CDDM_score=-8.865985290652894_N=3.json"
+env_name = 'XOR'
+filename = f"../../../data/evolved_models/{env_name}/XOR_score=-8.028540532705483_N=4.json"
 file = open(filename, "rb")
 data = json.load(file)
 with file as json_file:
@@ -18,17 +16,12 @@ print(genome_dict)
 W = get_connectivity_matrix(genome_dict)
 print(W)
 
-names = ["ctx m", "ctx c", "mr", "ml", "cr", "cl", "OutR", "OutL"]
-n = len(names)
+
 fig_w_rec = plt.figure()
 ax = plt.gca()
 im = ax.imshow(W, interpolation='blackman', cmap='coolwarm')
 fig_w_rec.colorbar(im)
 
-ax.set_xticks(np.arange(n))
-ax.set_xticklabels(names)
-ax.set_yticks(np.arange(n))
-ax.set_yticklabels(names)
 
 # Set ticks on both sides of axes on
 ax.tick_params(axis="x", bottom=False, top=True, labelbottom=False, labeltop=True)

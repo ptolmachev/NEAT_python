@@ -36,8 +36,8 @@ class BluePrint():
         if len(links) != len(set(links)):
             genome_dict = remove_duplicate_synapse(genome_dict)
         # (3) check if there are orphaned neurons and synapses
-        genome_dict = remove_orphaned_neurons(genome_dict)
-        genome_dict = remove_orphaned_synapses(genome_dict)
+        # genome_dict = remove_orphaned_neurons(genome_dict)
+        # genome_dict = remove_orphaned_synapses(genome_dict)
         success = self.set_topological_order(genome_dict)
         # (4) remove cycles if present
         if success == False:
@@ -162,6 +162,11 @@ class BluePrint():
         self.genome_dict = genome_dict_new
         return True
 
+    def add_multiple_synapses(self, n=3):
+        for i in range(n):
+            self.add_synapse()
+        return True
+
     def add_synapse(self):
         hid_neurons = self.get_neurons_by_type(type='h')
         list_of_links = self.get_list_of_links()
@@ -235,17 +240,27 @@ class BluePrint():
                     self.genome_dict[gene_type][innovation][key] = np.clip(new_weight, -self.max_weight_val, self.max_weight_val)
         return True
 
+    # def disable_synapse(self):
+    #     synapses = self.genome_dict["synapses"]
+    #     innovations = list(key for key, info in synapses.items() if info["active"])
+    #     if not innovations:
+    #         return False
+    #
+    #     weights = np.array([synapses[innovation]["weight"] for innovation in innovations if synapses[innovation]["active"]])
+    #     if len(weights) >= 6:
+    #         # if the synapses is relatively useless it is more likely to be deleted
+    #         probs = get_probs(-np.abs(weights), slope=10)
+    #         sampled_innovation = int(np.random.choice(innovations, p=probs))
+    #         self.genome_dict["synapses"][sampled_innovation]["active"] = False
+    #     return True
+
     def disable_synapse(self):
-        innovations = list(self.genome_dict["synapses"].keys())
+        synapses = self.genome_dict["synapses"]
+        innovations = list(key for key, info in synapses.items() if info["active"])
         if not innovations:
             return False
-
-        weights = np.array([self.genome_dict["synapses"][innovation]["weight"] for innovation in innovations])
-        if len(weights) >= 6:
-            # if the synapses is relatively useless it is more likely to be deleted
-            probs = get_probs(-np.abs(weights), slope=10)
-            sampled_innovation = int(np.random.choice(innovations, p=probs))
-            self.genome_dict["synapses"][sampled_innovation]["active"] = False
+        sampled_innovation = int(np.random.choice(innovations))
+        self.genome_dict["synapses"][sampled_innovation]["active"] = False
         return True
 
     def reset_bias(self):
@@ -257,32 +272,52 @@ class BluePrint():
 
     def get_longest_path(self):
         l = self.n_inputs
-        A = self.get_adjacency_matrix()[l:]
-        nrn_vals = np.zeros(A.shape[1])
+        W = self.get_connectivity_matrix()[l:]
+        nrn_vals = np.zeros(W.shape[1])
         nrn_vals[:l] = np.ones(l)
         nrn_vals_prev = np.zeros_like(nrn_vals)
+        vals = []
         for i in range(10000):
             nrn_vals_prev = np.copy(nrn_vals)
-            nrn_vals[l:] = A @ nrn_vals_prev
+            nrn_vals[l:] = W @ nrn_vals_prev
+            vals.append(deepcopy(nrn_vals))
             if np.array_equal(nrn_vals_prev, nrn_vals):
-                return i + 1
+                return i
         raise ValueError("There is a loop in the connectivity!")
+
+
+    def set_connectivity(self, W, b):
+        # TODO: check if the W, b are consistent with the current genome (number of synapses and neurons)
+        # also that the matrices W and b are "reasonable" (no loops, no connections to input nodes, no connections from output nodes)
+
+        neurons = self.genome_dict["neurons"]
+        nrn_names = list(neurons.keys())
+        synapses = self.genome_dict["synapses"]
+        for nrn_name, neuron_info in neurons.items():
+            if neuron_info["type"] == 'h':
+                neuron_info["bias"] = float(b[nrn_names.index(nrn_name)])
+        for synapse_info in synapses.values():
+            if synapse_info["active"]:
+                nrn_to = synapse_info["nrn_to"]
+                nrn_from = synapse_info["nrn_from"]
+                synapse_info["weight"] = float(W[nrn_names.index(nrn_to), nrn_names.index(nrn_from)])
+        return None
 
 #########################EXTERNAL FUNCTIONS########################
 
 def recombine_genes(genes_by_parents, genes_names_by_parent, fitness):
-    probs = [0.9, 0.1] if (fitness[0] > fitness[1]) else ([0.5, 0.5] if (fitness[0] == fitness[1]) else [0.1, 0.9])
     unique_gene_names = set(genes_names_by_parent[0]) | set(genes_names_by_parent[1])
-    child_gene = {}
+    child_genes = {}
     for name in unique_gene_names:
-        if name in genes_names_by_parent[0] and name in genes_names_by_parent[1]:
-            parent_index = np.random.choice([0, 1], p=probs)
-            child_gene[name] = genes_by_parents[parent_index][name]
-        elif name in genes_names_by_parent[0] and fitness[0] > fitness[1]:
-            child_gene[name] = genes_by_parents[0][name]
-        elif name in genes_names_by_parent[1] and fitness[1] > fitness[0]:
-            child_gene[name] = genes_by_parents[1][name]
-    return child_gene
+        if (name in genes_names_by_parent[0]) and (name in genes_names_by_parent[1]):
+            # if they are both present, 50% 50% inheritance
+            child_genes[name] = genes_by_parents[np.random.randint(2)][name]
+        else: #disjoint gene
+            if name in genes_names_by_parent[0] and fitness[0] > fitness[1]:
+                child_genes[name] = genes_by_parents[0][name]
+            elif name in genes_names_by_parent[1] and fitness[1] > fitness[0]:
+                child_genes[name] = genes_by_parents[1][name]
+    return child_genes
 
 def remove_duplicate_synapse(genome_dict):
     synapses = genome_dict["synapses"]
@@ -343,8 +378,8 @@ def remove_cycles(genome_dict):
         innov_to_silence = find_innovation_by_link(link_to_silence, genome_dict)
         genome_dict["synapses"][innov_to_silence]["active"] = False
         nrn_to, nrn_from = int(link_to_silence[0]), int(link_to_silence[1])
-        neural_graph[nrn_to].remove(nrn_from)
-        # neural_graph = get_neural_graph(genome_dict, active_only=True)
+        # neural_graph[nrn_to].remove(nrn_from)
+        neural_graph = get_neural_graph(genome_dict, active_only=True)
         top_sorter = TopologicalSorter(neural_graph)
         res = top_sorter._find_cycle()
         cycle = None if res is None else res[:-1]
