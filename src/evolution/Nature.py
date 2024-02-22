@@ -26,6 +26,9 @@ class RemoteWorker():
     def get_fitness(self, animal, seed, ref_animals):
         return self.nature.get_fitness(animal, seed, ref_animals)
 
+    def get_experienced_animal(self, animal, seed):
+        return self.nature.get_experienced_animal(animal, seed)
+
 class NatureBase():
     def __init__(self,
                  innovation_handler=None,
@@ -53,6 +56,9 @@ class NatureBase():
                  interspecies_mating_chance=0.01,
                  metabolic_penalty = 0.05,
                  eval_repeats=11,
+                 lifetime_learning=False,
+                 n_learning_episodes = 0,
+                 lr = 0.001,
                  validator=None,
                  logger=None,
                  save_logs = True,
@@ -92,6 +98,9 @@ class NatureBase():
         self.blueprint_params = blueprint_params
         self.animal_params = deepcopy(animal_params) # output type, neuron type, action bounds
         self.eval_repeats = eval_repeats
+        self.lifetime_learning = lifetime_learning
+        self.n_learning_episodes = n_learning_episodes
+        self.lr = lr
 
         # params for evaluating distance between the genomes:
         self.c_w = c_w
@@ -166,17 +175,25 @@ class NatureBase():
     def get_fitness(self, animal, seed, ref_animals=None):
         raise NotImplementedError("This is a placeholder method of a base Nature class")
 
+    def get_experienced_animal(self, animal, seed):
+        raise NotImplementedError("This is a placeholder method of a base Nature class")
+
+    def mature_animals(self, animals, seed):
+        if self.parallel:
+            experienced_animals = list(self.pool.map(lambda W, a: W.get_experienced_animal.remote(animal=a, seed=seed), animals))
+        else:
+            experienced_animals = [self.get_experienced_animal(animal=animal, seed=seed) for animal in animals]
+        return experienced_animals
+
     def eval_population(self):
         # seed = self.current_generation
         seed = np.random.randint(100000)
-
         # reference animals against whom a generation will be measured
         refs = np.random.choice(self.animals, self.n_ref_animals, replace=False) if self.self_play else None
         if self.parallel:
             fitness_vals = list(self.pool.map(lambda W, a: W.get_fitness.remote(animal=a, seed=seed, ref_animals=refs), self.animals))
         else:
             fitness_vals = [self.get_fitness(animal, seed, ref_animals=refs) for animal in self.animals]
-
         # assign each animal with the fitness value
         for i, animal in enumerate(self.animals):
             animal.fitness = fitness_vals[i]
@@ -283,7 +300,7 @@ class NatureBase():
 
         if len(survived_species) == 0:
             #all of the species are bad. Remove all species, allow only the top one to survive
-            top_species_ind = np.argmax(np.array([np.max(species.fitness_list) for species in self.species_list]))
+            top_species_ind = np.nanargmax(np.array([np.max(species.fitness_list) for species in self.species_list]))
             top_species = self.species_list[top_species_ind]
             top_species.top_fitness_list.clear()
             top_species.mean_fitness_list.clear()
@@ -311,7 +328,7 @@ class NatureBase():
 
     def assign_new_species_representative(self):
         for species in self.species_list:
-            r = np.argmax(len(species.fitness_list)) # assign top animal to be its representatives
+            r = np.nanargmax(len(species.fitness_list)) # assign top animal to be its representatives
             species.representative_genome = deepcopy(species.subpopulation[r].blueprint.genome_dict)
         return None
 
@@ -323,11 +340,11 @@ class NatureBase():
         return None
 
     def get_champions(self):
-        # if species has more than "established_species_thr" individuals, it is considered to be mature to draw champions.
+        # if species has more than "established_species_thr" individuals, it is considered to be experienced to draw champions.
         if len(self.species_list) == 1:
-            return [deepcopy(self.species_list[0].subpopulation[np.argmax(self.species_list[0].fitness_list)].blueprint)]
+            return [deepcopy(self.species_list[0].subpopulation[np.nanargmax(self.species_list[0].fitness_list)].blueprint)]
         else:
-            return [deepcopy(species.subpopulation[np.argmax(species.fitness_list)].blueprint)
+            return [deepcopy(species.subpopulation[np.nanargmax(species.fitness_list)].blueprint)
                 for species in self.species_list if len(species.subpopulation) > self.established_species_thr]
 
     def evolve_step(self):
@@ -354,7 +371,11 @@ class NatureBase():
         spawned_animals = [Animal(b, self.blueprint_params, **self.animal_params) for b in childrens_blueprints]
 
         self.remove_old_generation() # empty the subpopulations
-        self.assign_species(spawned_animals)
+        if self.lifetime_learning:
+            experienced_animals = self.mature_animals(spawned_animals, seed=np.random.randint(100000))
+            self.assign_species(experienced_animals)
+        else:
+            self.assign_species(spawned_animals)
         self.eval_population()
         self.age_species()
         # self.extinction_of_stagnant()
@@ -373,14 +394,13 @@ class NatureBase():
         self.eval_population()
 
         for i in tqdm(range(n_generations)):
-            self.evolve_step()
+            max_fitness = self.evolve_step()
             fitness_vals = np.array(self.fitness_list)
-
+            top_animal = self.animals[np.nanargmax(fitness_vals)]
             if not (self.validator is None):
-                cur_val_score = self.validator.get_validation_score(animal=self.animals[np.argmax(fitness_vals)],
-                                                                    )
+                cur_val_score = self.validator.get_validation_score(animal=top_animal, seed = np.random.randint(100000))
                 val_scores_sequence.append(cur_val_score)
-
+            print(f"Maximum fitness: {max_fitness}, Validation score: {cur_val_score}")
             cur_top_score = np.max(fitness_vals)
             top_score_sequence.append(cur_top_score)
             mean_score_sequence.append(np.nanmean(fitness_vals))
@@ -397,7 +417,7 @@ class NatureBase():
                         log_dict[f"Species {species.species_id} top fitness"] = float(np.max(species.fitness_list))
                         log_dict[f"Species {species.species_id} mean fitness"] = float(species.mean_fitness)
                         log_dict[f"Species {species.species_id} std fitness"] = float(species.std_fitness)
-                        top_animal_genome = species.subpopulation[np.argmax(species.fitness_list)].blueprint.genome_dict
+                        top_animal_genome = species.subpopulation[np.nanargmax(species.fitness_list)].blueprint.genome_dict
                         log_dict[f"Species {species.species_id} top animal N hidden neurons"] = \
                             len(get_neurons_by_type(top_animal_genome, type='h'))
                         log_dict[f"Species {species.species_id} top animal N synapses"] = \
@@ -416,7 +436,6 @@ class NatureBase():
                 cur_score = cur_top_score if (self.validator is None) else cur_val_score
                 if cur_score >= best_score_overall:
                     best_score_overall = cur_score
-                    top_animal = self.animals[np.argmax(fitness_vals)]
                     data_dict = deepcopy(top_animal.blueprint.genome_dict)
                     if (self.validator is None):
                         data_dict["score"] = best_score_overall
@@ -427,16 +446,13 @@ class NatureBase():
                     self.logger.fossilize(top_animal,
                                           generation=None,
                                           env_name=self.env_name,
-                                          score=best_score_overall)
+                                          score=cur_val_score)
             self.current_generation += 1
         return None
 
     def get_mating_pairs(self, n_paris):
         # based on the adjusted fitness of species, assign a probability of a child to be spawned by this species
-        try:
-            top_species_fitness = np.array([np.max(species.fitness_list) for species in self.species_list])
-        except:
-            top_species_fitness = np.array([np.max(species.fitness_list) for species in self.species_list])
+        top_species_fitness = np.array([np.max(species.fitness_list) for species in self.species_list])
         top_species_rel_advantage = np.maximum(0, top_species_fitness - np.median(top_species_fitness))
         species_sizes = np.array([len(species.subpopulation) for species in self.species_list])
         adjusted_species_fitness = top_species_rel_advantage/species_sizes
@@ -500,7 +516,6 @@ class NatureBase():
                 D[i, j] = D[j, i] = get_dist_btwn_genomes(self.animals[i].blueprint.genome_dict,
                                                           self. animals[j].blueprint.genome_dict,
                                                           c_w=self.c_w, c_d=self.c_d)
-
         return D
 
 
@@ -575,34 +590,20 @@ class NatureCustomTask(NatureBase):
         self.lr = lr
         self.n_learning_episodes = n_learning_episodes
 
+    def get_experienced_animal(self, animal, seed):
+        # animal.blueprint.set_topological_order(animal.blueprint.genome_dict)
+        return animal.live_and_learn(task=self.environment,
+                                     batch_size=self.eval_repeats,
+                                     lr=self.lr,
+                                     lmbd=self.metabolic_penalty,
+                                     n_learning_episodes=self.n_learning_episodes,
+                                     seed=seed)
+
     def get_fitness(self, animal, seed, ref_animals=None):
-        if not self.lifetime_learning:
-            inputs, targets = self.task.get_batch(batch_size=self.eval_repeats, seed=seed)
-            W = animal.blueprint.get_connectivity_matrix()
-            b = animal.blueprint.get_biases()
-            return -np.sum((animal.react(inputs) - targets)**2) - self.metabolic_penalty * (np.sum(W**2) + np.sum(b**2))
-
-        inputs, targets = self.task.get_batch(batch_size=self.eval_repeats)
-
-        # before training
-        W_bt = animal.blueprint.get_connectivity_matrix()
-        b_bt = animal.blueprint.get_biases()
-
-        if animal.blueprint.get_longest_path() == 0:
-            cost = np.sum((animal.react(inputs) - targets) ** 2)\
-                   + self.metabolic_penalty * (np.sum((W_bt) ** 2) + np.sum((b_bt) ** 2))
-        else:
-            #after training:
-            W_at, b_at = animal.live_and_learn(task=self.environment,
-                                               batch_size=self.eval_repeats,
-                                               lr=self.lr,
-                                               n_learning_episodes=self.n_learning_episodes,
-                                               lmbd=self.metabolic_penalty)
-            mature_animal = deepcopy(animal)
-            mature_animal.blueprint.set_connectivity(W_at, b_at)
-            cost = np.sum((mature_animal.react(inputs) - targets) ** 2)\
-                   + self.metabolic_penalty * (np.sum((W_at - W_bt) ** 2) + np.sum((b_at - b_bt) ** 2))
-        return -cost
+        inputs, targets = self.task.get_batch(batch_size=self.eval_repeats, seed=seed)
+        W = animal.blueprint.get_connectivity_matrix()
+        b = animal.blueprint.get_biases()
+        return -np.sum((animal.react(inputs) - targets)**2) - self.metabolic_penalty * (np.sum(W**2) + np.sum(b**2))
 
 
 def get_animal_to_species_DistMat(animals, species_list):

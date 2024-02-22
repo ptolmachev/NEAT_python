@@ -289,7 +289,6 @@ class BluePrint():
     def set_connectivity(self, W, b):
         # TODO: check if the W, b are consistent with the current genome (number of synapses and neurons)
         # also that the matrices W and b are "reasonable" (no loops, no connections to input nodes, no connections from output nodes)
-
         neurons = self.genome_dict["neurons"]
         nrn_names = list(neurons.keys())
         synapses = self.genome_dict["synapses"]
@@ -301,6 +300,7 @@ class BluePrint():
                 nrn_to = synapse_info["nrn_to"]
                 nrn_from = synapse_info["nrn_from"]
                 synapse_info["weight"] = float(W[nrn_names.index(nrn_to), nrn_names.index(nrn_from)])
+        self.genome_dict = {"neurons" : neurons, "synapses" : synapses}
         return None
 
 #########################EXTERNAL FUNCTIONS########################

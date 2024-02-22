@@ -1,5 +1,6 @@
 import numpy as np
 from copy import deepcopy
+from sklearn.datasets import make_circles, make_moons
 '''
 Generic class-template for task which should contain 'generate_input_target_stream' and 'get_batch' methods
 '''
@@ -71,3 +72,85 @@ class TaskCDDM():
                     inputs[2:, index] = [*irr, *rel]
                 targets[correct_choice_ind, index] = 1.0
         return inputs, targets
+
+
+class TaskMoons():
+    def __init__(self):
+        self.n_inputs = 3
+        self.n_outputs = 1
+        self.observation_space = np.ones(self.n_inputs)
+        self.action_space = np.ones(self.n_outputs)
+
+    def get_batch(self, batch_size=None, seed=None):
+        '''
+        '''
+        if seed is None:
+            seed = np.random.randint(10000)
+            rng = np.random.default_rng(seed)
+        else:
+            rng = np.random.default_rng(seed)
+
+        X, targets = make_moons(n_samples=batch_size, noise=0.2, random_state=seed)
+        inputs = np.zeros((self.n_inputs, batch_size))
+        inputs[2, :] = 1.0
+        inputs[:2, :] = X.T
+        return inputs, targets
+
+class TaskCircles():
+    def __init__(self):
+        self.n_inputs = 3
+        self.n_outputs = 1
+        self.observation_space = np.ones(self.n_inputs)
+        self.action_space = np.ones(self.n_outputs)
+
+    def get_batch(self, batch_size=None, seed=None):
+        '''
+        '''
+        if seed is None:
+            seed = np.random.randint(10000)
+            rng = np.random.default_rng(seed)
+        else:
+            rng = np.random.default_rng(seed)
+
+        X, targets = make_circles(n_samples=batch_size, noise=0.1, random_state=seed)
+        inputs = np.zeros((self.n_inputs, batch_size))
+        inputs[2, :] = 1.0
+        inputs[:2, :] = X.T
+        return inputs, targets
+
+
+
+class TaskSpirals():
+    def __init__(self):
+        self.n_inputs = 3
+        self.n_outputs = 1
+        self.observation_space = np.ones(self.n_inputs)
+        self.action_space = np.ones(self.n_outputs)
+        self.L = 1
+        self.w = 3 * np.pi
+
+
+    def make_spirals(self, n_samples, noise, seed):
+        t = self.L * np.random.rand(n_samples)
+        rng = np.random.default_rng(seed)
+        ids = rng.choice([0, 1], size=n_samples)
+        mask = ids == 0
+
+        psi = np.zeros(n_samples)
+        psi[mask] = 0
+        psi[~mask] = -np.pi
+
+        r = t + noise * rng.normal(size=n_samples)
+        phi = self.w * t + psi
+        x = r * np.cos(phi)
+        y = r * np.sin(phi)
+        return np.vstack([x.reshape(1, -1), y.reshape(1, -1)]), mask
+
+    def get_batch(self, batch_size=None, seed=None):
+        X, targets = self.make_spirals(n_samples=batch_size, noise=0.05, seed=seed)
+        inputs = np.zeros((self.n_inputs, batch_size))
+        inputs[2, :] = 1.0
+        inputs[:2, :] = X
+        return inputs, targets
+
+

@@ -4,10 +4,10 @@ from src.evolution.Blueprint import BluePrint
 from src.evolution.Animal import Animal
 from matplotlib import pyplot as plt
 import numpy as np
-from src.evolution.Tasks.Tasks import TaskXOR
+from src.evolution.Tasks.Tasks import TaskSpirals
 np.set_printoptions(suppress=True)
-env_name = 'XOR'
-filename = f"../../../data/evolved_models/{env_name}/XOR_score=-16.870775792733706_N=4.json"
+env_name = 'Spirals'
+filename = f"../../../data/evolved_models/{env_name}/Spirals_score=-22.369662890251384_N=6.json"
 file = open(filename, "rb")
 data = json.load(file)
 with file as json_file:
@@ -24,7 +24,7 @@ animal = Animal(blueprint,
                 neuron_type="relu")
 
 batch_size = 1000
-task = TaskXOR()
+task = TaskSpirals()
 
 inputs_scatter, targets_scatter = task.get_batch(batch_size=batch_size, seed = np.random.randint(10000))
 outputs_scatter = (animal.react(inputs_scatter).flatten())
@@ -45,10 +45,9 @@ inputs_grid[1, :] = Y.flatten()
 
 output_grid = animal.react(inputs_grid)
 output_grid = output_grid.reshape(n, n)
-fig = plt.plot(figsize=(5, 5))
+fig = plt.plot(figsize = (5, 5))
 
-plt.imshow(output_grid[::-1], extent=(np.min(x), np.max(x), np.min(x), np.max(x)),
-           cmap='bwr', interpolation='bilinear', vmin=0, vmax=1, alpha=0.4)
+plt.imshow(output_grid[::-1, :], extent=(np.min(x), np.max(x), np.min(x), np.max(x)), cmap='bwr', interpolation='bilinear',vmin=0, vmax=1, alpha=0.1)
 plt.colorbar()  # Add color bar for reference
 
 inds_pm = np.where(outputs_scatter > 0.5)[0]

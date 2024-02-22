@@ -4,7 +4,7 @@ from src.evolution.Logger import Logger
 from src.evolution.InnovationHandler import InnovationHandler
 import numpy as np
 import hydra
-from src.evolution.Tasks.Tasks import TaskCDDM, TaskXOR
+from src.evolution.Tasks.Tasks import TaskCDDM, TaskXOR, TaskCircles, TaskMoons, TaskSpirals
 import ast
 
 
@@ -14,11 +14,9 @@ class Validator():
         self.eval_repeats = eval_repeats
         self.max_timesteps = max_timesteps
 
-    def get_validation_score(self, animal):
-        inputs, targets = self.task.get_batch(batch_size=self.eval_repeats, seed=40)
-        outputs = animal.react(inputs)
-        cost = np.sum((outputs - targets)**2)
-        return -cost
+    def get_validation_score(self, animal, seed):
+        inputs, targets = self.task.get_batch(batch_size=self.eval_repeats, seed=seed)
+        return -np.sum((animal.react(inputs) - targets) ** 2)
 
 task_name = "XOR"
 @hydra.main(config_path="conf", config_name=f"config_{task_name}", version_base="1.3")
@@ -26,7 +24,6 @@ def run_evolution(cfg):
     for i in range(1):
         innovation_handler = InnovationHandler(cfg.innovation_handler_params["maxlen"])
         innovation_handler.innovation_counter = 0
-
 
         task_builder_fn = lambda: TaskXOR()
 
@@ -76,10 +73,10 @@ def run_evolution(cfg):
                                 lifetime_learning=cfg.nature_params.lifetime_learning,
                                 lr=cfg.nature_params.lr,
                                 n_learning_episodes=cfg.nature_params.n_learning_episodes,
-                                n_ref_animals=cfg.nature_params.n_ref_animals,
                                 logger=logger,
                                 log_every=cfg.nature_params.log_every,
-                                validator=Validator(eval_repeats=512, max_timesteps=1,
+                                validator=Validator(eval_repeats=cfg.nature_params.eval_repeats,
+                                                    max_timesteps=1,
                                                     env_builder_function=task_builder_fn))
         if cfg.nature_params.parallel:
             nature.ensure_parallellism()
