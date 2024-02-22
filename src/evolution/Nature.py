@@ -378,7 +378,7 @@ class NatureBase():
             self.assign_species(spawned_animals)
         self.eval_population()
         self.age_species()
-        # self.extinction_of_stagnant()
+        self.extinction_of_stagnant()
         self.assign_new_species_representative()
         return np.max(self.fitness_list)
 

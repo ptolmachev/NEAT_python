@@ -36,8 +36,8 @@ class BluePrint():
         if len(links) != len(set(links)):
             genome_dict = remove_duplicate_synapse(genome_dict)
         # (3) check if there are orphaned neurons and synapses
-        # genome_dict = remove_orphaned_neurons(genome_dict)
-        # genome_dict = remove_orphaned_synapses(genome_dict)
+        genome_dict = remove_orphaned_neurons(genome_dict)
+        genome_dict = remove_orphaned_synapses(genome_dict)
         success = self.set_topological_order(genome_dict)
         # (4) remove cycles if present
         if success == False:

@@ -7,7 +7,7 @@ import numpy as np
 from src.evolution.Tasks.Tasks import TaskSpirals
 np.set_printoptions(suppress=True)
 env_name = 'Spirals'
-filename = f"../../../data/evolved_models/{env_name}/Spirals_score=-22.369662890251384_N=6.json"
+filename = f"../../../data/evolved_models/{env_name}/Spirals_score=-55.38292911897291_N=6.json"
 file = open(filename, "rb")
 data = json.load(file)
 with file as json_file:
@@ -33,11 +33,11 @@ print(f"MSE naive {np.sum((outputs_scatter - targets_scatter)**2)}")
 
 
 #generate a grid
-n = 30
+n = 100
 inputs_grid = np.zeros((3, n**2))
 targets_grid = np.zeros(n**2)
 inputs_grid[2, :] = 1.0
-x = np.linspace(-1, 1, n)
+x = np.linspace(-1.25, 1.25, n)
 cnt = 0
 X, Y = np.meshgrid(x, x)
 inputs_grid[0, :] = X.flatten()
@@ -47,7 +47,9 @@ output_grid = animal.react(inputs_grid)
 output_grid = output_grid.reshape(n, n)
 fig = plt.plot(figsize = (5, 5))
 
-plt.imshow(output_grid[::-1, :], extent=(np.min(x), np.max(x), np.min(x), np.max(x)), cmap='bwr', interpolation='bilinear',vmin=0, vmax=1, alpha=0.1)
+plt.imshow(output_grid[::-1, :], extent=(np.min(x), np.max(x), np.min(x), np.max(x)),
+           cmap='bwr', interpolation='bilinear',
+           vmin=0, vmax=1, alpha=0.4)
 plt.colorbar()  # Add color bar for reference
 
 inds_pm = np.where(outputs_scatter > 0.5)[0]

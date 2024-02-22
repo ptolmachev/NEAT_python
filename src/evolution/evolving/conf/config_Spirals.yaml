@@ -5,7 +5,7 @@ nature_params:
   max_timesteps: 1
   rel_advantage_ind: 3.0
   rel_advantage_spec: 1.0
-  mutation_probs: (0.01, 0.02, 0.3, 0.3, 0.8, 0.0)
+  mutation_probs: (0.02, 0.02, 0.3, 0.3, 0.8, 0.0)
   syn_mutation_prob: 0.8
   syn_mut_type_probs: (0.9, 0.05, 0.05)
   weight_change_std: 0.1
@@ -26,8 +26,9 @@ nature_params:
   save_logs: True
   log_every: 10
   lifetime_learning: True
-  lr: 0.001
+  lr: 0.0005
   n_learning_episodes: 1000
+
 
 innovation_handler_params:
   maxlen: 300
@@ -36,7 +37,7 @@ animal_params:
   neuron_type: "relu"
   action_type: "Sigmoid"
   action_bounds: None
-  action_noise: 0.0
+  action_noise: 0.03
 
 blueprint_params:
   weight_init_std : 0.4
@@ -53,5 +54,5 @@ logger_params:
   plot_every : 10
 
 evolution_params:
-  n_generations: 50
+  n_generations: 80
 

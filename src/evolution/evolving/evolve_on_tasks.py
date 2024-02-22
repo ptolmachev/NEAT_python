@@ -15,17 +15,18 @@ class Validator():
         self.max_timesteps = max_timesteps
 
     def get_validation_score(self, animal, seed):
+        animal.action_noise = 0
         inputs, targets = self.task.get_batch(batch_size=self.eval_repeats, seed=seed)
         return -np.sum((animal.react(inputs) - targets) ** 2)
 
-task_name = "XOR"
+task_name = "Spirals"
 @hydra.main(config_path="conf", config_name=f"config_{task_name}", version_base="1.3")
 def run_evolution(cfg):
     for i in range(1):
         innovation_handler = InnovationHandler(cfg.innovation_handler_params["maxlen"])
         innovation_handler.innovation_counter = 0
 
-        task_builder_fn = lambda: TaskXOR()
+        task_builder_fn = lambda: TaskSpirals()
 
         print(f"Evolving agents to solve {task_name}.")
         current_datetime = datetime.now()
