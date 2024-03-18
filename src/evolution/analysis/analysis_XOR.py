@@ -7,7 +7,7 @@ import numpy as np
 from src.evolution.Tasks.Tasks import TaskXOR
 np.set_printoptions(suppress=True)
 env_name = 'XOR'
-filename = f"../../../data/evolved_models/{env_name}/XOR_score=-16.870775792733706_N=4.json"
+filename = f"../../../data/evolved_models/{env_name}/XOR_score=-7.612787239198586_N=7.json"
 file = open(filename, "rb")
 data = json.load(file)
 with file as json_file:

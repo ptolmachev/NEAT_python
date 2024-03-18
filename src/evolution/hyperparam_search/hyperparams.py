@@ -1,7 +1,8 @@
+# Not currently working example of how to do a hyperparameter search
+
 import optuna
 from functools import partial
 import numpy as np
-
 from src.evolution.evolving.evolve_CartPole import run_evolution
 
 np.set_printoptions(suppress=True)
@@ -36,7 +37,7 @@ def objective(trial, num_repeats=7):
     neuron_type = 'relu'
     weight_init_std = 0.2
     weight_change_std = 0.05
-    data_folder = '/Users/tolmach/Documents/GitHub/NEAT_python/data/evolved_models/CartPole-v1'
+    data_folder = '../../data/evolved_models/CartPole-v1'
     orph_node_thr = 0.05
 
     # define params to be varied
@@ -66,6 +67,7 @@ def objective(trial, num_repeats=7):
                        save_every=save_every,
                        render=render,
                        render_every=render_every, data_folder=data_folder)
+
         print(f"best_score in this run {best_score}")
         best_scores.append(deepcopy(best_score))
     print(f"best_score averaged across trials {np.mean(best_scores)}")

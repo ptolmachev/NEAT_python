@@ -19,6 +19,9 @@ class Species():
         self.top_fitness_list = deque(maxlen=L)
         self.std_fitness_list = deque(maxlen=L)
         self.mean_fitness_list = deque(maxlen=L)
+        self.top_vscore_list = deque(maxlen=L)
+        self.std_vscore_list = deque(maxlen=L)
+        self.mean_vscore_list = deque(maxlen=L)
 
     def add_animal(self, animal):
         animal.spec_id = self.id
@@ -40,6 +43,10 @@ class Species():
     @property
     def fitness_list(self):
         return list([animal.fitness for animal in self.subpopulation])
+
+    @property
+    def vscore_list(self):
+        return list([animal.vscore for animal in self.subpopulation])
 
     def get_gendist_to_representative(self, animal):
         genome1 = self.representative_genome

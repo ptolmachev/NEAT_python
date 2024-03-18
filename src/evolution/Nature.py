@@ -26,6 +26,9 @@ class RemoteWorker():
     def get_fitness(self, animal, seed, ref_animals):
         return self.nature.get_fitness(animal, seed, ref_animals)
 
+    def get_vscore(self, animal, seed):
+        return self.nature.get_vscore(animal, seed)
+
     def get_experienced_animal(self, animal, seed):
         return self.nature.get_experienced_animal(animal, seed)
 
@@ -35,7 +38,7 @@ class NatureBase():
                  env_builder_fn=None,
                  env_name=None,
                  max_animals=32,
-                 max_species=6,
+                 n_species_setpoint=15,
                  max_timesteps=1000,
                  blueprint_params=None,
                  animal_params=None,
@@ -89,8 +92,15 @@ class NatureBase():
         self.logger = logger
         self.save_logs = save_logs
         self.log_every = log_every
+        self.top_fitness_sequence = []
+        self.mean_fitness_sequence = []
+        self.std_fitness_sequence = []
+        if not (self.validator is None):
+            self.top_vscore_sequence = []
+            self.mean_vscore_sequence = []
+            self.std_vscore_sequence = []
         self.max_animals = max_animals
-        self.max_species = max_species
+        self.n_species_setpoint = n_species_setpoint
         self.rel_advantage_ind = rel_advantage_ind
         self.rel_advantage_spec = rel_advantage_spec
         self.parthenogenesis_rate = parthenogenesis_rate
@@ -105,7 +115,7 @@ class NatureBase():
         # params for evaluating distance between the genomes:
         self.c_w = c_w
         self.c_d = c_d
-        self.delta = delta #speciation threshold
+        self.delta = delta # speciation threshold
         self.gamma = gamma # parameter adjusting the speciation threshold if there are too many species
         self.established_species_thr = established_species_thr
         self.cull_ratio = cull_ratio
@@ -114,6 +124,7 @@ class NatureBase():
         self.species_counter = 0 #counts unique species over the whole evolution run
         self.parallel = parallel
         self.n_workers = n_workers
+
 
     def ensure_parallellism(self):
         @ray.remote
@@ -139,10 +150,14 @@ class NatureBase():
         return list(chain.from_iterable([species.fitness_list for species in self.species_list]))
 
     @property
+    def vscore_list(self):
+        return list(chain.from_iterable([species.vscore_list for species in self.species_list]))
+
+    @property
     def animals(self):
         return list(chain.from_iterable([species.subpopulation for species in self.species_list]))
 
-    def spawn_simplest_lifeforms(self):
+    def spawn_simplest_lifeforms(self, n):
         # get observation and actions spaces to put number of inputs and outputs
         n_inputs = self.environment.observation_space.shape[0]
         try:
@@ -167,12 +182,15 @@ class NatureBase():
                       n_outputs=n_outputs,
                       **self.blueprint_params)
         # mutate these blueprints
-        base_blueprints = [deepcopy(b) for i in range(self.max_animals)]
+        base_blueprints = [deepcopy(b) for i in range(n)]
         mutated_blueprints = [self.mutate(b) for b in base_blueprints]
         simplest_animals = [Animal(b, self.blueprint_params, **self.animal_params) for b in mutated_blueprints]
         return simplest_animals
 
     def get_fitness(self, animal, seed, ref_animals=None):
+        raise NotImplementedError("This is a placeholder method of a base Nature class")
+
+    def get_vscore(self, animal, seed):
         raise NotImplementedError("This is a placeholder method of a base Nature class")
 
     def get_experienced_animal(self, animal, seed):
@@ -186,10 +204,10 @@ class NatureBase():
         return experienced_animals
 
     def eval_population(self):
-        # seed = self.current_generation
-        seed = np.random.randint(100000)
-        # reference animals against whom a generation will be measured
-        refs = np.random.choice(self.animals, self.n_ref_animals, replace=False) if self.self_play else None
+        seed = self.current_generation
+        refs = None
+        if self.self_play:
+            refs = np.random.choice(self.animals, self.n_ref_animals, replace=False)
         if self.parallel:
             fitness_vals = list(self.pool.map(lambda W, a: W.get_fitness.remote(animal=a, seed=seed, ref_animals=refs), self.animals))
         else:
@@ -209,6 +227,27 @@ class NatureBase():
             species.std_fitness_list.append(np.nanstd(species.fitness_list))
         return None
 
+    def validate_population(self):
+        seed = self.current_generation + 10000
+        if self.parallel:
+            vscores = list(self.pool.map(lambda W, a: W.get_fitness.remote(animal=a, seed=seed, ref_animals=None), self.animals))
+        else:
+            vscores = [self.get_vscore(animal, seed) for animal in self.animals]
+
+        # assign each animal with the value
+        for i, animal in enumerate(self.animals):
+            animal.vscore = vscores[i]
+
+        for species in self.species_list:
+            species.mean_vscore = np.nanmean(species.vscore_list)
+            species.std_vscore = np.nanstd(species.vscore_list)
+
+            # to store the history of values
+            species.top_vscore_list.append(np.nanmax(species.vscore_list))
+            species.mean_vscore_list.append(np.nanmean(species.vscore_list))
+            species.std_vscore_list.append(np.nanstd(species.vscore_list))
+        return None
+
     def mutate(self, blueprint):
         # possible mutations:
         # (0.03, 0.03, 0.2, 0.1, 0.8, 0.05) - default probabilities of mutation type occuring
@@ -224,13 +263,13 @@ class NatureBase():
                                   type_prob=self.syn_mut_type_probs,
                                   weight_change_std=self.weight_change_std,
                                   perturb_biases=self.perturb_biases)
-        # n = np.random.poisson(2)
-        # add_synapses = partial(blueprint.add_multiple_synapses, n=n)
         mutation_functions = [blueprint.add_neuron, blueprint.remove_neuron,
                               blueprint.add_synapse, blueprint.disable_synapse,
                               perturb_weights, blueprint.reset_bias]
 
-        [mutation_functions[i]() for i in range(len(probs)) if np.random.rand() < probs[i]]
+        #random order of mutations
+        mutation_ids = np.random.choice(np.arange(6), size=6, replace=False)
+        [mutation_functions[int(id)]() for id in mutation_ids if np.random.rand() < probs[int(id)]]
         return blueprint
 
     def remove_old_generation(self):
@@ -277,8 +316,14 @@ class NatureBase():
 
         self.species_list = [species for species in self.species_list if len(species.subpopulation) != 0]
         # if there are too many species, adjust the speciation threshold:
-        if len(self.species_list) >= self.max_species:
+        lower_bound = int((3/4) * self.n_species_setpoint)
+        upper_bound = int((4/3) * self.n_species_setpoint)
+
+        if len(self.species_list) > upper_bound:
             self.delta *= self.gamma
+
+        if len(self.species_list) < lower_bound:
+            self.delta /= self.gamma
         return None
 
     def age_species(self):
@@ -289,11 +334,11 @@ class NatureBase():
     def extinction_of_stagnant(self):
         survived_species = []
         for species in self.species_list:
+            scores = species.top_fitness_list if (self.validator is None) else species.top_vscore_list
+            l = scores.maxlen
             L = species.age
-            l = species.top_fitness_list.maxlen
-            if L >= l:
-                top_fitness_list = list(species.top_fitness_list)
-                if np.nanmean(top_fitness_list[:l//2]) < np.nanmean(top_fitness_list[l//2:]):
+            if L >= l: #only if the species lived long enough
+                if np.nanmean(list(scores)[:l//2]) < np.nanmean(list(scores)[l//2:]):
                     survived_species.append(species)
             else:
                 survived_species.append(species)
@@ -305,9 +350,16 @@ class NatureBase():
             top_species.top_fitness_list.clear()
             top_species.mean_fitness_list.clear()
             top_species.std_fitness_list.clear()
+            if not (self.validator is None):
+                top_species.top_vscore_list.clear()
+                top_species.mean_vscore_list.clear()
+                top_species.std_vscore_list.clear()
+            top_species.age = 0
             survived_species.append(top_species)
+
             # boost mutation rate:
-            self.weight_change_std *= 2.0
+            self.weight_change_std *= 1.05
+
             print("Increasing mutation rate!")
 
         for species in self.species_list:
@@ -316,14 +368,13 @@ class NatureBase():
 
         self.species_list = survived_species
         self.species_list = [species for species in self.species_list if len(species.subpopulation) != 0]
-
-            # # Alternatively, restart the whole process
-            # self.innovation_handler.innovation_counter = 0 # reset innovation handeler
-            # self.innovation_handler.synapse_hash = deque(maxlen=int(self.innovation_handler.maxlen))
-            # self.innovation_handler.innov_ids = deque(maxlen=int(self.innovation_handler.maxlen))
-            # simplest_animals = self.spawn_simplest_lifeforms()
-            # self.assign_species(simplest_animals)
-            # self.eval_population()
+        #     # Alternatively, restart the whole process
+        #     self.innovation_handler.innovation_counter = 0 # reset innovation handeler
+        #     self.innovation_handler.synapse_hash = deque(maxlen=int(self.innovation_handler.maxlen))
+        #     self.innovation_handler.innov_ids = deque(maxlen=int(self.innovation_handler.maxlen))
+        #     simplest_animals = self.spawn_simplest_lifeforms(n=self.max_animals)
+        #     self.assign_species(simplest_animals)
+        #     self.eval_population()
         return None
 
     def assign_new_species_representative(self):
@@ -358,7 +409,7 @@ class NatureBase():
         n_paris = self.max_animals - n_champions
         if n_paris <= 0:
             raise ValueError("The entire population has been spawned by existing champions."
-                             " Try either to reduce number of max_species or increase max_animals parameter!")
+                             " Try either to reduce number of n_species_setpoint or increase max_animals parameter!")
         pairs = self.get_mating_pairs(n_paris=n_paris)
         if self.parallel:
             childrens_blueprints = ray.get([self.mate_parallel.remote(self.animals[pair[0]], self.animals[pair[1]]) for pair in pairs])
@@ -377,77 +428,96 @@ class NatureBase():
         else:
             self.assign_species(spawned_animals)
         self.eval_population()
+        if not (self.validator is None):
+            self.validate_population()
+
         self.age_species()
         self.extinction_of_stagnant()
         self.assign_new_species_representative()
-        return np.max(self.fitness_list)
+        return None
 
     def run_evolution(self, n_generations):
-        best_score_overall = -np.inf
-        top_score_sequence = []
-        val_scores_sequence = [] if not (self.validator is None) else None
-        mean_score_sequence = []
-        std_score_sequence = []
-
-        simplest_animals = self.spawn_simplest_lifeforms()
+        simplest_animals = self.spawn_simplest_lifeforms(n=self.max_animals)
         self.assign_species(simplest_animals)
         self.eval_population()
+        self.best_score = -np.inf
+        for i in range(n_generations):
+            self.evolve_step()
 
-        for i in tqdm(range(n_generations)):
-            max_fitness = self.evolve_step()
-            fitness_vals = np.array(self.fitness_list)
-            top_animal = self.animals[np.nanargmax(fitness_vals)]
+            #save a bunch of stats
+            self.top_fitness_sequence.append(np.nanmax(self.fitness_list))
+            self.mean_fitness_sequence.append(np.nanmean(self.fitness_list))
+            self.std_fitness_sequence.append(np.nanstd(self.fitness_list))
             if not (self.validator is None):
-                cur_val_score = self.validator.get_validation_score(animal=top_animal, seed = np.random.randint(100000))
-                val_scores_sequence.append(cur_val_score)
-            print(f"Maximum fitness: {max_fitness}, Validation score: {cur_val_score}")
-            cur_top_score = np.max(fitness_vals)
-            top_score_sequence.append(cur_top_score)
-            mean_score_sequence.append(np.nanmean(fitness_vals))
-            std_score_sequence.append(np.nanstd(fitness_vals))
+                self.top_vscore_sequence.append(np.nanmax(self.vscore_list))
+                self.mean_vscore_sequence.append(np.nanmean(self.vscore_list))
+                self.std_vscore_sequence.append(np.nanstd(self.vscore_list))
 
-            #TODO: make it more compact
             if not (self.logger is None):
-                tag = self.logger.tag if not (self.logger is None) else ''
-                if self.save_logs and ((self.current_generation + 1) % self.log_every) == 0:
-                    log_dict = {}
-                    log_dict[f"Num species"] = len(self.species_list)
-                    for species in self.species_list:
-                        log_dict[f"Species {species.species_id} num animals"] = len(species.subpopulation)
-                        log_dict[f"Species {species.species_id} top fitness"] = float(np.max(species.fitness_list))
-                        log_dict[f"Species {species.species_id} mean fitness"] = float(species.mean_fitness)
-                        log_dict[f"Species {species.species_id} std fitness"] = float(species.std_fitness)
-                        top_animal_genome = species.subpopulation[np.nanargmax(species.fitness_list)].blueprint.genome_dict
-                        log_dict[f"Species {species.species_id} top animal N hidden neurons"] = \
-                            len(get_neurons_by_type(top_animal_genome, type='h'))
-                        log_dict[f"Species {species.species_id} top animal N synapses"] = \
-                            len(list(top_animal_genome["synapses"].keys()))
-                        log_dict[f"Species {species.species_id} top animal"] = top_animal_genome
-
-                    self.logger.save_log(log_dict, file_name=f"{self.env_name}_gen={self.current_generation}_{tag}.json")
-
-                if (self.current_generation + 1) % self.logger.plot_every == 0:
-                    self.logger.plot_scores(top_scores=top_score_sequence,
-                                            val_scores=val_scores_sequence,
-                                            mean_scores=mean_score_sequence,
-                                            std_scores=std_score_sequence,
-                                            file_name=f"{self.env_name}_scores_{tag}.png")
-
-                cur_score = cur_top_score if (self.validator is None) else cur_val_score
-                if cur_score >= best_score_overall:
-                    best_score_overall = cur_score
-                    data_dict = deepcopy(top_animal.blueprint.genome_dict)
-                    if (self.validator is None):
-                        data_dict["score"] = best_score_overall
-                    else:
-                        data_dict["val score"] = best_score_overall
-                    data_dict["N_neurons"] = int(len(top_animal.blueprint.get_neurons_by_type("h")))
-                    data_dict["N_synapses"] = int(len(list(top_animal.blueprint.genome_dict["synapses"].keys())))
-                    self.logger.fossilize(top_animal,
-                                          generation=None,
-                                          env_name=self.env_name,
-                                          score=cur_val_score)
+                self.log_information()
             self.current_generation += 1
+        return None
+
+    def log_information(self):
+        tag = self.logger.tag if not (self.logger is None) else ''
+        if not (self.validator is None):
+            print(f"Generation {self.current_generation}; max vscore : {np.round(np.max(self.vscore_list), 3)}; max fitness : {np.round(np.max(self.fitness_list), 3)}")
+        if self.save_logs and ((self.current_generation + 1) % self.log_every) == 0:
+            log_dict = {}
+
+            log_dict["top fitness score"] = float(self.top_fitness_sequence[-1])
+            if not (self.validator is None):
+                log_dict["top validation score"] = float(self.top_vscore_sequence[-1])
+
+            log_dict["delta"] = float(self.delta)
+            log_dict["N species"] = len(self.species_list)
+
+            for species in self.species_list:
+                if not (self.validator is None):
+                    top_animal_within_species = species.subpopulation[np.nanargmax(species.vscore_list)]
+                    log_dict[f"Species {species.species_id} top validation score"] = float(np.max(species.vscore_list))
+                    log_dict[f"Species {species.species_id} mean validation score"] = float(np.mean(species.vscore_list))
+                    log_dict[f"Species {species.species_id} std validation score"] = float(np.std(species.vscore_list))
+                else:
+                    top_animal_within_species = species.subpopulation[np.nanargmax(species.fitness_list)]
+                top_animal_genome = top_animal_within_species.blueprint.genome_dict
+                log_dict[f"Species {species.species_id} num animals"] = len(species.subpopulation)
+                log_dict[f"Species {species.species_id} top fitness"] = float(np.max(species.fitness_list))
+                log_dict[f"Species {species.species_id} mean fitness"] = float(species.mean_fitness)
+                log_dict[f"Species {species.species_id} std fitness"] = float(species.std_fitness)
+
+                log_dict[f"Species {species.species_id} N hidden neurons"] = len(get_neurons_by_type(top_animal_genome, type='h'))
+                log_dict[f"Species {species.species_id} N synapses"] = len(list(top_animal_genome["synapses"].keys()))
+                # log_dict[f"Species {species.species_id} top animal"] = top_animal_genome
+            self.logger.save_log(log_dict, file_name=f"{self.env_name}_gen={self.current_generation}_{tag}.json")
+
+        if (self.current_generation + 1) % self.logger.plot_every == 0:
+            if not (self.validator is None):
+                self.logger.plot_scores(top_scores=self.top_vscore_sequence,
+                                        mean_scores=self.mean_vscore_sequence,
+                                        std_scores=self.std_vscore_sequence,
+                                        file_name=f"{self.env_name}_scores_{tag}.png")
+            else:
+                self.logger.plot_scores(top_scores=self.top_fitness_sequence,
+                                        mean_scores=self.mean_fitness_sequence,
+                                        std_scores=self.std_fitness_sequence,
+                                        file_name=f"{self.env_name}_scores_{tag}.png")
+
+        cur_score = self.top_fitness_sequence[-1] if (self.validator is None) else self.top_vscore_sequence[-1]
+        if cur_score >= self.best_score:
+            best_score_overall = cur_score
+            top_animal = self.animals[np.nanargmax(self.vscore_list)]
+            data_dict = deepcopy(top_animal.blueprint.genome_dict)
+            if (self.validator is None):
+                data_dict["score"] = best_score_overall
+            else:
+                data_dict["validation score"] = best_score_overall
+            data_dict["N neurons"] = int(len(top_animal.blueprint.get_neurons_by_type("h")))
+            data_dict["N synapses"] = int(len(list(top_animal.blueprint.genome_dict["synapses"].keys())))
+            self.logger.fossilize(top_animal,
+                                  generation=None,
+                                  env_name=self.env_name,
+                                  score=cur_score)
         return None
 
     def get_mating_pairs(self, n_paris):
@@ -529,6 +599,8 @@ class NatureOpenAIgym(NatureBase):
         except:
             self.environment.seed(seed=seed)
             obs = self.environment.reset()
+            self.environment.policy.reset()
+
         if type(obs) == tuple:  # for compatibility with other gym environments
             obs = obs[0]
         return obs
@@ -559,7 +631,7 @@ class NatureOpenAIgym(NatureBase):
 
     def get_fitness(self, animal, seed, ref_animals=None):
         if not (ref_animals is None):
-            if not ref_animals:
+            if len(ref_animals) == 0:
                 raise ValueError("Need to set reference animals against which a primary animal is evaluated")
 
         rewards = []
@@ -570,7 +642,7 @@ class NatureOpenAIgym(NatureBase):
                     rewards.append(reward)
         else:
             for i in range(self.eval_repeats):
-                reward = self.run_through_environment(animal, seed=seed + i)
+                reward = self.run_through_environment(animal, seed=seed + i, other_animal=None)
                 rewards.append(reward)
         self.environment.close()
 
@@ -581,6 +653,8 @@ class NatureOpenAIgym(NatureBase):
             return np.nanmean(rewards) - penalty
         return np.nanmean(rewards)
 
+    def get_vscore(self, animal, seed):
+        return self.validator.get_vscore(animal, seed)
 
 class NatureCustomTask(NatureBase):
     def __init__(self, lifetime_learning=False, n_learning_episodes=500, lr=1e-3, **kwargs):

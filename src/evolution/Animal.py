@@ -27,6 +27,7 @@ class Animal():
         self.action_type = action_type
         self.action_bounds = action_bounds
         self.fitness = None
+        self.vscore = None
         self.species_id = None
 
         self.inp_nrns = set(self.blueprint.get_neurons_by_type('i'))

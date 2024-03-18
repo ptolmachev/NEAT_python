@@ -7,7 +7,7 @@ import numpy as np
 from src.evolution.Tasks.Tasks import TaskCircles
 np.set_printoptions(suppress=True)
 env_name = 'Circles'
-filename = f"../../../data/evolved_models/{env_name}/Circles_score=-112.6337893804576_N=5.json"
+filename = f"../../../data/evolved_models/{env_name}/Circles_score=-123.5687184202034_N=3.json"
 file = open(filename, "rb")
 data = json.load(file)
 with file as json_file:

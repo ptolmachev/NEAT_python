@@ -71,13 +71,11 @@ class Logger():
         fig.savefig(os.path.join(self.img_folder, file_name))
         plt.close()
 
-    def plot_scores(self, top_scores, mean_scores, std_scores,  file_name, val_scores = None):
+    def plot_scores(self, top_scores, mean_scores, std_scores,  file_name):
         fig = plt.figure(figsize = (10, 4))
         top_scores = np.array(top_scores)
         mean = np.array(mean_scores)
         std = np.array(std_scores)
-        if not(val_scores is None):
-            plt.plot(val_scores, color = 'g', label="validation scores")
 
         plt.plot(top_scores, color = 'r', label="top scores")
         plt.plot(mean, color='blue', label="mean scores")
@@ -85,10 +83,7 @@ class Logger():
         plt.plot(mean + std, color='blue', linestyle='--', linewidth = 0.5)
 
         # getting a ylim
-        if not(val_scores is None):
-            ref_scores = val_scores
-        else:
-            ref_scores = top_scores
+        ref_scores = top_scores
         y_min = np.min(ref_scores)
         y_max = np.max(ref_scores)
         range = y_max - y_min

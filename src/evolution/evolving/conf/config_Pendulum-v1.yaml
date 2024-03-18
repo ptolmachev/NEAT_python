@@ -1,28 +1,34 @@
 env_name: &env_name "Pendulum-v1"
 nature_params:
-  max_animals: 100
-  max_species: 12
+  max_animals: 120
+  n_species_setpoint: 10
   max_timesteps: 500
   rel_advantage_ind: 3.0
   rel_advantage_spec: 1.0
-  mutation_probs: (0.02, 0.03, 0.2, 0.2, 0.8, 0.05)
-  syn_mutation_prob: 0.4
+  mutation_probs: (0.03, 0.03, 0.4, 0.4, 0.6, 0.02)
+  syn_mutation_prob: 0.6
   syn_mut_type_probs: (0.9, 0.05, 0.05)
   weight_change_std: 0.05
+  perturb_biases : True
   c_d: 1.0
   c_w: 0.4
-  delta: 3.0
-  gamma: 1.2
+  delta: 0.5
+  gamma: 1.02
   established_species_thr: 5
-  cull_ratio: 0.2
+  cull_ratio: 0.25
   parthenogenesis_rate: 0.25
   interspecies_mating_chance : 0.02
-  metabolic_penalty: 0.01
-  eval_repeats: 7
+  metabolic_penalty: 0.001
+  eval_repeats: 11
   parallel: True
-  n_workers: 10
+  n_workers: 16
   self_play: False
-  n_ref_animals: 0
+  num_reference_animals: 0
+  save_logs: True
+  log_every: 1
+  lifetime_learning: False
+  lr: None
+  n_learning_episodes: None
 
 innovation_handler_params:
   maxlen: 300

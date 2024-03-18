@@ -7,7 +7,7 @@ import numpy as np
 from src.evolution.Tasks.Tasks import TaskMoons
 np.set_printoptions(suppress=True)
 env_name = 'Moons'
-filename = f"../../../data/evolved_models/{env_name}/Moons_score=-13.129627270805099_N=5.json"
+filename = f"../../../data/evolved_models/{env_name}/Moons_score=-16.476500671685713_N=4.json"
 file = open(filename, "rb")
 data = json.load(file)
 with file as json_file:
@@ -48,7 +48,7 @@ output_grid = output_grid.reshape(n, n)
 fig = plt.plot(figsize = (5, 5))
 
 plt.imshow(output_grid[::-1, :], extent=(np.min(x), np.max(x), np.min(y), np.max(y)), cmap='bwr', interpolation='bilinear',
-           vmin=0, vmax=1, alpha=0.1)
+           vmin=0, vmax=1, alpha=0.4)
 plt.colorbar()  # Add color bar for reference
 
 inds_pm = np.where(outputs_scatter > 0.5)[0]

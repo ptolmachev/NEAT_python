@@ -6,10 +6,14 @@ import numpy as np
 import time
 
 env_name = 'SlimeVolley-v0'
-max_timesteps = 3000
+max_timesteps = 30000
 sleep = 0.01
 animols_param = {"neuron_type" : 'relu', "action_noise" : 0.00, "action_type" : "MultiBinary", "action_bounds" : None}
-filename = f"../../data/evolved_models/{env_name}/None_generation=437_score=1.4285714285714286_N=6.json"
+# filename = f"../../data/evolved_models/{env_name}/None_generation=437_score=1.4285714285714286_N=6.json"
+# filename = f"../../data/evolved_models/{env_name}/None_generation=187_score=1.4285714285714286_N=2.json"
+filename = f"../../data/evolved_models/{env_name}/SlimeVolley-v0_score=0.9364914853305916_N=4.json"
+
+
 file = open(filename, "rb")
 data = json.load(file)
 with file as json_file:
@@ -33,7 +37,7 @@ blueprint = BluePrint(innovation_handler = None,
                       n_inputs=n_inputs,
                       n_outputs=n_outputs)
 
-animal = Animal(blueprint, **animols_param)
+animal = Animal(blueprint, **animols_param, blueprint_params=None)
 
 seed = np.random.randint(100000)
 try:

@@ -1,7 +1,7 @@
 env_name: &env_name "Moons"
 nature_params:
-  max_animals: 500
-  max_species: 50
+  max_animals: 200
+  n_species_setpoint: 10
   max_timesteps: 1
   rel_advantage_ind: 3.0
   rel_advantage_spec: 1.0
@@ -21,7 +21,7 @@ nature_params:
   metabolic_penalty: 0.001
   eval_repeats: 1000
   parallel: True
-  n_workers: 10
+  n_workers: 16
   self_play: False
   save_logs: True
   log_every: 10

@@ -1,31 +1,33 @@
 env_name: &env_name "CDDM"
 nature_params:
-  max_animals: 500
+  max_animals: 200
   max_species: 50
   max_timesteps: 1
-  rel_advantage_ind: 5.0
+  rel_advantage_ind: 3.0
   rel_advantage_spec: 1.0
-  mutation_probs: (0.01, 0.02, 0.5, 0.5, 0.8, 0.0)
+  mutation_probs: (0.01, 0.02, 0.3, 0.3, 0.8, 0.0)
   syn_mutation_prob: 0.8
   syn_mut_type_probs: (0.9, 0.05, 0.05)
   weight_change_std: 0.1
   perturb_biases : False
   c_d: 1.0
   c_w: 0.4
-  delta: 1.5
+  delta: 2.0
   gamma: 1.2
-  established_species_thr: 1
+  established_species_thr: 5
   cull_ratio: 0.25
   parthenogenesis_rate: 0.1
   interspecies_mating_chance : 0.02
   metabolic_penalty: 0.1
-  eval_repeats: 512
-  parallel: False
-  n_workers: 10
+  eval_repeats: 1000
+  parallel: True
+  n_workers: 16
   self_play: False
   save_logs: True
-  log_every: 1
-  n_ref_animals: None
+  log_every: 10
+  lifetime_learning: True
+  lr: 0.001
+  n_learning_episodes: 1000
 
 innovation_handler_params:
   maxlen: 300
@@ -34,7 +36,7 @@ animal_params:
   neuron_type: "relu"
   action_type: "Sigmoid"
   action_bounds: None
-  action_noise: 0.00
+  action_noise: 0.0
 
 blueprint_params:
   weight_init_std : 0.4
@@ -51,5 +53,4 @@ logger_params:
   plot_every : 10
 
 evolution_params:
-  n_generations: 500
-
+  n_generations: 50

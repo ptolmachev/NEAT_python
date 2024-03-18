@@ -1,5 +1,4 @@
 import json
-from copy import deepcopy
 from src.evolution.Blueprint import BluePrint
 from src.evolution.Animal import Animal
 from matplotlib import pyplot as plt
@@ -7,7 +6,9 @@ import numpy as np
 from src.evolution.Tasks.Tasks import TaskSpirals
 np.set_printoptions(suppress=True)
 env_name = 'Spirals'
-filename = f"../../../data/evolved_models/{env_name}/Spirals_score=-55.38292911897291_N=6.json"
+filename = f"../../../data/evolved_models/{env_name}/Spirals_score=-23.082726892065093_N=8.json"
+# filename = f"../../../data/evolved_models/{env_name}/Spirals_score=-26.295079904756644_N=7.json"
+
 file = open(filename, "rb")
 data = json.load(file)
 with file as json_file:
@@ -60,7 +61,7 @@ if len(inds_pm) != 0:
     plt.scatter(inputs_scatter[0, inds_pm], inputs_scatter[1, inds_pm], color = 'r', edgecolors='k')#, alpha=alpha_pm**4)
 if len(inds_nm) != 0:
     plt.scatter(inputs_scatter[0, inds_nm], inputs_scatter[1, inds_nm], color = 'b', edgecolors='k')#, alpha=alpha_nm**4)
-plt.title('XOR task classification')
+plt.title('Spirals task classification')
 plt.show()
 
 

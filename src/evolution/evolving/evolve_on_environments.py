@@ -1,18 +1,17 @@
 from datetime import datetime
-import numpy as np
-import gymnasium
-import hydra
 from src.evolution.Nature import NatureOpenAIgym
 from src.evolution.Logger import Logger
 from src.evolution.InnovationHandler import InnovationHandler
+import numpy as np
+import gymnasium
+import hydra
+import sys
 from src.slimevolleygym.slimevolley import SlimeVolleyEnv
 import ast
 
 
-class ValidatorSlimeVolley():
-    def __init__(self, eval_repeats=11,
-                 max_timesteps=2000,
-                 environment_builder_fn=None):
+class Validator():
+    def __init__(self, environment_builder_fn, eval_repeats, max_timesteps):
         self.environment = environment_builder_fn()
         self.eval_repeats = eval_repeats
         self.max_timesteps = max_timesteps
@@ -21,12 +20,10 @@ class ValidatorSlimeVolley():
         try:
             self.environment.seed(seed=seed)
             obs = self.environment.reset()
-            self.environment.policy.reset()
         except:
             obs = self.environment.reset(seed=seed)
         if type(obs) == tuple:
             obs = obs[0]
-
         return obs
 
     def run_through_environment(self, animal, seed):
@@ -38,15 +35,13 @@ class ValidatorSlimeVolley():
         while (not done) and (while_cnt < self.max_timesteps):
             action = animal.react(inputs=obs)
             result = self.environment.step(action=action)
-            if len(result) == 4:
-                obs, reward, done, info = result
-            elif len(result) == 5:
-                obs, reward, done, _, info = result
+            if len(result) == 4: obs, reward, done, info = result
+            elif len(result) == 5: obs, reward, done, _, info = result
             total_reward += reward
             while_cnt += 1
         return total_reward
 
-    def get_vscore(self, animal, seed):
+    def get_validation_score(self, animal, seed):
         rewards = []
         for i in range(self.eval_repeats):
             reward = self.run_through_environment(animal, seed=seed)
@@ -54,16 +49,15 @@ class ValidatorSlimeVolley():
         self.environment.close()
         return np.nanmean(rewards)
 
-env_name = "SlimeVolley-v0"
+env_name = "BipedalWalker-v3"
 @hydra.main(config_path="conf", config_name=f"config_{env_name}", version_base="1.3")
 def run_evolution(cfg):
-    for i in range(5):
+    for i in range(1):
         innovation_handler = InnovationHandler(cfg.innovation_handler_params["maxlen"])
         innovation_handler.innovation_counter = 0
-        seed = np.random.randint(0, 10000)
 
         env_name = cfg.env_name
-        if env_name == "SlimeVolley-v0":
+        if env_name == "SlimeVolley-v1":
             environment_builder_fn = SlimeVolleyEnv
         else:
             try:
@@ -94,7 +88,7 @@ def run_evolution(cfg):
                                  n_species_setpoint=cfg.nature_params.n_species_setpoint,
                                  max_timesteps=cfg.nature_params.max_timesteps,
                                  animal_params=animal_params,
-                                 blueprint_params = dict(cfg.blueprint_params),
+                                 blueprint_params=dict(cfg.blueprint_params),
                                  rel_advantage_ind=cfg.nature_params.rel_advantage_ind,
                                  rel_advantage_spec=cfg.nature_params.rel_advantage_spec,
                                  mutation_probs=ast.literal_eval(cfg.nature_params.mutation_probs),
@@ -120,9 +114,9 @@ def run_evolution(cfg):
                                  n_learning_episodes=cfg.nature_params.n_learning_episodes,
                                  logger=logger,
                                  log_every=cfg.nature_params.log_every,
-                                 validator=ValidatorSlimeVolley(eval_repeats=cfg.nature_params.eval_repeats,
-                                                    max_timesteps=cfg.nature_params.max_timesteps,
-                                                    environment_builder_fn=environment_builder_fn))
+                                 validator=Validator(eval_repeats=cfg.nature_params.eval_repeats,
+                                                                max_timesteps=cfg.nature_params.max_timesteps,
+                                                                environment_builder_fn=environment_builder_fn))
         if cfg.nature_params.parallel:
             nature.ensure_parallellism()
         nature.run_evolution(n_generations=cfg.evolution_params.n_generations)

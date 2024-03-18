@@ -7,7 +7,7 @@ import numpy as np
 
 env_name = 'LunarLander-v2'
 animols_param = {"neuron_type" : 'relu', "action_noise" : 0.00, "action_type" : "Discrete"}
-filename = f"../../data/evolved_models/{env_name}/LunarLander-v2_generation=239_score=280.43465647393157_N=1.json"
+filename = f"../../data/evolved_models/{env_name}/LunarLander-v2_score=309.2024188781816_N=3.json"
 file = open(filename, "rb")
 data = json.load(file)
 with file as json_file:
@@ -35,7 +35,7 @@ blueprint = BluePrint(innovation_handler = None,
                       n_inputs=n_inputs,
                       n_outputs=n_outputs)
 
-animal = Animal(blueprint, **animols_param)
+animal = Animal(blueprint, blueprint_params=None, **animols_param)
 
 seed = np.random.randint(100000)
 try:

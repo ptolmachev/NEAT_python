@@ -11,7 +11,8 @@ class BluePrint():
                  weight_init_std=0.4,
                  orph_node_thr=0.1,
                  max_weight_val=3.0,
-                 max_neurons=32):
+                 max_neurons=32,
+                 disable_synapse_thr=6):
         '''The genome dict has to contain the following information
         1) a list of nodes
         2) a list of synapses with innovation_id, active or disabled, nrn_to id, nrn_from id, weight'''
@@ -36,7 +37,7 @@ class BluePrint():
         if len(links) != len(set(links)):
             genome_dict = remove_duplicate_synapse(genome_dict)
         # (3) check if there are orphaned neurons and synapses
-        genome_dict = remove_orphaned_neurons(genome_dict)
+        # genome_dict = remove_orphaned_neurons(genome_dict) #TODO: add back
         genome_dict = remove_orphaned_synapses(genome_dict)
         success = self.set_topological_order(genome_dict)
         # (4) remove cycles if present
@@ -52,6 +53,7 @@ class BluePrint():
         self.max_neruons = max_neurons
         self.max_weight_val = max_weight_val
         self.weight_init_std = weight_init_std
+        self.disable_synapse_thr = disable_synapse_thr
 
     def get_neurons_by_type(self, type):
         return get_neurons_by_type(self.genome_dict, type)
@@ -136,6 +138,9 @@ class BluePrint():
     def remove_neuron(self):
         # line up neurons which are orphaned
         types = [neuron_info["type"] for neuron_info in  self.genome_dict["neurons"].values()]
+
+        if not ('h' in types):
+            return False
         neuron_names = list(map(int, self.genome_dict["neurons"].keys()))
         N = len(types)
         W = self.get_connectivity_matrix()
@@ -219,13 +224,14 @@ class BluePrint():
         gene_types = ["synapses"]
         if perturb_biases == True:
             gene_types.append("neurons")
+
         for gene_type in gene_types:
             if gene_type == "neurons": # allow biases only on hidden units to change
                 innovations = [innovation for innovation, info in self.genome_dict[gene_type].items() if (info["type"] == 'h')]
             else:
                 innovations = self.genome_dict[gene_type].keys()
             if len(innovations) == 0:
-                continue
+                return False
 
             key = "weight" if gene_type == "synapses" else "bias"
 
@@ -240,28 +246,27 @@ class BluePrint():
                     self.genome_dict[gene_type][innovation][key] = np.clip(new_weight, -self.max_weight_val, self.max_weight_val)
         return True
 
-    # def disable_synapse(self):
-    #     synapses = self.genome_dict["synapses"]
-    #     innovations = list(key for key, info in synapses.items() if info["active"])
-    #     if not innovations:
-    #         return False
-    #
-    #     weights = np.array([synapses[innovation]["weight"] for innovation in innovations if synapses[innovation]["active"]])
-    #     if len(weights) >= 6:
-    #         # if the synapses is relatively useless it is more likely to be deleted
-    #         probs = get_probs(-np.abs(weights), slope=10)
-    #         sampled_innovation = int(np.random.choice(innovations, p=probs))
-    #         self.genome_dict["synapses"][sampled_innovation]["active"] = False
-    #     return True
-
     def disable_synapse(self):
         synapses = self.genome_dict["synapses"]
         innovations = list(key for key, info in synapses.items() if info["active"])
-        if not innovations:
+        if (len(innovations) <= self.disable_synapse_thr): # if there are too few synapses, don't disable them!
             return False
-        sampled_innovation = int(np.random.choice(innovations))
+
+        weights = np.array([synapses[innovation]["weight"] for innovation in innovations if synapses[innovation]["active"]])
+        # if the synapses is relatively useless it is more likely to be deleted
+        probs = get_probs(-np.abs(weights), slope=10)
+        sampled_innovation = int(np.random.choice(innovations, p=probs))
         self.genome_dict["synapses"][sampled_innovation]["active"] = False
         return True
+    #
+    # def disable_synapse(self):
+    #     synapses = self.genome_dict["synapses"]
+    #     innovations = list(key for key, info in synapses.items() if info["active"])
+    #     if (len(innovations) <= self.disable_synapse_thr): # if there are too few synapses, don't disable them!
+    #         return False
+    #     sampled_innovation = int(np.random.choice(innovations))
+    #     self.genome_dict["synapses"][sampled_innovation]["active"] = False
+    #     return True
 
     def reset_bias(self):
         hidden_neurons = self.get_neurons_by_type(type='h')

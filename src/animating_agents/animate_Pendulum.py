@@ -7,7 +7,7 @@ import numpy as np
 
 env_name = 'Pendulum-v1'
 animols_param = {"neuron_type" : 'relu', "action_noise" : 0.00, "action_type" : "Continuous"}
-filename = f"../../data/evolved_models/{env_name}/Pendulum-v1_generation=746_score=-185.76052550779474_N=10.json"
+filename = f"../../data/evolved_models/{env_name}/Pendulum-v1_score=-5810.091794543231_N=3.json"
 file = open(filename, "rb")
 data = json.load(file)
 with file as json_file:
@@ -35,7 +35,7 @@ blueprint = BluePrint(innovation_handler = None,
                       n_inputs=n_inputs,
                       n_outputs=n_outputs)
 
-animal = Animal(blueprint, **animols_param)
+animal = Animal(blueprint, blueprint_params=None, **animols_param)
 
 seed = np.random.randint(100000)
 try:
@@ -53,7 +53,7 @@ for i in range(max_timesteps):
     env.render()
     time.sleep(sleep)
     action = animal.react(inputs=obs)
-    result = env.step(action=action)
+    result = env.step(action=action.flatten())
     match len(result):
         case 3: obs, reward, done = result
         case 4: obs, reward, done, info = result
