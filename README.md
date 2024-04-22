@@ -1,4 +1,4 @@
-**NEAT: Neuroevolution of Augmenting Topologies**
+# NEAT: Neuroevolution of Augmenting Topologies
 
 In this algorithm multiple “animals” with the neural network defined by their genome evolve to solve a particular problem. 
 For each animal, its “nervous system” (the neurons and their connectivity) is defined by the genome dictionary (see example below).
