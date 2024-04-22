@@ -1,6 +1,9 @@
-*NEAT algorithm*: Neuroevolution of Augmenting Topologies.
+**NEAT: Neuroevolution of Augmenting Topologies**
+
 In this algorithm multiple “animals” with the neural network defined by their genome evolve to solve a particular problem. 
 For each animal, its “nervous system” (the neurons and their connectivity) is defined by the genome dictionary (see example below).
+
+```yaml
 {
   “neurons”: 
   {
@@ -99,6 +102,7 @@ LunarLander-v2 OpenAI gym task
 The genome contains only one hidden neuron:
 (During all the training I didn’t allow biases)
 
+```yaml
 "genome dict": {
     "neurons": {
     "0": {"type": "i","bias": 0.0},
@@ -138,7 +142,7 @@ Below are some plots of the decision boundaries:
 
 ![Spirals](https://github.com/ptolmachev/NEAT_python/blob/main/img/Spirals/Spirals%20result.png)
 ![Moons](https://github.com/ptolmachev/NEAT_python/blob/main/img/Moons/Moons%20result.png)
-![Circles](https://github.com/ptolmachev/NEAT_python/blob/main/img/Circles/Circles%20result.png)
+![Circles](https://github.com/ptolmachev/NEAT_python/blob/main/img/Circles/circles%20result.png)
 ![XOR](https://github.com/ptolmachev/NEAT_python/blob/main/img/XOR/XOR%20result.png)
 
 Further directions:
