@@ -20,15 +20,17 @@ For each animal, its “nervous system” (the neurons and their connectivity) i
 ```
 
 At first, the simplest network topologies are spawned, mutated, speciated and their performance is evaluated.
+
+**High level description of NEAT**
 Further, the NEAT algorithm consists of iteratively cycling through phases in this order:
 
-- Culling the population
--  Reproduction: spawning new animals
--  Mutation of the spawned genomes
--  Speciation of the animals
--  (Optional) Live and learn - given a fixed topology, modify the weights of the network via gradient descent
--  Evaluation of performance
--  Extinction of stagnant species
+- (1) Culling the population
+- (2) Reproduction: spawning new animals
+- (3) Mutation of the spawned genomes
+- (4) Speciation of the animals
+- (5, Optional) Live and learn - given a fixed topology, modify the weights of the network via gradient descent
+- (6) Evaluation of performance
+- (7) Extinction of stagnant species
 
 At (1) culling the population, for each species, the 25% of least fit animals are removed.
 
@@ -94,14 +96,14 @@ The full list of hyperparameters for the NEAT algorithm is summarized in the con
 
 The relevant code is implemented in the ‘evolution’ subdirectory.
 
-Performance:
+**Performance**
 
-LunarLander-v2 OpenAI gym task
+LunarLander-v2 OpenAI gym task:
 
 ![LunarLander-v2 performance](https://github.com/ptolmachev/NEAT_python/blob/main/img/LunarLander-v2/LunarLander-v2_scores_1445_04_03_2024.png)
 
 The genome contains only one hidden neuron:
-(During all the training I didn’t allow biases)
+(During all the training I didn’t allow biases). I also saw solutions with zero neurons as well: somewhat surprising that this taks could be solved just using a linear mapping from input to output!
 
 ```yaml
 "genome dict": {
@@ -146,7 +148,7 @@ Below are some plots of the decision boundaries:
 ![Circles](https://github.com/ptolmachev/NEAT_python/blob/main/img/Circles/circles%20result.png)
 ![XOR](https://github.com/ptolmachev/NEAT_python/blob/main/img/XOR/XOR%20result.png)
 
-Further directions:
+**Further directions**:
 
 Keeping hard-coded speciation might not be necessary. Instead, one can introduce a soft-speciation, by utilizing an “affinity function”, which accepts the distance between the two genomes and returns the likelihood of the two animals mating. The larger the distance, the less likely the two animals mate with one another.
 In addition, one can introduce that the two closely related animals (having the same genes) will be less likely to mate as well, nudging the evolution towards greater diversification within the species, making the search more efficient. 
