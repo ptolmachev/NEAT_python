@@ -17,17 +17,17 @@ For each animal, its “nervous system” (the neurons and their connectivity) i
     4 : {“nrn_to” : 1, “nrn_from”: 2, “actve”: True, “weight”: 0.5}
   }
 }
-
+'''
 At first, the simplest network topologies are spawned, mutated, speciated and their performance is evaluated.
 Further, the NEAT algorithm consists of iteratively cycling through phases in this order:
 
 - Culling the population
 -  Reproduction: spawning new animals
--   Mutation of the spawned genomes
--   Speciation of the animals
--   (Optional) Live and learn - given a fixed topology, modify the weights of the network via gradient descent
--   Evaluation of performance
--   Extinction of stagnant species
+-  Mutation of the spawned genomes
+-  Speciation of the animals
+-  (Optional) Live and learn - given a fixed topology, modify the weights of the network via gradient descent
+-  Evaluation of performance
+-  Extinction of stagnant species
 
 At (1) culling the population, for each species, the 25% of least fit animals are removed.
 
