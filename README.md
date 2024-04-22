@@ -60,7 +60,7 @@ During the (3) mutation phase, several de novo mutations may take place:
  
 Adding a neuron: \
 With probability 0.03 by default, a random synapse is chosen and disabled. \
-In between the two neurons “nrn_from” and “nrn_to” a “new_nrn” is inserted, and the two synapses are added into the genome: \
+In between the two neurons “nrn_from” and “nrn_to” a “new_nrn” is inserted, and the two synapses are added into the genome: 
 ```yaml
 {“nrn_to” : nrn_to, “nrn_from” : new_nrn, weight: old_weight, “active”: True}
 {“nrn_to” : “new_nrn”, “nrn_from” : “nrn_from”, weight: 1.0, “active”: True}
@@ -72,7 +72,7 @@ Removing an orphaned neuron: \
 With probability p = 0.03, if the network has a neuron which doesn’t connect to anything else, it is removed from the genome. If no such neurons are present, the mutation does nothing. 
 
 Adding a synapse: \
-With probability 0.3, two neurons are chosen, in such a way that the synapse between them would not produce a cycle (handled via topologically sorting the neurons). A new synapse between these two neurons is added with a new weight, randomly sampled from a normal distribution with mu = 0, sigma=0.4. If no new synapse can be added, mutation does nothing. \
+With probability 0.3, two neurons are chosen, in such a way that the synapse between them would not produce a cycle (handled via topologically sorting the neurons). A new synapse between these two neurons is added with a new weight, randomly sampled from a normal distribution with mu = 0, sigma=0.4. If no new synapse can be added, mutation does nothing. 
 
 Removing a synapse: \
 With probability 0.3, an existing synapse is chosen and disabled (setting “active” to False). The synapses with lesser absolute weights are preferred (simulating atrophy). \
@@ -83,7 +83,7 @@ Taking 80% of all the synapses and perturbing them as follows. \
 For each synapse marked for perturbation, with 90% probability a given synapse is perturbed with normal random variable with mu=0 and sigma = 0.1, with 5% probability the existing weight is doubled, and with 5% probability it is halved. 
 
 For the (4) evaluation phase, all the animals are evaluated on task n_repeat times with different seeds (the n_repeats seeds are kept the same for all the animals, so that they go through the same trials in parallel), and assigned with the fitness value equal to the average score they attain over the n_repeat times. \
-The evaluation of multiple animals is parallelized for efficiency with *ray* python-library.
+The evaluation of multiple animals is parallelized for efficiency with ray python-library.
 
 (5) live an learn: \
 For a given topology and the given initial weight, an animal is trained to perform the task with backpropagation. For now, this step works only for the tasks for which targets are available (in a supervised manner, so that the error can be computed). \
@@ -101,7 +101,7 @@ Finally, in the (7) extinction of the stagnant phase, if a given species has fai
 
 The full list of hyperparameters for the NEAT algorithm is summarized in the config file for a given task (the precise parameters may vary from task to task). 
 
-The relevant code is implemented in the ‘evolution’ subdirectory. \
+The relevant code is implemented in the ‘evolution’ subdirectory. 
 
 **Performance**
 
@@ -168,5 +168,5 @@ It is quite straightforward to use such packages as optuna to optimize the hyper
 Current backpropagation is a bit hacky, because sometimes the gradients returns nans. For now, if the optimization doesn’t converge, I keep reducing the learning rate and try one more time for 10 times (maximal learning rate reduction is thus by a factor of 1024). However, sometimes, the optimization still doesn’t converge. In that case, I revert to the unoptimized weights and biases. \
 Spending more time writing an optimizer which does all the checks will certainly make life much easier. \
 Since jax can also compute hessians, it might be a good idea to do a second order optimization. However, computing the hessian and the inverse of it (to use in Newton-Raphson method) might be even more time consuming than doing, say, 2000 steps of gradient descent. \
-There is always a way to optimize the code. For instance, during the performance evaluation, each animal has to compute an output given the input multiple times, making it the most called function in the evolution loop, calling it approximately n_timesteps x n_eval_repeats x n_animals x n_generations times. Optimizing this function would directly translate into speed up of the algorithm. Currently, while computing the output of the neural \network, I identified the longest path it takes from input to reach the output, and then just iteratively multiplied the connectivity matrix with the neural activity followed by the application of the activation function. In practice it works fine (faster than looping through each neuron in the topological order), however, looping through seems more computationally efficient (at least in theory). Making the looping through neurons practically might be a good idea to pursue to speed up the computations. \
+There is always a way to optimize the code. For instance, during the performance evaluation, each animal has to compute an output given the input multiple times, making it the most called function in the evolution loop, calling it approximately n_timesteps x n_eval_repeats x n_animals x n_generations times. Optimizing this function would directly translate into speed up of the algorithm. Currently, while computing the output of the neural network, I identified the longest path it takes from input to reach the output, and then just iteratively multiplied the connectivity matrix with the neural activity followed by the application of the activation function. In practice it works fine (faster than looping through each neuron in the topological order), however, looping through seems more computationally efficient (at least in theory). Making the looping through neurons practically might be a good idea to pursue to speed up the computations. \
 There definitely should be a way to use GPU cells to massively parallelize computations, but I haven’t looked through this.
