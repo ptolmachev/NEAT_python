@@ -17,7 +17,8 @@ For each animal, its “nervous system” (the neurons and their connectivity) i
     4 : {“nrn_to” : 1, “nrn_from”: 2, “actve”: True, “weight”: 0.5}
   }
 }
-'''
+```
+
 At first, the simplest network topologies are spawned, mutated, speciated and their performance is evaluated.
 Further, the NEAT algorithm consists of iteratively cycling through phases in this order:
 
@@ -134,7 +135,7 @@ The genome contains only one hidden neuron:
     "31": {"nrn_to": 11,"nrn_from": 7,"weight": -0.9274080082782241, "active": false},
     "440": {"nrn_to": 11,"nrn_from": 0,"weight": -0.6026475237481741, "active": true}
 }
-
+```
 
 In addition, the NEAT is applied to solve several supervised tasks (XOR, classifying Moons, Circles and Spirals) with just a few hidden neurons.
 Below are some plots of the decision boundaries:
