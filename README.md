@@ -43,7 +43,7 @@ With probability “parthenogenesis_rate” = 0.25, the chosen animal carries it
 With probability 1 - ”parthenogenesis_rate”, another animal has to be selected for mating. Normally, another animal-parent is chosen from the same species, however, with probability “interspecies_mating_rate” a different species is chosen (in the same manner as before), and another animal-parent is chosen from the new species. \
 Given the two animal-parents, the crossover of the two genomes is done according to the following rules. \
 If a given gene is present in both parents, then the inherited gene is chosen with 50/50 probability (even if the genes are both code for the same neurons or synapse, the specific weight or bias may be different).\
-For the disjoint genes, the gene to inherit is chosen from the most fit individual. If the two parents are equally fit, the choice is random with 50/50 chance. \
+For the disjoint genes, the gene to inherit is chosen from the most fit individual. If the two parents are equally fit, the choice is random with 50/50 chance. 
 
 To choose either species or individual for further reproduction, the fitness of a given individual/species has to be translated into probability of choosing it for further reproduction. \
 This is done by the following procedure.
@@ -54,9 +54,9 @@ where [...]+ denotes taking only positive values, while setting the negative val
 B = [e^{-a_1}, e^{-a_2}, ..., e^{-a_p}], \
 where the λ parameter controls the relative fitness advantage, and is set to 1.0 for choosing the species, and 3.0 if choosing an individual within the species. \
 Finally, the probabilities of choosing species/individual for reproduction are calculated as Pi = B_i / sum(B_i).
-Fitness values of the species are calculated as the maximal fitness value within the species divided by the size of the population. Such a penalty prevents the domination of a single species, which, in turn, makes the search for the network topology wider and more efficient. \
+Fitness values of the species are calculated as the maximal fitness value within the species divided by the size of the population. Such a penalty prevents the domination of a single species, which, in turn, makes the search for the network topology wider and more efficient. 
 
-During the (3) mutation phase, several de novo mutations may take place: \
+During the (3) mutation phase, several de novo mutations may take place: 
  
 Adding a neuron: \
 With probability 0.03 by default, a random synapse is chosen and disabled. \
@@ -66,51 +66,51 @@ In between the two neurons “nrn_from” and “nrn_to” a “new_nrn” is in
 {“nrn_to” : “new_nrn”, “nrn_from” : “nrn_from”, weight: 1.0, “active”: True}
 ```
 Note that the first synapse in the chain is always set with the weight 1.0, whereas the second synapses is set with the “old_weight” of the disabled synapse. This is done to preserve the performance as much as possible, while given room for new useful mutations. \
-If no synapse is yet present in the genome dictionary, the mutation does nothing. \
+If no synapse is yet present in the genome dictionary, the mutation does nothing. 
 
 Removing an orphaned neuron: \
-With probability p = 0.03, if the network has a neuron which doesn’t connect to anything else, it is removed from the genome. If no such neurons are present, the mutation does nothing. \
+With probability p = 0.03, if the network has a neuron which doesn’t connect to anything else, it is removed from the genome. If no such neurons are present, the mutation does nothing. 
 
 Adding a synapse: \
 With probability 0.3, two neurons are chosen, in such a way that the synapse between them would not produce a cycle (handled via topologically sorting the neurons). A new synapse between these two neurons is added with a new weight, randomly sampled from a normal distribution with mu = 0, sigma=0.4. If no new synapse can be added, mutation does nothing. \
 
 Removing a synapse: \
 With probability 0.3, an existing synapse is chosen and disabled (setting “active” to False). The synapses with lesser absolute weights are preferred (simulating atrophy). \
-If there are no active synapses, the mutation does nothing. \
+If there are no active synapses, the mutation does nothing. 
 
 Mutate weights of synapses: \
 Taking 80% of all the synapses and perturbing them as follows. \
-For each synapse marked for perturbation, with 90% probability a given synapse is perturbed with normal random variable with mu=0 and sigma = 0.1, with 5% probability the existing weight is doubled, and with 5% probability it is halved) \
+For each synapse marked for perturbation, with 90% probability a given synapse is perturbed with normal random variable with mu=0 and sigma = 0.1, with 5% probability the existing weight is doubled, and with 5% probability it is halved. 
 
 For the (4) evaluation phase, all the animals are evaluated on task n_repeat times with different seeds (the n_repeats seeds are kept the same for all the animals, so that they go through the same trials in parallel), and assigned with the fitness value equal to the average score they attain over the n_repeat times. \
 The evaluation of multiple animals is parallelized for efficiency with *ray* python-library.
 
 (5) live an learn: \
 For a given topology and the given initial weight, an animal is trained to perform the task with backpropagation. For now, this step works only for the tasks for which targets are available (in a supervised manner, so that the error can be computed). \
-In principle, it is possible to make this step work with reinforcement learning as well. \
+In principle, it is possible to make this step work with reinforcement learning as well. 
 
 During the (6) speciation phase, the animals are assigned to a species based on their proximity to the representative genome of the species. \
 The proximity of two given genomes is measured as the sum of two terms: \
 The number of the disjoint genes (Nd) divided by the number of genes in the longest genome (N) taken with the coefficient c_d = 1.0: c_d * Nd/N \
-The average weights and biases difference for the genes which a present in both genomes taken with coefficient c_w: c_w * sum (|wi - wi’|) \
+The average weights and biases difference for the genes which a present in both genomes taken with coefficient c_w: c_w * sum (|wi - wi’|) 
 
 Each newly spawned and mutated genome is assigned to species if the distance between the given genome and a representative genome of the species is below a certain threshold (delta = 3.0). If, however, the genome in question is far away from all existing species, a new species is created with the new genome set as a representative genome. \
-Further, for each species, a new representative genome is chosen from the genomes of animals currently assigned to this species. \
+Further, for each species, a new representative genome is chosen from the genomes of animals currently assigned to this species. 
 
-Finally, in the (7) extinction of the stagnant phase, if a given species has failed to improve its top fitness for specified time, it is removed from the species with all the animals in it, simulating an extinction. \
+Finally, in the (7) extinction of the stagnant phase, if a given species has failed to improve its top fitness for specified time, it is removed from the species with all the animals in it, simulating an extinction. 
 
-The full list of hyperparameters for the NEAT algorithm is summarized in the config file for a given task (the precise parameters may vary from task to task). \
+The full list of hyperparameters for the NEAT algorithm is summarized in the config file for a given task (the precise parameters may vary from task to task). 
 
 The relevant code is implemented in the ‘evolution’ subdirectory. \
 
 **Performance**
 
-LunarLander-v2 OpenAI gym task: \
+LunarLander-v2 OpenAI gym task: 
 
 ![LunarLander-v2 performance](https://github.com/ptolmachev/NEAT_python/blob/main/img/LunarLander-v2/LunarLander-v2_scores_1445_04_03_2024.png)
 
-The genome contains only one hidden neuron:
-(During all the training I didn’t allow biases). I also saw solutions with zero neurons as well: somewhat surprising that this taks could be solved just using a linear mapping from input to output!
+The genome contains only one hidden neuron. I also saw solutions with zero neurons as well: somewhat surprising that this taks could be solved just using a linear mapping from input to output!\
+Note: During all the training I didn’t allow biases.
 
 ```yaml
 "genome dict": {
@@ -147,23 +147,23 @@ The genome contains only one hidden neuron:
 ```
 
 In addition, the NEAT is applied to solve several supervised tasks (XOR, classifying Moons, Circles and Spirals) with just a few hidden neurons. \
-Below are some plots of the decision boundaries: \
+Below are some plots of the decision boundaries: 
 
 ![Spirals](https://github.com/ptolmachev/NEAT_python/blob/main/img/Spirals/Spirals%20result.png)
 ![Moons](https://github.com/ptolmachev/NEAT_python/blob/main/img/Moons/Moons%20result.png)
 ![Circles](https://github.com/ptolmachev/NEAT_python/blob/main/img/Circles/circles%20result.png)
 ![XOR](https://github.com/ptolmachev/NEAT_python/blob/main/img/XOR/XOR%20result.png)
 
-**Further directions**: \
+**Further directions**: 
 
 Keeping hard-coded speciation might not be necessary. Instead, one can introduce a soft-speciation, by utilizing an “affinity function”, which accepts the distance between the two genomes and returns the likelihood of the two animals mating. The larger the distance, the less likely the two animals mate with one another. \
 In addition, one can introduce that the two closely related animals (having the same genes) will be less likely to mate as well, nudging the evolution towards greater diversification within the species, making the search more efficient. \
-Fun fact (!): about 20% of marriages are between cousins. 80% of all marriages in history have been between second cousins or closer. \
+Fun fact (!): about 20% of marriages are between cousins. 80% of all marriages in history have been between second cousins or closer. 
 
-Additionally, I become really interested in how the real biological chromosomes align: perhaps, one can draw further inspiration on how to create biologically plausible crossovers, and handle the speciation by borrowing ideas from biological mitosis. \
+Additionally, I become really interested in how the real biological chromosomes align: perhaps, one can draw further inspiration on how to create biologically plausible crossovers, and handle the speciation by borrowing ideas from biological mitosis. 
 
 The hyperparameters for the evolution are set manually and are by no means optimal. \
-It is quite straightforward to use such packages as optuna to optimize the hyperparameters (which implement Bayesian optimization strategy). However, running hyperparameters optimization is quite time consuming, and it is reserved more for an end product. \
+It is quite straightforward to use such packages as optuna to optimize the hyperparameters (which implement Bayesian optimization strategy). However, running hyperparameters optimization is quite time consuming, and it is reserved more for an end product. 
 
 Current backpropagation is a bit hacky, because sometimes the gradients returns nans. For now, if the optimization doesn’t converge, I keep reducing the learning rate and try one more time for 10 times (maximal learning rate reduction is thus by a factor of 1024). However, sometimes, the optimization still doesn’t converge. In that case, I revert to the unoptimized weights and biases. \
 Spending more time writing an optimizer which does all the checks will certainly make life much easier. \
